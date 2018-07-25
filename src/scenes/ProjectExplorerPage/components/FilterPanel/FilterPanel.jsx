@@ -10,7 +10,7 @@ class FilterPanel extends Component<{}, {}> {
             <div className={this.props.className}>
                 <div className={styles.header}>
                     <label>
-                        <FormattedMessage id="FILTER.HEADER.FILTERS" />
+                        <FormattedMessage id="PROJECT_LIST.FILTER.HEADER.FILTERS" />
                     </label>
                 </div>
                 {this.props.filters.map((filter, i) => {

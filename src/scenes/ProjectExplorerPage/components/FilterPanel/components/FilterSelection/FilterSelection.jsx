@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { injectIntl, FormattedMessage } from "react-intl";
 
 let cx = classNames.bind(styles);
-const MULTILANG_FILTER_PREFIX = "FILTER.TYPE";
+const MULTILANG_FILTER_PREFIX = "PROJECT_LIST.FILTER.TYPE";
 
 class FilterSelection extends Component<{}, {}> {
     constructor(props) {
