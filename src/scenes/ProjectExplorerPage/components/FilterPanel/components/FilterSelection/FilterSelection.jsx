@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./FilterSelection.module.css";
-import ReactDOM from 'react-dom';
-import classNames from 'classnames';
+import ReactDOM from "react-dom";
+import classNames from "classnames";
+import { injectIntl, FormattedMessage } from "react-intl";
 
 let cx = classNames.bind(styles);
+const MULTILANG_FILTER_PREFIX = "FILTER.TYPE";
 
 class FilterSelection extends Component<{}, {}> {
     constructor(props) {
@@ -32,9 +34,10 @@ class FilterSelection extends Component<{}, {}> {
     render() {
         let activatedStyle = "";
         let maxHeight = 0;
-        
+        let { filterType, filterValues } = this.props;
+
         if (this.state.active) {
-            activatedStyle = styles.active; 
+            activatedStyle = styles.active;
             maxHeight = this.state.maxHeight;
         }
 
@@ -42,12 +45,27 @@ class FilterSelection extends Component<{}, {}> {
 
         return (
             <div>
-                <div className={classNames(styles.accordion, activatedStyle)} onClick={this.toggle}>
-                    {this.props.filterType}
+                <div
+                    className={classNames(styles.accordion, activatedStyle)}
+                    onClick={this.toggle}
+                >
+                    <FormattedMessage
+                        id={`${MULTILANG_FILTER_PREFIX}.${filterType}`}
+                    />
                 </div>
-                <ul ref={"list"} className={`${styles.panel}`} style={{maxHeight: maxHeight}}>
-                    {this.props.filterValues.map((value, i) => {
-                        return <li key={value}>{value}</li>;
+                <ul
+                    ref={"list"}
+                    className={`${styles.panel}`}
+                    style={{ maxHeight: maxHeight }}
+                >
+                    {filterValues.map((value, i) => {
+                        return (
+                            <li key={value}>
+                                <FormattedMessage
+                                    id={`${MULTILANG_FILTER_PREFIX}.${filterType}.${value}`}
+                                />
+                            </li>
+                        );
                     })}
                 </ul>
             </div>
@@ -55,4 +73,4 @@ class FilterSelection extends Component<{}, {}> {
     }
 }
 
-export default connect()(FilterSelection);
+export default injectIntl(connect()(FilterSelection));

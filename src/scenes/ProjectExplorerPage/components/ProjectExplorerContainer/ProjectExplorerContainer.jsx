@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import TopPanel from '../../../../components/TopPanel/TopPanel';
 import FilterPanel from '../FilterPanel/FilterPanel';
 import styles from './ProjectExplorerContainer.module.css';
+import { injectIntl } from 'react-intl';
 
 class ProjectExplorerContainer extends Component<{}, {}> {
     render() {
@@ -17,4 +18,4 @@ class ProjectExplorerContainer extends Component<{}, {}> {
     }
 }
 
-export default connect()(ProjectExplorerContainer);
+export default injectIntl(connect()(ProjectExplorerContainer));

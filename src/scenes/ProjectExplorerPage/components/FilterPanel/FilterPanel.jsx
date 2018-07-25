@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import FilterSelection from "./components/FilterSelection/FilterSelection";
 import styles from "./FilterPanel.module.css";
-import { FormattedMessage } from "react-intl";
+import { injectIntl, FormattedMessage  } from "react-intl";
 
 class FilterPanel extends Component<{}, {}> {
     render() {
@@ -10,7 +10,7 @@ class FilterPanel extends Component<{}, {}> {
             <div className={this.props.className}>
                 <div className={styles.header}>
                     <label>
-                        <FormattedMessage id="FILTER.HEADER.NAVIGATION" defaultMessage="Navigation" />
+                        <FormattedMessage id="FILTER.HEADER.FILTERS" />
                     </label>
                 </div>
                 {this.props.filters.map((filter, i) => {
@@ -30,18 +30,18 @@ class FilterPanel extends Component<{}, {}> {
 const mapStateToProps = state => ({
     filters: [
         {
-            type: "project-type",
-            values: ["all", "profit-sharing", "energy-buy-back"]
+            type: "PROJECT_TYPE",
+            values: ["ALL", "PROFIT_SHARING", "ENERGY_BUY_BACK"]
         },
         {
-            type: "category",
-            values: ["all", "solar", "wind"]
+            type: "CATEGORY",
+            values: ["ALL", "SOLAR", "WIND"]
         },
         {
-            type: "project-timing",
-            values: ["all", "active", "upcoming", "ended"]
+            type: "PROJECT_TIMING",
+            values: ["ALL", "ACTIVE", "UPCOMING", "ENDED"]
         }
     ]
 });
 
-export default connect(mapStateToProps)(FilterPanel);
+export default injectIntl(connect(mapStateToProps)(FilterPanel));

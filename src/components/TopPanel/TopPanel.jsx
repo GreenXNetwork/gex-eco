@@ -9,6 +9,8 @@ import { faCaretSquareLeft } from "@fortawesome/free-solid-svg-icons";
 import NotificationButton from "./components/NotificationButton/NotificationButton";
 import AccountButton from "./components/AccountButton/AccountButton";
 import LanguageButton from "../LanguageButton/LanguageButton";
+import { injectIntl, FormattedMessage } from "react-intl";
+import { connect } from 'react-redux';
 
 class TopPanel extends Component<{}, {}> {
     render() {
@@ -28,20 +30,20 @@ class TopPanel extends Component<{}, {}> {
                 </div>
                 <div className={styles.navContainer}>
                     <Link className={styles.item} to="/projects">
-                        Project List
+                        <FormattedMessage id="TOP_PANEL.PAGE.PROJECT_LIST" />
                     </Link>
                     <Link className={styles.item} to="/portfolio">
-                        Portfolio
+                        <FormattedMessage id="TOP_PANEL.PAGE.PORTFOLIO" />
                     </Link>
                     <Link className={styles.item} to="/exchange">
-                        Exchange
+                        <FormattedMessage id="TOP_PANEL.PAGE.EXCHANGE" />
                     </Link>
                 </div>
                 <div className={styles.rightContainer}>
                     <LanguageButton />
                     <NotificationButton className={styles.item} />
                     <Link className={styles.item} to="/support">
-                        Support
+                        <FormattedMessage id="TOP_PANEL.USER.SUPPORT" />
                     </Link>
                     <AccountButton className={styles.item} />
                 </div>
@@ -52,4 +54,4 @@ class TopPanel extends Component<{}, {}> {
 
 library.add(faCaretSquareLeft);
 
-export default TopPanel;
+export default injectIntl(connect()(TopPanel));
