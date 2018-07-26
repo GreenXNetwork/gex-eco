@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import classNames from "classnames";
 import { injectIntl, FormattedMessage } from "react-intl";
 
-let cx = classNames.bind(styles);
+// let cx = classNames.bind(styles);
 const MULTILANG_FILTER_PREFIX = "PROJECT_LIST.FILTER.TYPE";
 
 class FilterSelection extends Component<{}, {}> {

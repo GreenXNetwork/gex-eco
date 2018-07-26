@@ -3,7 +3,6 @@ import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { setLocale } from "../../services/locale/localeAction";
 import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 
 const SUPPORTED_LANG = ["en", "vi"];
 
