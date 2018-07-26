@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import {
     BrowserRouter as Router,
     Route,
-    Switch,
-    Redirect
+    Switch
 } from "react-router-dom";
-import { Provider, connect } from "react-redux";
+import { connect } from "react-redux";
 import { IntlProvider } from "react-intl";
 import PropTypes from "prop-types";
 import AuthenticatedRoute from "./components/AuthenticatedRoute/AuthenticatedRoute";
@@ -15,7 +13,6 @@ import LoginPage from "./scenes/LandingPage/LoginPage";
 import PortfolioPage from "./scenes/PortfolioPage/PortfolioPage";
 import ExchangePage from "./scenes/ExchangePage/ExchangePage";
 import ProjectExplorerPage from "./scenes/ProjectExplorerPage/ProjectExplorerPage";
-import { setLocale } from "./services/locale/localeAction";
 
 class App extends Component<{}, {}> {
     render() {

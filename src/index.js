@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import store from "./store";
+import configureStore from "./configureStore";
 import { addLocaleData } from 'react-intl'
 import en from 'react-intl/locale-data/en';
 import vi from 'react-intl/locale-data/vi';
@@ -12,6 +12,8 @@ import { setLocale } from './services/locale/localeAction';
 
 addLocaleData(en);
 addLocaleData(vi);
+
+const store = configureStore();
 
 if (!localStorage.platformLang) {
     store.dispatch(setLocale(localStorage.platformLang));
