@@ -1,0 +1,7 @@
+{
+    "flow.useNPMPackagedFlow": true,
+    "flow.runOnAllFiles": true,
+    "typescript.validate.enable": false,
+    "javascript.validate.enable": false,
+    "prettier.tabWidth": 4
+}

@@ -1,0 +1,15 @@
+[ignore]
+.*/node_modules/.*
+.*/build/.*
+.*/.vscode/.*
+.*\.json
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]
