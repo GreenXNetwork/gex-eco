@@ -2,10 +2,21 @@ const path = require('path');
 
 export default {
   entry: 'src/index.js',
-  extraBabelPlugins: [['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]],
+  extraBabelPlugins: [
+    ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
+  ],
   env: {
     development: {
-      extraBabelPlugins: ['dva-hmr'],
+      extraBabelPlugins: 
+      [
+        'dva-hmr',
+        [
+          'react-intl',
+          {
+            'messagesDir': './i18n-messages',
+          },
+        ]
+      ],
     },
   },
   externals: {
