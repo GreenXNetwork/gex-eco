@@ -1,0 +1,14 @@
+{
+  "UserLayout.footer.terms": "条款",
+  "UserLayout.title": "GreenX",
+  "UserLayout.copyright": "版权",
+  "UserLayout.copyrightMessage": "2018 GreenX Network",
+  "UserLayout.footer.help": "帮帮我",
+  "UserLayout.footer.privacy": "隐私",
+  "UserLayout.description": "GreenX MVP",
+  "UserLogin.button.signin": "签到",
+  "UserLogin.button.signup": "注册",
+  "UserLogin.link.forgot_password": "忘记密码",
+  "UserLogin.link.remember_me": "记住我",
+  "UserLogin.warn.incorrect_user_pass": "用户名或密码不正确（admin / 888888）"
+}

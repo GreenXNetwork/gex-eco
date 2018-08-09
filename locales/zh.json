@@ -1,0 +1,14 @@
+{
+  "UserLayout.footer.terms": "Terms",
+  "UserLayout.title": "GreenX",
+  "UserLayout.copyright": "Copyright",
+  "UserLayout.copyrightMessage": "2018 GreenX Network",
+  "UserLayout.footer.help": "Help",
+  "UserLayout.footer.privacy": "Privacy",
+  "UserLayout.description": "GreenX MVP",
+  "UserLogin.button.signin": "Sign In",
+  "UserLogin.button.signup": "Sign Up",
+  "UserLogin.link.forgot_password": "Forgot password",
+  "UserLogin.link.remember_me": "Remember me",
+  "UserLogin.warn.incorrect_user_pass": "Incorrect username or password (admin/888888)"
+}
