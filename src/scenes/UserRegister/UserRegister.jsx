@@ -172,6 +172,8 @@ export default class UserRegister extends Component {
         const { form, dispatch } = this.props;
         form.validateFields({ force: true }, (err, values) => {
             const { prefix } = this.state;
+            console.log(values);
+            console.log(prefix);
             if (!err) {
                 dispatch({
                     type: 'register/submit',
