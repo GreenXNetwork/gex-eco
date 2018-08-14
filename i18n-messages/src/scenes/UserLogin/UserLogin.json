@@ -1,0 +1,22 @@
+[
+  {
+    "id": "UserLogin.button.signin",
+    "defaultMessage": "Sign In"
+  },
+  {
+    "id": "UserLogin.button.signup",
+    "defaultMessage": "Sign Up"
+  },
+  {
+    "id": "UserLogin.link.remember_me",
+    "defaultMessage": "Remember me"
+  },
+  {
+    "id": "UserLogin.link.forgot_password",
+    "defaultMessage": "Forgot password"
+  },
+  {
+    "id": "UserLogin.warn.incorrect_user_pass",
+    "defaultMessage": "Incorrect username or password (admin/888888)"
+  }
+]
