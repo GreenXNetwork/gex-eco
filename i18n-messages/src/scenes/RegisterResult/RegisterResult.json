@@ -1,0 +1,18 @@
+[
+  {
+    "id": "RegisterResult.view_mail_box.button",
+    "defaultMessage": "View Mailbox"
+  },
+  {
+    "id": "RegisterResult.back_to_home.button",
+    "defaultMessage": "Back to home"
+  },
+  {
+    "id": "RegisterResult.page.title",
+    "defaultMessage": "Your account {account} registration success"
+  },
+  {
+    "id": "RegisterResult.page.description",
+    "defaultMessage": "The activation email has been sent to your email address and is valid for 24 hours. Please log in to the email in time and click the link in the email to activate the account."
+  }
+]
