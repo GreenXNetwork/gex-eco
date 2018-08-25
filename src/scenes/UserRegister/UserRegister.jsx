@@ -59,6 +59,14 @@ const messages = defineMessages({
         id: 'UserRegister.email.placeholder',
         defaultMessage: 'Email',
     },
+    name_rule_required: {
+        id: 'UserRegister.name.rule.required',
+        defaultMessage: 'Please enter your name!',
+    },
+    name_placeholder: {
+        id: 'UserRegister.name.placeholder',
+        defaultMessage: 'Name',
+    },
     captcha_rule_required: {
         id: 'UserRegister.captcha.rule.required',
         defaultMessage: 'Please enter verification code!',
@@ -172,8 +180,6 @@ export default class UserRegister extends Component {
         const { form, dispatch } = this.props;
         form.validateFields({ force: true }, (err, values) => {
             const { prefix } = this.state;
-            console.log(values);
-            console.log(prefix);
             if (!err) {
                 dispatch({
                     type: 'register/submit',
@@ -265,7 +271,22 @@ export default class UserRegister extends Component {
                 </h3>
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem>
-                        {getFieldDecorator('mail', {
+                        {getFieldDecorator('name', {
+                            rules: [
+                                {
+                                    required: true,
+                                    message: intl.formatMessage(messages.name_rule_required),
+                                },
+                            ],
+                        })(
+                            <Input
+                                size="large"
+                                placeholder={intl.formatMessage(messages.name_placeholder)}
+                            />
+                        )}
+                    </FormItem>
+                    <FormItem>
+                        {getFieldDecorator('email', {
                             rules: [
                                 {
                                     required: true,
@@ -283,7 +304,9 @@ export default class UserRegister extends Component {
                             />
                         )}
                     </FormItem>
-                    <FormItem help={help === undefined || help === '' ? '' : intl.formatMessage(help)}>
+                    <FormItem
+                        help={help === undefined || help === '' ? '' : intl.formatMessage(help)}
+                    >
                         <Popover
                             content={
                                 <div style={{ padding: '4px 0' }}>

@@ -13,6 +13,7 @@ loadLocaleData(['en', 'zh']);
 function RouterConfig({ history, app }) {
   const routerData = getRouterData(app);
   const UserLayout = routerData['/user'].component;
+  const ProjectsLayout = routerData['/projects'].component;
   const BasicLayout = routerData['/'].component;
   
   return (
@@ -23,7 +24,7 @@ function RouterConfig({ history, app }) {
             <AuthorizedRoute
               path="/"
               render={props => <BasicLayout {...props} />}
-              authority={['admin', 'user']}
+              authority={['admin', 'investor']}
               redirectPath={getQueryPath('/user/login', {
                 redirect: window.location.href,
               })}
