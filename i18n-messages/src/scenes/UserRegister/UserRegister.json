@@ -52,6 +52,14 @@
     "defaultMessage": "Email"
   },
   {
+    "id": "UserRegister.name.rule.required",
+    "defaultMessage": "Please enter your name!"
+  },
+  {
+    "id": "UserRegister.name.placeholder",
+    "defaultMessage": "Name"
+  },
+  {
     "id": "UserRegister.captcha.rule.required",
     "defaultMessage": "Please enter verification code!"
   },
