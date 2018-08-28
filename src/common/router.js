@@ -83,8 +83,13 @@ export const getRouterData = app => {
                 import('../layouts/BasicLayout')
             ),
         },
+        '/projects': {
+            component: dynamicWrapper(app, ['user'], () => import('../scenes/ProjectsExplorer/ProjectsExplorer')),
+            authority: ['investor', 'admin'],
+        },
         '/user': {
             component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
+            authority: ['investor'],
         },
         '/user/login': {
             component: dynamicWrapper(app, ['login'], () =>

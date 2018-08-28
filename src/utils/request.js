@@ -2,6 +2,7 @@ import fetch from 'dva/fetch';
 import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
 import store from '../index';
+import { getAccessToken, setAccessToken } from './auth';
 
 const codeMessage = {
     200: 'Server returned the data successfully.',
@@ -35,18 +36,24 @@ function checkStatus(response) {
     throw error;
 }
 
-/**
- * Requests a URL, returning a promise.
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- * @return {object}           An object containing either "data" or "err"
- */
-export default function request(url, options) {
+function requestAccessToken() {
+    const options = {
+        credentials: 'same-origin',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json; charset=utf-8',
+        },
+        method: 'POST',
+    };
+    return fetch('api/refresh', options);
+}
+
+function prepareFetchOptions(options) {
     const defaultOptions = {
-        credentials: 'include',
+        credentials: 'same-origin',
     };
     const newOptions = { ...defaultOptions, ...options };
+
     if (
         newOptions.method === 'POST' ||
         newOptions.method === 'PUT' ||
@@ -54,36 +61,73 @@ export default function request(url, options) {
     ) {
         if (!(newOptions.body instanceof FormData)) {
             newOptions.headers = {
-                Accept: 'application/json',
                 'Content-Type': 'application/json; charset=utf-8',
                 ...newOptions.headers,
             };
             newOptions.body = JSON.stringify(newOptions.body);
-        } else {
-            // newOptions.body is FormData
-            newOptions.headers = {
-                Accept: 'application/json',
-                ...newOptions.headers,
-            };
         }
     }
+
+    newOptions.headers = {
+        Accept: 'application/json',
+        ...newOptions.headers,
+    };
+
+    return newOptions;
+}
+
+function retriableFetch(url, options, token, canRetry = true) {
+    let authorizationHeader = {};
+    if (token) {
+        authorizationHeader = { Authorization: 'Bearer ' + token };
+    }
+
+    const newOptions = { ...options };
+    newOptions.headers = {
+        ...authorizationHeader,
+        ...options.headers,
+    };
 
     return fetch(url, newOptions)
         .then(checkStatus)
         .then(response => {
             if (newOptions.method === 'DELETE' || response.status === 204) {
-                return response.text();
+                resolve(response.text());
             }
-            return response.json();
+            const result = response.json();
+            return result;
         })
         .catch(e => {
             const { dispatch } = store;
             const status = e.name;
             if (status === 401) {
-                dispatch({
-                    type: 'login/logout',
-                });
-                return;
+                if (canRetry && token) {
+                    /*
+                    If accessToken is present and canRetry (calling login should not set canRetry=true), request new access token.
+                    If refresh fails, do logout. If it succeeds, reinvoke the url.
+                     */
+                    return requestAccessToken()
+                        .then(internalRes => {
+                            if (internalRes) {
+                                if (internalRes.status === 200) {
+                                    return internalRes.json();
+                                }
+                                if (internalRes.status === 401) {
+                                    // Refresh token expired or not login yet
+                                    dispatch({
+                                        type: 'login/logout',
+                                    });
+                                }
+                            }
+                        })
+                        .then(result => {
+                            const newToken = result.access_token;
+                            setAccessToken(newToken, Date.now());
+                            return fetchAgain(url, options, newToken).then(result1 => {
+                                return result1;
+                            });
+                        });
+                }
             }
             if (status === 403) {
                 dispatch(routerRedux.push('/exception/403'));
@@ -97,4 +141,46 @@ export default function request(url, options) {
                 dispatch(routerRedux.push('/exception/404'));
             }
         });
+}
+
+function fetchAgain(url, options, token) {
+    let authorizationHeader = {};
+    if (token) {
+        authorizationHeader = { Authorization: 'Bearer ' + token };
+    }
+
+    const newOptions = { ...options };
+    newOptions.headers = {
+        ...authorizationHeader,
+        ...options.headers,
+    };
+
+    return fetch(url, newOptions)
+        .then(checkStatus)
+        .then(response => {
+            if (newOptions.method === 'DELETE' || response.status === 204) {
+                return response.text();
+            }
+            const result = response.json();
+            return result;
+        });
+}
+
+/**
+ * Requests a URL, returning a promise.
+ *
+ * @param  {string} url       The URL we want to request
+ * @param  {object} [options] The options we want to pass to "fetch"
+ * @return {object}           An object containing either "data" or "err"
+ */
+export function request(url, options) {
+    const newOptions = prepareFetchOptions(options);
+    const accessToken = getAccessToken();
+    return retriableFetch(url, newOptions, accessToken, false);
+}
+
+export function requestWithRetry(url, options) {
+    const newOptions = prepareFetchOptions(options);
+    const accessToken = getAccessToken();
+    return retriableFetch(url, newOptions, accessToken);
 }

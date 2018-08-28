@@ -1,9 +1,9 @@
-import request from '../utils/request';
+import { requestWithRetry } from '../utils/request';
 
 export async function query() {
-  return request('/api/users');
+    return requestWithRetry('/api/users');
 }
 
 export async function queryCurrent() {
-  return request('/api/currentUser');
+    return requestWithRetry('/api/user');
 }

@@ -48,7 +48,8 @@ class LoginPage extends Component {
             dispatch({
                 type: 'login/login',
                 payload: {
-                    ...values,
+                    email: values.username,
+                    password: values.password,
                     type,
                 },
             });
@@ -75,7 +76,7 @@ class LoginPage extends Component {
                         login.type === 'account' &&
                         !submitting &&
                         this.renderMessage(intl.formatMessage(messages.incorrectUserPass))}
-                    <UserName name="userName" placeholder="admin/user" />
+                    <UserName name="username" placeholder="admin/user" />
                     <Password name="password" placeholder="888888/123456" />
                     <div>
                         <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
