@@ -84,7 +84,9 @@ export const getRouterData = app => {
             ),
         },
         '/projects': {
-            component: dynamicWrapper(app, ['user'], () => import('../scenes/ProjectsExplorer/ProjectsExplorer')),
+            component: dynamicWrapper(app, ['user'], () =>
+                import('../scenes/ProjectsExplorer/ProjectsExplorer')
+            ),
             authority: ['investor', 'admin'],
         },
         '/user': {
