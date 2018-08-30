@@ -1,0 +1,18 @@
+[
+  {
+    "id": "GlobalHeader.account.profile_menuitem",
+    "defaultMessage": "Profile"
+  },
+  {
+    "id": "GlobalHeader.account.logout_menuitem",
+    "defaultMessage": "Logout"
+  },
+  {
+    "id": "GlobalHeader.support.title",
+    "defaultMessage": "Support"
+  },
+  {
+    "id": "GlobalHeader.search.placeholder",
+    "defaultMessage": "Search"
+  }
+]
