@@ -122,7 +122,7 @@ function retriableFetch(url, options, token, canRetry = true) {
                         })
                         .then(result => {
                             const newToken = result.access_token;
-                            setAccessToken(newToken, Date.now());
+                            setAccessToken(newToken);
                             return fetchAgain(url, options, newToken).then(result1 => {
                                 return result1;
                             });

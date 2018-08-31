@@ -36,7 +36,7 @@ export default {
   },
   disableDynamicImport: true,
   publicPath: '/',
-  hash: true,
+  hash: false,
   proxy: {
     "/api": {
       "target": "http://localhost:8080/",
