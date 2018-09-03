@@ -15,12 +15,22 @@ function RouterConfig({ history, app }) {
   const UserLayout = routerData['/user'].component;
   const ProjectsLayout = routerData['/projects'].component;
   const BasicLayout = routerData['/'].component;
+  const TestPage = routerData['/test'].component;
   
   return (
       <IntlProvider initialProps={{ locale: "en", defaultLocale: "en", messages: {} }}>
         <ConnectedRouter history={history}>
           <Switch>
             <Route path="/user" component={UserLayout} />
+            <Route path='/test' component={TestPage} />
+            <AuthorizedRoute
+              path="/projects"
+              render={props => <ProjectsLayout {...props} />}
+              authority={['admin', 'investor']}
+              redirectPath={getQueryPath('/user/login', {
+                redirect: window.location.href,
+              })}
+            />
             <AuthorizedRoute
               path="/"
               render={props => <BasicLayout {...props} />}

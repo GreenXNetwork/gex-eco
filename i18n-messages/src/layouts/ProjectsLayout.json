@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ProjectsLayout.notification.empty",
+    "defaultMessage": "empty {type}"
+  },
+  {
+    "id": "UserLayout.copyright",
+    "defaultMessage": "Copyright"
+  },
+  {
+    "id": "UserLayout.copyrightMessage",
+    "defaultMessage": "2018 GreenX Network"
+  }
+]

@@ -5,6 +5,13 @@ const menuData = [
     name: 'projects',
     icon: 'projects',
     path: 'projects',
+    children: [
+      {
+        name: 'list',
+        path: 'list',
+        hideInMenu: true,
+      },
+    ],
   },
   {
     name: 'portfolio',
@@ -15,11 +22,6 @@ const menuData = [
     name: 'exchange',
     icon: 'exchange',
     path: 'exchange',
-  },
-  {
-    name: 'profile',
-    icon: 'profile',
-    path: 'profile',
   },
 ];
 

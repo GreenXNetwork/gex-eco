@@ -84,8 +84,15 @@ export const getRouterData = app => {
             ),
         },
         '/projects': {
-            component: dynamicWrapper(app, ['user'], () => import('../scenes/ProjectsExplorer/ProjectsExplorer')),
+            component: dynamicWrapper(app, ['user'], () => import('../layouts/ProjectsLayout')),
             authority: ['investor', 'admin'],
+        },
+        '/projects/list': {
+            component: dynamicWrapper(app, ['project'], () => import('../scenes/ProjectsExplorer/ProjectsExplorer')),
+            authority: ['investor', 'admin'],
+        },
+        '/test': {
+            component: dynamicWrapper(app, ['project'], () => import('../scenes/TestPage')),
         },
         '/user': {
             component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),

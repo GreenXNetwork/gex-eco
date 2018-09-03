@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Icon, message } from 'antd';
+import { Layout, message } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
 import { Route, Redirect, Switch, routerRedux } from 'dva/router';
@@ -9,22 +9,21 @@ import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
-import GlobalFooter from '../components/GlobalFooter';
-import SiderMenu from '../components/SiderMenu';
 import NotFound from '../components/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
+import fulllogo from '../assets/fulllogo_big.png';
 import { injectIntl } from '../common/decorator';
 import { defineMessages, FormattedMessage } from 'react-intl';
 
-const { Content, Header, Footer } = Layout;
+const { Header } = Layout;
 const { AuthorizedRoute, check } = Authorized;
 
 const messages = defineMessages({
     notification_empty: {
-        id: 'BasicLayout.notification.empty',
+        id: 'ProjectsLayout.notification.empty',
         defaultMessage: `empty {type}`,
     },
     copyright: {
@@ -50,6 +49,7 @@ const getRedirect = item => {
             });
         }
     }
+    console.log('redirect=' + JSON.stringify(redirectData));
 };
 getMenuData().forEach(getRedirect);
 
@@ -109,7 +109,7 @@ enquireScreen(b => {
     fetchingNotices: loading.effects['global/fetchNotices'],
     notices: global.notices,
 }))
-export default class BasicLayout extends React.PureComponent {
+export default class ProjectsLayout extends React.PureComponent {
     static childContextTypes = {
         location: PropTypes.object,
         breadcrumbNameMap: PropTypes.object,
@@ -233,65 +233,42 @@ export default class BasicLayout extends React.PureComponent {
         const { isMobile: mb } = this.state;
         const baseRedirect = this.getBaseRedirect();
 
-        const copyright = (
-            <Fragment>
-                {`${intl.formatMessage(messages.copyright)} `}
-                <Icon type="copyright" />
-                {` ${intl.formatMessage(messages.copyrightMessage)}`}
-            </Fragment>
-        );
-
         const layout = (
             <Layout>
-                <SiderMenu
-                    logo={logo}
-                    // If you do not have the Authorized parameter
-                    // you will be forced to jump to the 403 interface without permission
-                    Authorized={Authorized}
-                    menuData={getMenuData()}
-                    collapsed={collapsed}
-                    location={location}
-                    isMobile={mb}
-                    onCollapse={this.handleMenuCollapse}
-                />
-                <Layout>
-                    <Header style={{ padding: 0 }}>
-                        <GlobalHeader
-                            logo={logo}
-                            currentUser={currentUser}
-                            fetchingNotices={fetchingNotices}
-                            notices={notices}
-                            collapsed={collapsed}
-                            isMobile={mb}
-                            menus={[]}
-                            onNoticeClear={this.handleNoticeClear}
-                            onCollapse={this.handleMenuCollapse}
-                            onMenuClick={this.handleMenuClick}
-                            onNoticeVisibleChange={this.handleNoticeVisibleChange}
-                        />
-                    </Header>
-                    <Content style={{ margin: '24px 24px 0', height: '100%' }}>
-                        <Switch>
-                            {redirectData.map(item => (
-                                <Redirect key={item.from} exact from={item.from} to={item.to} />
-                            ))}
-                            {getRoutes(match.path, routerData).map(item => (
-                                <AuthorizedRoute
-                                    key={item.key}
-                                    path={item.path}
-                                    component={item.component}
-                                    exact={item.exact}
-                                    authority={item.authority}
-                                    redirectPath="/exception/403"
-                                />
-                            ))}
-                            <Redirect exact from="/" to={baseRedirect} />
-                            <Route render={NotFound} />
-                        </Switch>
-                    </Content>
-                    <Footer style={{ padding: 0 }}>
-                        <GlobalFooter copyright={copyright} />
-                    </Footer>
+                <Header style={{ padding: 0 }}>
+                    <GlobalHeader
+                        logo={logo}
+                        fulllogo={fulllogo}
+                        currentUser={currentUser}
+                        fetchingNotices={fetchingNotices}
+                        notices={notices}
+                        collapsed={collapsed}
+                        isMobile={mb}
+                        menus={getMenuData()}
+                        onNoticeClear={this.handleNoticeClear}
+                        onCollapse={this.handleMenuCollapse}
+                        onMenuClick={this.handleMenuClick}
+                        onNoticeVisibleChange={this.handleNoticeVisibleChange}
+                    />
+                </Header>
+                <Layout style={{ height: '100%' }}>
+                    <Switch>
+                        {redirectData.map(item => (
+                            <Redirect key={item.from} exact from={item.from} to={item.to} />
+                        ))}
+                        {getRoutes(match.path, routerData).map(item => (
+                            <AuthorizedRoute
+                                key={item.key}
+                                path={item.path}
+                                component={item.component}
+                                exact={item.exact}
+                                authority={item.authority}
+                                redirectPath="/exception/403"
+                            />
+                        ))}
+                        <Redirect exact from="/" to={baseRedirect} />
+                        <Route render={NotFound} />
+                    </Switch>
                 </Layout>
             </Layout>
         );

@@ -20,7 +20,7 @@
   line-height: 58px;
   vertical-align: top;
   display: inline-block;
-  padding: 0 0 0 24px;
+  padding: 0 24px 0 24px;
   cursor: pointer;
   font-size: 20px;
   img {
@@ -46,6 +46,23 @@ i.trigger {
   padding: 0 24px;
   &:hover {
     background: @primary-1;
+  }
+}
+
+.navbar {
+  height: 100%;
+  display: inline-block;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 0px 12px;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a:not(:first-child) {
+    padding-left: 8px;   
   }
 }
 
@@ -97,7 +114,6 @@ i.trigger {
       padding: 0 12px;
     }
     .logo {
-      padding-right: 12px;
       position: relative;
     }
     .right {

@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Menu, Icon, Spin, Tag, Dropdown, Avatar, Divider, Tooltip } from 'antd';
+import { Menu, Icon, Spin, Tag, Dropdown, Avatar, Tooltip } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import Debounce from 'lodash-decorators/debounce';
 import { Link } from 'dva/router';
-import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
 import { defineMessages, injectIntl } from 'react-intl';
@@ -83,9 +82,14 @@ class GlobalHeader extends PureComponent {
             collapsed,
             isMobile,
             logo,
+            fulllogo,
+            menus,
             onMenuClick,
             intl,
         } = this.props;
+
+        const topNav = menus.map(item => <Link key={item.path} to={item.path}>{item.name}</Link>);
+
         const menu = (
             <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
                 <Menu.Item disabled>
@@ -100,19 +104,30 @@ class GlobalHeader extends PureComponent {
             </Menu>
         );
 
+        let logoBox;
+        if (isMobile) {
+            logoBox = ([
+                <Link to="/" className={styles.logo} key="logo">
+                    <img src={logo} alt="logo" width="32" />
+                </Link>,
+            ]);
+        } else {
+            logoBox = ([
+                <Link to="/" className={styles.logo} key="logo">
+                    <img src={fulllogo} alt="logo" width="170" />
+                </Link>,
+            ]);
+        }
+
         return (
             <div className={styles.header}>
-                {isMobile && [
-                    <Link to="/" className={styles.logo} key="logo">
-                        <img src={logo} alt="logo" width="32" />
-                    </Link>,
-                    <Divider type="vertical" key="line" />,
-                ]}
+                {logoBox}
                 <Icon
                     className={styles.trigger}
                     type={collapsed ? 'menu-unfold' : 'menu-fold'}
                     onClick={this.toggle}
                 />
+                <div className={styles.navbar}>{topNav}</div>
                 <div className={styles.right}>
                     <HeaderSearch
                         className={`${styles.action} ${styles.search}`}

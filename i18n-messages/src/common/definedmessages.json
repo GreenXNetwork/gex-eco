@@ -1,0 +1,58 @@
+[
+  {
+    "id": "model.project.project_type",
+    "defaultMessage": "Project Type"
+  },
+  {
+    "id": "model.project.project_category",
+    "defaultMessage": "Category"
+  },
+  {
+    "id": "model.project.project_timing",
+    "defaultMessage": "Project Timing"
+  },
+  {
+    "id": "model.project.all",
+    "defaultMessage": "All"
+  },
+  {
+    "id": "model.project.profit_sharing",
+    "defaultMessage": "Profit Sharing"
+  },
+  {
+    "id": "model.project.energy_buy_back",
+    "defaultMessage": "Energy Buy-back"
+  },
+  {
+    "id": "model.project.headline_profit_sharing",
+    "defaultMessage": "PROFIT SHARING"
+  },
+  {
+    "id": "model.project.headline.energy_buy_back",
+    "defaultMessage": "ENERGY BUY BACK"
+  },
+  {
+    "id": "model.project.solar",
+    "defaultMessage": "Solar"
+  },
+  {
+    "id": "model.project.wind",
+    "defaultMessage": "Wind"
+  },
+  {
+    "id": "model.project.active",
+    "defaultMessage": "Active"
+  },
+  {
+    "id": "model.project.upcoming",
+    "defaultMessage": "Upcoming"
+  },
+  {
+    "id": "model.project.ended",
+    "defaultMessage": "Ended"
+  },
+  {
+    "id": "time.remaining.days",
+    "defaultMessage": "{days} days left"
+  }
+]

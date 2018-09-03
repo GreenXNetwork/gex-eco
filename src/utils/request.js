@@ -45,7 +45,7 @@ function requestAccessToken() {
         },
         method: 'POST',
     };
-    return fetch('api/refresh', options);
+    return fetch('/api/refresh', options);
 }
 
 function prepareFetchOptions(options) {
