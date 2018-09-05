@@ -1,0 +1,66 @@
+@projectColor: #38dc81;
+
+.headline {
+    color: @projectColor;
+    font-weight: bolder;
+    line-height: 1.6rem;
+    text-align: center;
+}
+
+.name {
+    width: 100%;
+    font-weight: bold;
+    text-align: left;
+    background-color: lightgrey;
+
+    span {
+        padding: 0 20px;
+    }
+}
+
+.desc {
+    padding: 4px 20px;
+    text-align: left;
+}
+
+.footerpart {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 4px 0;
+    border-top-width: 1px;
+    border-top-color: lightgrey;
+    border-top-style: solid;
+
+    .footercontent {
+        padding: 0 20px;
+        text-align: left;
+        font-size: 0.8rem;
+
+        .category {
+            color: @projectColor;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .progressinfo {
+            font-weight: bold;
+            > p {
+                margin: 0;
+            }
+        }
+
+        .floattoleft {
+            float: left;
+        }
+
+        .floattoright {
+            float: right;
+        }
+    }
+}
+
+.textColor {
+    color: @projectColor;
+}
