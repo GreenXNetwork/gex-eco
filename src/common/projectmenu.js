@@ -1,6 +1,6 @@
-import { isUrl } from '../../utils/utils';
+import { isUrl } from '../utils/utils';
 
-const menuData = [
+export const menuData = [
   {
     name: 'project-type',
     icon: 'filter',
@@ -74,7 +74,7 @@ const menuData = [
   },
 ];
 
-function formatter(data, parentPath = '/', parentAuthority) {
+function formatter(data, parentPath = '/projects/list/', parentAuthority) {
   return data.map(item => {
     let { path } = item;
     if (!isUrl(path)) {

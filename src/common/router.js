@@ -87,8 +87,12 @@ export const getRouterData = app => {
             component: dynamicWrapper(app, ['user'], () => import('../layouts/ProjectsLayout')),
             authority: ['investor', 'admin'],
         },
-        '/projects/list': {
+        '/projects/list/:filterkey/:filtervalue': {
             component: dynamicWrapper(app, ['project'], () => import('../scenes/ProjectsExplorer/ProjectsExplorer')),
+            authority: ['investor', 'admin'],
+        },
+        '/projects/detail/:id': {
+            component: dynamicWrapper(app, ['project'], () => import('../components/Exception/404')),
             authority: ['investor', 'admin'],
         },
         '/test': {

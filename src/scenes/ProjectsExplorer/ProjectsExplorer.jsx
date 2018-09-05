@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import { defineMessages, injectIntl } from 'react-intl';
 import styles from './ProjectsExplorer.less';
 import ProjectSider from './components/ProjectSider/ProjectSider';
-import { getMenuData } from './projectmenu';
+import { getMenuData } from '../../common/projectmenu';
 import { Layout } from 'antd';
 import banner from '../../assets/projectlist/banner.png';
 import ProjectList from './components/ProjectList/ProjectList';
@@ -32,7 +32,7 @@ class ProjectsExplorer extends Component {
     };
 
     render() {
-        const { intl, collapsed, location } = this.props;
+        const { collapsed, location, match } = this.props;
         return (
             <Layout>
                 <ProjectSider
@@ -47,7 +47,7 @@ class ProjectsExplorer extends Component {
                         <img className={styles.banner} src={banner} />
                     </div>
                     <div className={styles.maincontent}>
-                        <ProjectList />
+                        <ProjectList location={location} match={match} />
                     </div>
                 </Content>
             </Layout>

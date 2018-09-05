@@ -9,6 +9,7 @@ import { getRemainingDays } from '../../../../utils/time';
 
 class ProjectCard extends PureComponent {
     // state = {
+    //     id: 0,
     //     type: undefined,
     //     name: undefined,
     //     description: undefined,
@@ -19,7 +20,7 @@ class ProjectCard extends PureComponent {
     // }
 
     render() {
-        const { project, intl } = this.props;
+        const { project, intl, onClick } = this.props;
 
         const picture = require('../../../../assets/projectlist/item/' + project.image);
 
@@ -35,7 +36,7 @@ class ProjectCard extends PureComponent {
                 hoverable
                 style={{ width: 300, height: 360, display: 'inline-block' }}
                 bodyStyle={{ padding: 0 }}
-                cover={<img alt={project.name} src={picture} />}
+                cover={<img alt={project.name} src={picture} onClick={onClick} />}
             >
                 <div className={styles.headline}>{intl.formatMessage(headline)}</div>
                 <div className={styles.name}>
@@ -51,7 +52,7 @@ class ProjectCard extends PureComponent {
                             <div style={{ clear: 'both' }} />
                         </div>
                         <CandyProgress value={project.progress} />
-                        <span className={styles.days}>
+                        <span>
                             <Icon className={styles.textColor} type="clock-circle-o" /> {timeLeft}
                         </span>
                     </div>
@@ -64,6 +65,7 @@ class ProjectCard extends PureComponent {
 const propTypes = {
     intl: PropTypes.any.isRequired,
     project: PropTypes.any.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 ProjectCard.propTypes = propTypes;
 

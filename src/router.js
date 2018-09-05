@@ -22,7 +22,6 @@ function RouterConfig({ history, app }) {
         <ConnectedRouter history={history}>
           <Switch>
             <Route path="/user" component={UserLayout} />
-            <Route path='/test' component={TestPage} />
             <AuthorizedRoute
               path="/projects"
               render={props => <ProjectsLayout {...props} />}

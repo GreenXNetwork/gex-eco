@@ -49,7 +49,6 @@ const getRedirect = item => {
             });
         }
     }
-    console.log('redirect=' + JSON.stringify(redirectData));
 };
 getMenuData().forEach(getRedirect);
 

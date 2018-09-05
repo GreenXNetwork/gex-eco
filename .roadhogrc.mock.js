@@ -1,6 +1,6 @@
 import mockjs from 'mockjs';
 import { getRule, postRule } from './mock/rule';
-import { getActivities, getNotice, getFakeList } from './mock/api';
+import { getActivities, getNotice, getFakeList, getFakeProjects } from './mock/api';
 import { getFakeChartData } from './mock/chart';
 import { getProfileBasicData } from './mock/profile';
 import { getProfileAdvancedData } from './mock/profile';
@@ -135,46 +135,7 @@ const proxy = {
             path: '/base/category/list',
         });
     },
-    'GET /api/projects': (req, res) => {
-        res.send([
-            {
-                type: 'energy-buy-back',
-                name: 'Project Alpha Energy Buy-back',
-                description:
-                    'The project is in South Africa and is a solar panel system installed on the roof of a government building.',
-                category: 'solar',
-                raisedamount: 500000,
-                currency: 'usd',
-                progress: 0.8,
-                endtime: '2018-11-19 00:00:00 +0700',
-                image: 'img-1.png',
-            },
-            {
-                type: 'profit-sharing',
-                name: 'Project Beta - Energy Equity',
-                description:
-                    'The project is in Autralia and is a wind panel system installed on the field.',
-                category: 'wind',
-                raisedamount: 500000,
-                currency: 'usd',
-                progress: 0.4,
-                endtime: '2018-06-19 00:00:00 +0600',
-                image: 'img-2.png',
-            },
-            {
-                type: 'energy-buy-back',
-                name: 'Project Gamma - Energy Buy-back',
-                description:
-                    'The project is in Australia and is a wind panel system installed on the hills.',
-                category: 'solar',
-                raisedamount: 800000,
-                currency: 'usd',
-                progress: 0.9,
-                endtime: '2018-09-19 00:00:00 +0000',
-                image: 'img-3.png',
-            },
-        ]);
-    },
+    'GET /api/projects': getFakeProjects,
 };
 
 export default (noProxy ? {} : delay(proxy, 1000));
