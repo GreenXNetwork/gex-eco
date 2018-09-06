@@ -37,18 +37,18 @@ export default {
   disableDynamicImport: true,
   publicPath: '/',
   hash: false,
-  proxy: {
-    "/api/user": {
-      "target": "http://localhost:8080/",
-    },
-    "/api/login": {
-      "target": "http://localhost:8080/",
-    },
-    "/api/logout": {
-      "target": "http://localhost:8080/",
-    },
-    "/api/register": {
-      "target": "http://localhost:8080/",
-    },
-  }
+  // proxy: {
+  //   "/api/user": {
+  //     "target": "http://localhost:8080/",
+  //   },
+  //   "/api/login": {
+  //     "target": "http://localhost:8080/",
+  //   },
+  //   "/api/logout": {
+  //     "target": "http://localhost:8080/",
+  //   },
+  //   "/api/register": {
+  //     "target": "http://localhost:8080/",
+  //   },
+  // }
 };

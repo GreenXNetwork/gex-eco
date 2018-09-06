@@ -13,20 +13,81 @@ const noProxy = process.env.NO_PROXY === 'true';
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 const proxy = {
     // 支持值为 Object 和 Array
-    'GET /api/currentUser': {
-        $desc: '获取当前用户接口',
-        $params: {
-            pageSize: {
-                desc: '分页',
-                exp: 2,
-            },
-        },
-        $body: {
-            name: 'Serati Ma',
-            avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
-            userid: '00000001',
-            notifyCount: 12,
-        },
+    'GET /api/user': (req, res) => {
+        const { authorization } = req.headers;
+        if (authorization === 'Bearer admin_fake_token_string') {
+            res.send({
+                id: 1,
+                name: 'Administrator',
+                email: 'admin@greenx.network',
+                created_at: '2018-08-20 07:26:57',
+                updated_at: '2018-08-20 07:26:57',
+                confirmed: 0,
+                confirmation_code: null,
+                date_of_birth: null,
+                phone: null,
+                address: null,
+                city: null,
+                state: null,
+                zipcode: null,
+                country_id: null,
+                identity_type: null,
+                identity_number: null,
+                identity_image: null,
+                kyc_status: 1,
+                referred_by: null,
+                address_id: null,
+                status: 0,
+                last_login_on: null,
+                language: 'en',
+                first_login: 1,
+                force_password_change: 1,
+                failed_login_count: 0,
+                last_failed_login_on: null,
+                notifyCount: 12,
+            });
+            return;
+        }
+        if (authorization === 'Bearer investor1_fake_token_string') {
+            res.send({
+                id: 2,
+                name: 'Investor1',
+                email: 'investor1@greenx.network',
+                created_at: '2018-08-20 07:26:57',
+                updated_at: '2018-08-20 07:26:57',
+                confirmed: 0,
+                confirmation_code: null,
+                date_of_birth: null,
+                phone: null,
+                address: null,
+                city: null,
+                state: null,
+                zipcode: null,
+                country_id: null,
+                identity_type: null,
+                identity_number: null,
+                identity_image: null,
+                kyc_status: 1,
+                referred_by: null,
+                address_id: null,
+                status: 0,
+                last_login_on: null,
+                language: 'en',
+                first_login: 1,
+                force_password_change: 1,
+                failed_login_count: 0,
+                last_failed_login_on: null,
+                notifyCount: 12,
+            });
+            return;
+        }
+        res.status(403).send({
+            timestamp: 1513932555104,
+            status: 403,
+            error: 'Unauthorized',
+            message: 'Unauthorized',
+            path: '/base/category/list',
+        });
     },
     // GET POST 可省略
     'GET /api/users': [
@@ -71,27 +132,28 @@ const proxy = {
     'GET /api/fake_chart_data': getFakeChartData,
     'GET /api/profile/basic': getProfileBasicData,
     'GET /api/profile/advanced': getProfileAdvancedData,
-    'POST /api/login/account': (req, res) => {
-        const { password, userName, type } = req.body;
-        if (password === '888888' && userName === 'admin') {
+    'POST /api/login': (req, res) => {
+        const { password, email, type } = req.body;
+        if (password === '888888' && email === 'admin@greenx.network') {
             res.send({
                 status: 'ok',
-                type,
+                access_token: 'admin_fake_token_string',
                 currentAuthority: 'admin',
+                expires_in: 36000000,
             });
             return;
         }
-        if (password === '123456' && userName === 'user') {
+        if (password === '123456' && email === 'investor1@greenx.network') {
             res.send({
                 status: 'ok',
-                type,
-                currentAuthority: 'user',
+                access_token: 'investor1_fake_token_string',
+                currentAuthority: 'investor',
+                expires_in: 36000000,
             });
             return;
         }
         res.send({
             status: 'error',
-            type,
             currentAuthority: 'guest',
         });
     },
