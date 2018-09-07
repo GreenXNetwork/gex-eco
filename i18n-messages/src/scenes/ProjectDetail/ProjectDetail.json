@@ -1,0 +1,18 @@
+[
+  {
+    "id": "ProjectDetail.tab.story",
+    "defaultMessage": "STORY"
+  },
+  {
+    "id": "ProjectDetail.tab.updates",
+    "defaultMessage": "UPDATES"
+  },
+  {
+    "id": "ProjectDetail.tab.comments",
+    "defaultMessage": "COMMENTS"
+  },
+  {
+    "id": "ProjectDetail.tab.investors",
+    "defaultMessage": "INVESTORS"
+  }
+]

@@ -11,3 +11,7 @@ export async function queryProjects(params) {
     // /api/projects/?category=solar
     return requestWithRetry(`/api/projects?${stringify(params)}`);
 }
+
+export async function queryProjectDetail(projectId) {
+    return requestWithRetry(`/api/projects/detail/${projectId}`);
+}

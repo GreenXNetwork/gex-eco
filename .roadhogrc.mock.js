@@ -1,11 +1,13 @@
 import mockjs from 'mockjs';
 import { getRule, postRule } from './mock/rule';
-import { getActivities, getNotice, getFakeList, getFakeProjects } from './mock/api';
+import { getActivities, getNotice, getFakeList } from './mock/api';
 import { getFakeChartData } from './mock/chart';
 import { getProfileBasicData } from './mock/profile';
 import { getProfileAdvancedData } from './mock/profile';
 import { getNotices } from './mock/notices';
-import { format, delay } from 'roadhog-api-doc';
+import { delay } from 'roadhog-api-doc';
+import { getFakeProjects } from './mock/projects';
+import { getFakeProjectDetail } from './mock/projectdetails';
 
 // 是否禁用代理
 const noProxy = process.env.NO_PROXY === 'true';
@@ -198,6 +200,7 @@ const proxy = {
         });
     },
     'GET /api/projects': getFakeProjects,
+    'GET /api/projects/detail/1': getFakeProjectDetail,
 };
 
 export default (noProxy ? {} : delay(proxy, 1000));

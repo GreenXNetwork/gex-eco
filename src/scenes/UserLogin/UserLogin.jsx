@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Link, Redirect } from 'dva/router';
+import { Link } from 'dva/router';
 import { Checkbox, Alert } from 'antd';
 import Login from 'components/Login';
-import styles from './UserLogin.less';
 import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import styles from './UserLogin.less';
 
 const { UserName, Password, Submit } = Login;
 
@@ -13,10 +13,6 @@ const messages = defineMessages({
     signInButton: {
         id: 'UserLogin.button.signin',
         defaultMessage: 'Sign In',
-    },
-    singUpButton: {
-        id: 'UserLogin.button.signup',
-        defaultMessage: 'Sign Up',
     },
     singUpButton: {
         id: 'UserLogin.button.signup',
@@ -40,6 +36,25 @@ class LoginPage extends Component {
         type: 'account',
         autoLogin: true,
     };
+
+    componentWillMount() {
+        const { dispatch, login } = this.props;
+        if (login && login.status === 'ok') {
+            dispatch({
+                type: 'login/loginRedirect',
+            });
+        }
+    }
+
+    shouldComponentUpdate(newProps) {
+        const { dispatch } = this.props;
+        if (newProps.login && newProps.login.status === 'ok') {
+            dispatch({
+                type: 'login/loginRedirect',
+            });
+        }
+        return true;
+    }
 
     handleSubmit = (err, values) => {
         const { type } = this.state;
@@ -65,25 +80,6 @@ class LoginPage extends Component {
     renderMessage = content => {
         return <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />;
     };
-
-    componentWillMount() {
-        const { dispatch, login } = this.props;
-        if (login && login.status === 'ok') {
-            dispatch({
-                type: 'login/loginRedirect',
-            });
-        }
-    }
-
-    shouldComponentUpdate(newProps) {
-        const { dispatch } = this.props;
-        if (newProps.login && newProps.login.status === 'ok') {
-            dispatch({
-                type: 'login/loginRedirect',
-            });
-        }
-        return true;
-    }
 
     render() {
         const { login, submitting, intl } = this.props;
