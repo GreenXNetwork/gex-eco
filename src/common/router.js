@@ -88,11 +88,15 @@ export const getRouterData = app => {
             authority: ['investor', 'admin'],
         },
         '/projects/list/:filterkey/:filtervalue': {
-            component: dynamicWrapper(app, ['project'], () => import('../scenes/ProjectsExplorer/ProjectsExplorer')),
+            component: dynamicWrapper(app, ['project'], () =>
+                import('../scenes/ProjectsExplorer/ProjectsExplorer')
+            ),
             authority: ['investor', 'admin'],
         },
         '/projects/detail/:id': {
-            component: dynamicWrapper(app, ['project'], () => import('../components/Exception/404')),
+            component: dynamicWrapper(app, ['projectdetail'], () =>
+                import('../scenes/ProjectDetail/ProjectDetail')
+            ),
             authority: ['investor', 'admin'],
         },
         '/test': {

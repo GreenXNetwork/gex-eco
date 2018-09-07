@@ -1,28 +1,18 @@
-import { routerRedux } from 'dva/router';
-import { queryProjects } from '../services/project';
+import { queryProjectDetail } from '../services/project';
 import { queryInvestorsByProject } from '../services/investor';
 
 export default {
-    namespace: 'project',
+    namespace: 'projectdetail',
 
-    state: {
-        list: [],
-    },
+    state: {},
 
     effects: {
-        *fetchProjects({ params }, { call, put }) {
-            const response = yield call(queryProjects, params);
+        *fetchProjectDetail({ projectId }, { call, put }) {
+            const reponse = yield call(queryProjectDetail, projectId);
             yield put({
-                type: 'show',
-                payload: response,
+                type: 'showProjectDetail',
+                payload: reponse,
             });
-        },
-        *showDetail({ id }, { put }) {
-            yield put(
-                routerRedux.push({
-                    pathname: `/projects/detail/${id}`,
-                })
-            );
         },
         *fetchProjectInvestors({ projectId }, { call, put }) {
             const response = yield call(queryInvestorsByProject, projectId);
@@ -34,10 +24,10 @@ export default {
     },
 
     reducers: {
-        show(state, { payload }) {
+        showProjectDetail(state, { payload }) {
             return {
                 ...state,
-                projects: payload,
+                detail: payload,
             };
         },
         showInvestors(state, { payload }) {
