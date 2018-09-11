@@ -6,10 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: gex-app
-    entrypoint: sh entrypoint.sh
     working_dir: /home/node
     ports:
       - 8000:8000
     volumes:
-      - .:/home/node
+      - ./:/home/node
       - ./node_modules:/home/node/node_modules
