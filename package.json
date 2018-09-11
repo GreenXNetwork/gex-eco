@@ -79,6 +79,7 @@
     "mockjs": "^1.0.1-beta3",
     "prettier": "1.14.0",
     "pro-download": "^1.0.1",
+    "react-image-resizer": "^1.3.0",
     "react-loadable": "^5.4.0",
     "redbox-react": "^1.5.0",
     "regenerator-runtime": "^0.12.0",

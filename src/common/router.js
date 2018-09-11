@@ -94,7 +94,7 @@ export const getRouterData = app => {
             authority: ['investor', 'admin'],
         },
         '/projects/detail/:id': {
-            component: dynamicWrapper(app, ['projectdetail'], () =>
+            component: dynamicWrapper(app, ['projectdetail', 'owner'], () =>
                 import('../scenes/ProjectDetail/ProjectDetail')
             ),
             authority: ['investor', 'admin'],

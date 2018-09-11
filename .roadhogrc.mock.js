@@ -8,6 +8,7 @@ import { getNotices } from './mock/notices';
 import { delay } from 'roadhog-api-doc';
 import { getFakeProjects } from './mock/projects';
 import { getFakeProjectDetail } from './mock/projectdetails';
+import { getFakeOwner } from './mock/owners';
 
 // 是否禁用代理
 const noProxy = process.env.NO_PROXY === 'true';
@@ -201,6 +202,7 @@ const proxy = {
     },
     'GET /api/projects': getFakeProjects,
     'GET /api/projects/detail/1': getFakeProjectDetail,
+    'GET /api/owners/1': getFakeOwner,
 };
 
 export default (noProxy ? {} : delay(proxy, 1000));
