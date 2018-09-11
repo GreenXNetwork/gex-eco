@@ -3,7 +3,6 @@ module.exports = {
   // 'primary-color': '#10e99b',
   'card-actions-background': '#f5f8fa',
   'menu-bg': 'transparent',
-  'menu-item-color': '#f0f0f0',
   'menu-item-active-bg': '#737373',
   'menu-highlight-color': '#38dc81',
   'menu-inline-toplevel-item-height': '32px',

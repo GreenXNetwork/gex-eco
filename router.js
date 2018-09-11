@@ -94,14 +94,14 @@ export const getRouterData = app => {
             authority: ['investor', 'admin'],
         },
         '/projects/detail/:id': {
-            component: dynamicWrapper(app, ['projectdetail', 'owner'], () =>
+            component: dynamicWrapper(app, ['projectdetail'], () =>
                 import('../scenes/ProjectDetail/ProjectDetail')
             ),
             authority: ['investor', 'admin'],
         },
         '/portfolio': {
-            component: dynamicWrapper(app, ['portfolio'], () =>
-                import('../scenes/Portfolio/Portfolio')
+            component: dynamicWrapper(app, ['projectdetail'], () =>
+                import('../scenes/ProjectDetail/ProjectDetail')
             ),
             authority: ['investor', 'admin'],
         },

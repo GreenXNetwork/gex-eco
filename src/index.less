@@ -69,4 +69,24 @@ body {
     .website svg {
         fill: #6a6a6a;
     }
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .clearfix {
+        &::after {
+            display: block;
+            content: '';
+            clear: both;
+        }
+    }
+
+    .main-title-text-color {
+        color: #1bd975;
+    }
 }
