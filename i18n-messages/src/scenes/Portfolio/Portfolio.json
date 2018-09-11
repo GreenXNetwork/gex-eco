@@ -1,0 +1,14 @@
+[
+  {
+    "id": "Portfolio.currency",
+    "defaultMessage": "Portfolio Currency"
+  },
+  {
+    "id": "Portfolio.overview",
+    "defaultMessage": "OVERVIEW"
+  },
+  {
+    "id": "Portfolio.chart_title",
+    "defaultMessage": "BREAKDOWN OF THE PIE PORTFOLIO"
+  }
+]

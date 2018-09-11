@@ -54,5 +54,29 @@
   {
     "id": "time.remaining.days",
     "defaultMessage": "{days} days left"
+  },
+  {
+    "id": "portfolio.min",
+    "defaultMessage": "Portfolio MIN"
+  },
+  {
+    "id": "portfolio.max",
+    "defaultMessage": "Portfolio MAX"
+  },
+  {
+    "id": "portfolio.least_profitable",
+    "defaultMessage": "Least Profitable"
+  },
+  {
+    "id": "portfolio.most_profitable",
+    "defaultMessage": "Most Profitable"
+  },
+  {
+    "id": "portfolio.worst_project",
+    "defaultMessage": "Worst Project"
+  },
+  {
+    "id": "portfolio.best_project",
+    "defaultMessage": "Best Project"
   }
 ]

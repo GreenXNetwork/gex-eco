@@ -61,14 +61,39 @@ const commonmessages = defineMessages({
         id: 'time.remaining.days',
         defaultMessage: '{days} days left',
     },
+
+    portfolio_min: {
+        id: 'portfolio.min',
+        defaultMessage: 'Portfolio MIN',
+    },
+    portfolio_max: {
+        id: 'portfolio.max',
+        defaultMessage: 'Portfolio MAX',
+    },
+    least_profitable: {
+        id: 'portfolio.least_profitable',
+        defaultMessage: 'Least Profitable',
+    },
+    most_profitable: {
+        id: 'portfolio.most_profitable',
+        defaultMessage: 'Most Profitable',
+    },
+    worst_project: {
+        id: 'portfolio.worst_project',
+        defaultMessage: 'Worst Project',
+    },
+    best_project: {
+        id: 'portfolio.best_project',
+        defaultMessage: 'Best Project',
+    },
 });
 
 export function getMessage(key) {
     if (typeof key === 'string') {
-        const formatted_key = key.replace(/-/g, '_');
-        return commonmessages[formatted_key];
+        const formattedKey = key.replace(/-/g, '_');
+        return commonmessages[formattedKey];
     }
     return key;
-};
+}
 
 export default commonmessages;

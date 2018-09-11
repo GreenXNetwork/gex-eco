@@ -4,9 +4,9 @@ import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import Debounce from 'lodash-decorators/debounce';
 import { Link } from 'dva/router';
+import { defineMessages, injectIntl } from 'react-intl';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
-import { defineMessages, injectIntl } from 'react-intl';
 
 const messages = defineMessages({
     profile_menuitem: {
@@ -88,7 +88,11 @@ class GlobalHeader extends PureComponent {
             intl,
         } = this.props;
 
-        const topNav = menus.map(item => <Link key={item.path} to={item.path}>{item.name}</Link>);
+        const topNav = menus.map(item => (
+            <Link key={item.path} to={item.path}>
+                {item.name}
+            </Link>
+        ));
 
         const menu = (
             <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
@@ -106,17 +110,17 @@ class GlobalHeader extends PureComponent {
 
         let logoBox;
         if (isMobile) {
-            logoBox = ([
+            logoBox = [
                 <Link to="/" className={styles.logo} key="logo">
                     <img src={logo} alt="logo" width="32" />
                 </Link>,
-            ]);
+            ];
         } else {
-            logoBox = ([
+            logoBox = [
                 <Link to="/" className={styles.logo} key="logo">
                     <img src={fulllogo} alt="logo" width="170" />
                 </Link>,
-            ]);
+            ];
         }
 
         return (
