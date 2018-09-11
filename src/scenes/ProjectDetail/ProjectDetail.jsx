@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { injectIntl, defineMessages } from 'react-intl';
 import { connect } from 'dva';
 import PropTypes from 'prop-types';
-import { Spin, Tabs } from 'antd';
+import { Modal, Button, Spin, Tabs } from 'antd';
 import Carousel from 'react-image-carousel';
 import { StickyContainer, Sticky } from 'react-sticky';
 import styles from './ProjectDetail.less';
+import Developer from '../Developer/Developer';
 
 const { TabPane } = Tabs;
 
@@ -29,6 +30,8 @@ const messages = defineMessages({
 });
 
 class ProjectDetail extends Component {
+    state = { visible: false };
+
     componentDidMount() {
         const { dispatch, match } = this.props;
         // See models/projectdetail.js for more effects and actions.
@@ -37,6 +40,19 @@ class ProjectDetail extends Component {
             projectId: match.params.id,
         });
     }
+
+    handleCancel = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
 
     callback = () => {};
 
@@ -59,6 +75,8 @@ class ProjectDetail extends Component {
             </Sticky>
         );
 
+        const { visible } = this.state;
+
         return (
             <div>
                 <div>{JSON.stringify(detail)}</div>
@@ -66,6 +84,21 @@ class ProjectDetail extends Component {
                 <div className={styles.imageSlideshow}>
                     <Carousel images={detail.media} thumb loop />
                 </div>
+                <Button type="primary" onClick={this.showModal}>
+                    Owner More!
+                </Button>
+                <Modal
+                    title="About"
+                    className="project-owner"
+                    visible={visible}
+                    width="600px"
+                    style={{ top: '50px', padding: '0px' }}
+                    bodyStyle={{ padding: '0px' }}
+                    onCancel={this.handleCancel}
+                    footer={null}
+                >
+                    <Developer ownerId="1" />
+                </Modal>
                 <StickyContainer>
                     <Tabs
                         defaultActiveKey="story"
