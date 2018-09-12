@@ -127,6 +127,10 @@ export const getRouterData = app => {
                 import('../scenes/RegisterResult/RegisterResult')
             ),
         },
+        '/exchange': {
+            component: dynamicWrapper(app, [], () => import('../scenes/Exchange/Exchange')),
+            authority: ['investor', 'admin'],
+        },
     };
     // Get name from ./menu.js or just set it in the router data.
     const menuData = getFlatMenuData(getMenuData());
