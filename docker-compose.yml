@@ -4,14 +4,17 @@ services:
   gex-node:
     image: node:carbon-alpine 
     container_name: gex-node
-    working_dir: /usr/src/docker-react-sample
+    working_dir: /usr/src/gex-mvp
     volumes:
-      - ./:/usr/src/docker-react-sample
-      - ./node_modules:/home/node/node_modules
-    command: ["npm","install"]
+      - ./:/usr/src/gex-mvp
     command: ["npm","start"]
     ports:
       - 8000:8000
+    networks: 
+      - frontend
+networks: 
+  frontend:
+    driver: bridge
 
 
 # to use the node container, use command below:
