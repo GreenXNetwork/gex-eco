@@ -11,11 +11,30 @@ import {
     message,
     Avatar,
     InputNumber,
+    Slider,
 } from 'antd';
 import classNames from 'classnames';
 import styles from './Exchange.less';
 
 const { Content, Header, Sider } = Layout;
+const marks = {
+    0: '0%',
+    25: '25%',
+    50: {
+        style: {
+            color: '#86af49',
+        },
+        label: <strong>50%</strong>,
+    },
+    75: '75%',
+    100: {
+        style: {
+            color: '#86af49',
+        },
+        label: <strong>100%</strong>,
+    },
+};
+const gexlogo = 'https://icobench.com/images/icos/icons/greenx.jpg';
 
 function handleMenuClick(e) {
     message.info('Click on menu item.');
@@ -23,6 +42,9 @@ function handleMenuClick(e) {
 }
 function onChange(value) {
     console.log('changed', value);
+}
+function onAfterChange(value) {
+    console.log('onAfterChange: ', value);
 }
 
 class Exchange extends Component {
@@ -44,59 +66,62 @@ class Exchange extends Component {
             </Menu>
         );
         const balance = (
-            <Card>
+            <>
                 <h3 className={styles.balancetitle}> Your Balance</h3>
-                <Row>
-                    <Col
-                        className={classNames(styles.balance, styles.balancespan)}
-                        xs={12}
-                        sm={12}
-                        md={6}
-                        lg={6}
-                        xl={6}
-                        span={6}
-                    >
-                        <span>
-                            GEX Balance
-                            <br />
-                            500,000
-                        </span>
-                    </Col>
-                    <Col className={styles.balance} xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
-                        <span>
-                            PR01 Balance
-                            <br />
-                            300,000
-                        </span>
-                    </Col>
-                    <Col
-                        className={classNames(styles.balance, styles.balancespan)}
-                        xs={12}
-                        sm={12}
-                        md={6}
-                        lg={6}
-                        xl={6}
-                        span={6}
-                    >
-                        <span>
-                            PR02 Balance
-                            <br />
-                            50,000
-                        </span>
-                    </Col>
-                    <Col className={styles.balance} xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
-                        <span>
-                            PR03 Balance
-                            <br />
-                            510,000
-                        </span>
-                    </Col>
-                </Row>
-            </Card>
+                <Card>
+                    <Row>
+                        <Col xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
+                            <div className={classNames(styles.balance, styles.balancespan)}>
+                                <span>
+                                    GEX Balance
+                                    <br />
+                                    500,000
+                                </span>
+                            </div>
+                        </Col>
+                        <Col xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
+                            <div className={classNames(styles.balance)}>
+                                <span>
+                                    PR01 Balance
+                                    <br />
+                                    300,000
+                                </span>
+                            </div>
+                        </Col>
+                        <Col xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
+                            <div className={classNames(styles.balance, styles.balancespan)}>
+                                <span>
+                                    PR02 Balance
+                                    <br />
+                                    50,000
+                                </span>
+                            </div>
+                        </Col>
+                        <Col xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
+                            <div className={classNames(styles.balance)}>
+                                <span>
+                                    PR03 Balance
+                                    <br />
+                                    510,000
+                                </span>
+                            </div>
+                        </Col>
+                    </Row>
+                </Card>
+            </>
         );
         const history = (
             <>
-                <center>History Table Const</center>
+                <Card>
+                    <Row type="flex" justify="center" align="center">
+                        <strong>1 GEX = 5 PR01</strong>
+                    </Row>
+                    <Row style={{ marginTop: 20 }} type="flex" justify="center" align="center">
+                        <Button className={styles.btnexchange} type="primary" size="large">
+                            Exchange
+                        </Button>
+                    </Row>
+                </Card>
             </>
         );
         const transferleftcol = (
@@ -106,25 +131,28 @@ class Exchange extends Component {
                     /Transfer
                 </h3>
                 <Card>
-                    <Row>
+                    <Row type="flex" justify="center" align="center">
+                        <Col xs={6} sm={3} md={3} lg={3} xl={3} span={3}>
+                            <Avatar src={gexlogo} />
+                        </Col>
                         <Col>
                             <div>
-                                <Avatar
-                                    className={styles.currenciesicon}
-                                    src="https://etherscan.io/token/images/greenx_28.png"
-                                    shape="circle"
-                                />
                                 <Dropdown overlay={exchangedropdown}>
-                                    <Button style={{ marginLeft: 8 }}>
+                                    <Button
+                                        className={styles.transferamount}
+                                        style={{ marginLeft: 8 }}
+                                    >
                                         <span> GEX - GreenX</span> <Icon type="down" />
                                     </Button>
                                 </Dropdown>
                             </div>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row style={{ marginTop: 8 }} type="flex" justify="center" align="center">
+                        <Col xs={6} sm={3} md={3} lg={3} xl={3} span={3}>
+                            Amount:
+                        </Col>
                         <Col>
-                            Amount:{' '}
                             <InputNumber
                                 className={styles.transferamount}
                                 min={0}
@@ -139,10 +167,71 @@ class Exchange extends Component {
                             />
                         </Col>
                     </Row>
+                    <Row style={{ marginTop: 20 }}>
+                        <Slider
+                            marks={marks}
+                            defaultValue={30}
+                            onChange={onChange}
+                            onAfterChange={onAfterChange}
+                        />
+                    </Row>
                 </Card>
             </>
         );
-        const transferrightcol = <center>Column right column const</center>;
+        const transferrightcol = (
+            <>
+                <h3 className={styles.transfertitle}>
+                    <span>Exchange</span>
+                    /Transfer
+                </h3>
+                <Card>
+                    <Row type="flex" justify="center" align="center">
+                        <Col xs={6} sm={3} md={3} lg={3} xl={3} span={3}>
+                            <Avatar src={gexlogo} />
+                        </Col>
+                        <Col>
+                            <div>
+                                <Dropdown overlay={exchangedropdown}>
+                                    <Button
+                                        className={styles.transferamount}
+                                        style={{ marginLeft: 8 }}
+                                    >
+                                        <span> GEX - GreenX</span> <Icon type="down" />
+                                    </Button>
+                                </Dropdown>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row style={{ marginTop: 8 }} type="flex" justify="center" align="center">
+                        <Col xs={6} sm={3} md={3} lg={3} xl={3} span={3}>
+                            Amount:
+                        </Col>
+                        <Col>
+                            <InputNumber
+                                className={styles.transferamount}
+                                min={0}
+                                max={999999999}
+                                defaultValue={1000000}
+                                formatter={value =>
+                                    `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                }
+                                parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                                onChange={onChange}
+                                step={0.1}
+                            />
+                        </Col>
+                    </Row>
+                    <Row style={{ marginTop: 20 }}>
+                        <Slider
+                            marks={marks}
+                            defaultValue={30}
+                            onChange={onChange}
+                            onAfterChange={onAfterChange}
+                        />
+                    </Row>
+                </Card>
+            </>
+        );
         return (
             <div>
                 <Layout>
