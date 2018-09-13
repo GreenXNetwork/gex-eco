@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { injectIntl, defineMessages } from 'react-intl';
 import { connect } from 'dva';
 import PropTypes from 'prop-types';
-import { Modal, Button, Spin, Tabs } from 'antd';
+import { Modal, Spin, Tabs, Row, Col, Layout } from 'antd';
 import Carousel from 'react-image-carousel';
 import { StickyContainer, Sticky } from 'react-sticky';
-import styles from './ProjectDetail.less';
 import Developer from '../Developer/Developer';
+import styles from './ProjectDetail.less';
+import DetailView from './components/DetailView/DetailView';
 
 const { TabPane } = Tabs;
+const { Content } = Layout;
 
 const messages = defineMessages({
     tab_story: {
@@ -41,8 +43,7 @@ class ProjectDetail extends Component {
         });
     }
 
-    handleCancel = e => {
-        console.log(e);
+    handleCancel = () => {
         this.setState({
             visible: false,
         });
@@ -70,7 +71,10 @@ class ProjectDetail extends Component {
         const renderTabBar = (props, DefaultTabBar) => (
             <Sticky bottomOffset={80}>
                 {({ style }) => (
-                    <DefaultTabBar {...props} style={{ ...style, zIndex: 1, background: '#000' }} />
+                    <DefaultTabBar
+                        {...props}
+                        style={{ ...style, zIndex: 1, background: 'transparent' }}
+                    />
                 )}
             </Sticky>
         );
@@ -78,15 +82,33 @@ class ProjectDetail extends Component {
         const { visible } = this.state;
 
         return (
-            <div>
-                <div>{JSON.stringify(detail)}</div>
-                <div>{detail.category}</div>
-                <div className={styles.imageSlideshow}>
-                    <Carousel images={detail.media} thumb loop />
-                </div>
-                <Button type="primary" onClick={this.showModal}>
-                    Owner More!
-                </Button>
+            <Content className={styles.container}>
+                <Row type="flex" gutter={24}>
+                    <Col
+                        className="gutter-row"
+                        xs={{ span: 24, order: 2 }}
+                        sm={{ span: 24, order: 2 }}
+                        md={{ span: 24, order: 2 }}
+                        lg={{ span: 24, order: 2 }}
+                        xl={{ span: 24, order: 2 }}
+                        xxl={{ span: 12, order: 1 }}
+                    >
+                        <div className={styles.imageSlideshow}>
+                            <Carousel images={detail.media} thumb loop />
+                        </div>
+                    </Col>
+                    <Col
+                        className="gutter-row"
+                        xs={{ span: 24, order: 1 }}
+                        sm={{ span: 24, order: 1 }}
+                        md={{ span: 24, order: 1 }}
+                        lg={{ span: 24, order: 1 }}
+                        xl={{ span: 24, order: 1 }}
+                        xxl={{ span: 12, order: 2 }}
+                    >
+                        <DetailView detail={detail} onOwnerMore={this.showModal} />
+                    </Col>
+                </Row>
                 <Modal
                     title="About"
                     className="project-owner"
@@ -99,27 +121,19 @@ class ProjectDetail extends Component {
                 >
                     <Developer ownerId="1" />
                 </Modal>
-                <StickyContainer>
+                <StickyContainer className="extraDetailContainer">
                     <Tabs
                         defaultActiveKey="story"
                         onChange={this.callback}
                         renderTabBar={renderTabBar}
                     >
-                        <TabPane tab={intl.formatMessage(messages.tab_story)} key="story">
-                            Content of Tab Pane 1
-                        </TabPane>
-                        <TabPane tab={intl.formatMessage(messages.tab_updates)} key="updates">
-                            Content of Tab Pane 2
-                        </TabPane>
-                        <TabPane tab={intl.formatMessage(messages.tab_comments)} key="comments">
-                            Content of Tab Pane 3
-                        </TabPane>
-                        <TabPane tab={intl.formatMessage(messages.tab_investors)} key="investors">
-                            Content of Tab Pane 3
-                        </TabPane>
+                        <TabPane tab={intl.formatMessage(messages.tab_story)} key="story" />
+                        <TabPane tab={intl.formatMessage(messages.tab_updates)} key="updates" />
+                        <TabPane tab={intl.formatMessage(messages.tab_comments)} key="comments" />
+                        <TabPane tab={intl.formatMessage(messages.tab_investors)} key="investors" />
                     </Tabs>
                 </StickyContainer>
-            </div>
+            </Content>
         );
     }
 }

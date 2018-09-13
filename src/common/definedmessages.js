@@ -43,6 +43,14 @@ const commonmessages = defineMessages({
         id: 'model.project.wind',
         defaultMessage: 'Wind',
     },
+    headline_solar: {
+        id: 'model.project.headline.solar',
+        defaultMessage: 'SOLAR',
+    },
+    headline_wind: {
+        id: 'model.project.headline.wind',
+        defaultMessage: 'WIND',
+    },
 
     active: {
         id: 'model.project.active',
