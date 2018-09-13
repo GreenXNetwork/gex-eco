@@ -3,13 +3,56 @@
     height: 560px;
     max-width: 100%;
     max-height: 100vh;
-    margin: 0 auto;
+    margin: 0 auto 24px auto;
+}
+
+.container {
+    margin: 24px 196px 24px 196px;
+
+    .padbottom {
+        padding-bottom: 24px;
+    }
+}
+
+@media (max-width: 1600px) {
+    .container {
+        margin: 24px 128px 24px 128px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .container {
+        margin: 24px 96px 24px 96px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        margin: 24px 24px 24px 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        margin: 12px 12px 12px 12px;
+        .overviewchart {
+            margin-bottom: 12px;
+        }
+    }
 }
 
 :global {
     .project-owner {
         .ant-modal-header {
             background: #0dca66;
+        }
+    }
+
+    .extraDetailContainer {
+        .ant-tabs-nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
         }
     }
 }
