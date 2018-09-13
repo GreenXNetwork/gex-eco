@@ -13,6 +13,7 @@ import {
     InputNumber,
     Slider,
     Tabs,
+    Input,
 } from 'antd';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -139,7 +140,7 @@ class Exchange extends Component {
                 </Card>
             </>
         );
-        const transferleftcol = (
+        const exchangeleftcol = (
             <Card>
                 <Row type="flex" justify="center" align="center">
                     <Col xs={6} sm={3} md={3} lg={3} xl={3} span={3}>
@@ -176,7 +177,7 @@ class Exchange extends Component {
                 </Row>
             </Card>
         );
-        const transferrightcol = (
+        const exchangerightcol = (
             <Card>
                 <Row type="flex" justify="center" align="center">
                     <Col xs={6} sm={3} md={3} lg={3} xl={3} span={3}>
@@ -212,6 +213,76 @@ class Exchange extends Component {
                     />
                 </Row>
             </Card>
+        );
+        const transfercol = (
+            <>
+                <Card>
+                    <Row gutter={30}>
+                        <Col xs={24} sm={24} md={14} span={14}>
+                            <strong>Receiving Address</strong>
+                            <Row style={{ marginTop: 20 }}>
+                                <Input
+                                    placeholder="Enter Receiving Address"
+                                    prefix={
+                                        <Icon
+                                            type="file-text"
+                                            style={{ color: 'rgba(0,0,0,0.5)' }}
+                                        />
+                                    }
+                                />
+                            </Row>
+                        </Col>
+                        <Col xs={24} sm={24} md={10} span={10}>
+                            <strong>From</strong>
+                            <Row style={{ marginTop: 20 }} type="flex" justify="left" align="left">
+                                <Col xs={8} span={3}>
+                                    <Avatar src={gexlogo} />
+                                </Col>
+                                <Col xs={16} span={21}>
+                                    <div>{dropdowncurrencies}</div>
+                                </Col>
+                            </Row>
+                            <Row style={{ marginTop: 20 }} type="flex" justify="left" align="left">
+                                <Col xs={8} span={3}>
+                                    Amount:
+                                </Col>
+                                <Col xs={16} span={21}>
+                                    <InputNumber
+                                        className={styles.transferamount}
+                                        min={0}
+                                        max={999999999}
+                                        defaultValue={1000000}
+                                        formatter={value =>
+                                            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                        }
+                                        parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                                        onChange={onChange}
+                                        step={0.1}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row style={{ marginTop: 20 }}>
+                                <Slider
+                                    marks={marks}
+                                    defaultValue={30}
+                                    onChange={onChange}
+                                    onAfterChange={onAfterChange}
+                                />
+                            </Row>
+                        </Col>
+                    </Row>
+                </Card>
+                <Card style={{ marginTop: 20 }}>
+                    <Row type="flex" justify="center" align="center">
+                        <strong>TRANSACTION FEE : 0.0003276 ETH</strong>
+                    </Row>
+                    <Row style={{ marginTop: 20 }} type="flex" justify="center" align="center">
+                        <Button className={styles.btnexchange} type="primary" size="large">
+                            Exchange
+                        </Button>
+                    </Row>
+                </Card>
+            </>
         );
         return (
             <div>
@@ -240,7 +311,7 @@ class Exchange extends Component {
                                                     xl={12}
                                                     span={12}
                                                 >
-                                                    {transferleftcol}
+                                                    {exchangeleftcol}
                                                 </Col>
                                                 <Col
                                                     className={classNames(
@@ -254,13 +325,13 @@ class Exchange extends Component {
                                                     xl={12}
                                                     span={12}
                                                 >
-                                                    {transferrightcol}
+                                                    {exchangerightcol}
                                                 </Col>
                                             </Row>
                                             <Row>{history}</Row>
                                         </TabPane>
                                         <TabPane tab={<span>{transfericon} Transfer</span>} key="2">
-                                            Transfer Content
+                                            {transfercol}
                                         </TabPane>
                                     </Tabs>
                                 </Col>
