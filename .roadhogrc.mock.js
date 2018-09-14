@@ -10,6 +10,12 @@ import { getFakeProjects } from './mock/projects';
 import { getFakeProjectDetail } from './mock/projectdetails';
 import { getFakeOwner } from './mock/owners';
 import {
+    getFakeExBalances,
+    getFakeExPairs,
+    getFakeExCurrencies,
+    getFakeExGas,
+} from './mock/exchange';
+import {
     portfolio,
     portfoliocurrency,
     portfoliosorts,
@@ -225,6 +231,10 @@ const proxy = {
     'GET /api/portfolio/details': {
         $body: portfoliodetails,
     },
+    'GET /api/exchange/balances': getFakeExBalances,
+    'GET /api/exchange/pairs': getFakeExPairs,
+    'GET /api/exchange/gas': getFakeExGas,
+    'GET /api/exchange/currencies': getFakeExCurrencies,
 };
 
 export default (noProxy ? {} : delay(proxy, 1000));
