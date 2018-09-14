@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, defineMessages } from 'react-intl';
-import { Button, Input, Row, Col, Card, Avatar } from 'antd';
+import { Button, Row, Col, Card, Avatar, InputNumber } from 'antd';
 import CandyProgress from 'components/CandyProgress';
 import classNames from 'classnames';
 import commonmessages, { getMessage } from '../../../../common/definedmessages';
@@ -105,28 +105,34 @@ class DetailView extends PureComponent {
                     </div>
                 </div>
 
-                <Row gutter={24} className={styles.actionContainer}>
+                <Row gutter={16} className={styles.actionContainer}>
                     <Col span={9}>
-                        <Button className={styles.cyanBtn} type="primary" size="large">
+                        <Button className={styles.cyanBtn} type="primary">
                             {intl.formatMessage({ ...messages.due_deli_report })}
                         </Button>
                     </Col>
 
                     <Col span={6}>
-                        <Button className={styles.darkblueBtn} type="primary" size="large">
+                        <Button className={styles.darkblueBtn} type="primary">
                             {intl.formatMessage({ ...messages.ai_risk_report })}
                         </Button>
                     </Col>
 
                     <Col span={9}>
-                        <Button className={styles.lightgreenBtn} type="primary" size="large">
+                        <Button className={styles.lightgreenBtn} type="primary">
                             {intl.formatMessage({ ...messages.contribute })}
                         </Button>
                     </Col>
                 </Row>
 
                 <div className={styles.contributionContainer}>
-                    <Input size="large" placeholder={donationText} />
+                    <InputNumber
+                        className={styles.contributionAmount}
+                        size="large"
+                        placeholder={donationText}
+                        formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                    />
                 </div>
             </div>
         );
