@@ -14,7 +14,10 @@ import {
     Slider,
     Tabs,
     Input,
+    Spin,
 } from 'antd';
+import { injectIntl } from 'react-intl';
+import { connect } from 'dva';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
@@ -73,7 +76,34 @@ function onAfterChange(value) {
 }
 
 class Exchange extends Component {
+    componentDidMount() {
+        const { dispatch } = this.props;
+        dispatch({
+            type: 'exchange/fetchPairs',
+        });
+        dispatch({
+            type: 'exchange/fetchGas',
+        });
+        dispatch({
+            type: 'exchange/fetchCurrencies',
+        });
+        dispatch({
+            type: 'exchange/fetchBalances',
+        });
+    }
+
     render() {
+        const { loading, exchange } = this.props;
+
+        const isGasLoading =
+            (loading.effects['exchange/fetchGas'] === undefined
+                ? true
+                : loading.effects['exchange/fetchGas']) || false;
+
+        if (isGasLoading) {
+            return <Spin size="large" />;
+        }
+
         const dropdowncurrencies = (
             <Dropdown placement="bottomCenter" overlay={exchangedropdown}>
                 <Button className={styles.transferamount} style={{ marginLeft: 8 }}>
@@ -130,7 +160,7 @@ class Exchange extends Component {
             <>
                 <Card>
                     <Row type="flex" justify="center" align="center">
-                        <strong>1 GEX = 5 PR01</strong>
+                        <strong>Max price: {exchange.gasprice.price.max}</strong>
                     </Row>
                     <Row style={{ marginTop: 20 }} type="flex" justify="center" align="center">
                         <Button className={styles.btnexchange} type="primary" size="large">
@@ -278,7 +308,7 @@ class Exchange extends Component {
                     </Row>
                     <Row style={{ marginTop: 20 }} type="flex" justify="center" align="center">
                         <Button className={styles.btnexchange} type="primary" size="large">
-                            Exchange
+                            Send
                         </Button>
                     </Row>
                 </Card>
@@ -343,4 +373,8 @@ class Exchange extends Component {
         );
     }
 }
-export default Exchange;
+const mapStateToProps = ({ exchange, loading }) => ({
+    exchange,
+    loading,
+});
+export default injectIntl(connect(mapStateToProps)(Exchange), { withRef: true });

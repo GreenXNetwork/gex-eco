@@ -128,7 +128,9 @@ export const getRouterData = app => {
             ),
         },
         '/exchange': {
-            component: dynamicWrapper(app, [], () => import('../scenes/Exchange/Exchange')),
+            component: dynamicWrapper(app, ['exchange'], () =>
+                import('../scenes/Exchange/Exchange')
+            ),
         },
     };
     // Get name from ./menu.js or just set it in the router data.
