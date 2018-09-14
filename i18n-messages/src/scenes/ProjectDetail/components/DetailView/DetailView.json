@@ -1,0 +1,34 @@
+[
+  {
+    "id": "DetailView.raised_by",
+    "defaultMessage": "{money} {currency} raised by {investornum} investors"
+  },
+  {
+    "id": "DetailView.percentage_of_money",
+    "defaultMessage": "{percentage} of {money}"
+  },
+  {
+    "id": "DetailView.due_diligence_report.button",
+    "defaultMessage": "DUE DILIGENCE REPORT"
+  },
+  {
+    "id": "DetailView.ai_risk_report.button",
+    "defaultMessage": "AI RISK REPORT"
+  },
+  {
+    "id": "DetailView.contribute.button",
+    "defaultMessage": "MAKE A CONTRIBUTION"
+  },
+  {
+    "id": "DetailView.donation.placeholder",
+    "defaultMessage": "DONATION GEX AMOUNT"
+  },
+  {
+    "id": "DetailView.project_owner",
+    "defaultMessage": "Developer"
+  },
+  {
+    "id": "DetailView.project_owner.more",
+    "defaultMessage": "More"
+  }
+]

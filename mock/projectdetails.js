@@ -9,6 +9,7 @@ const details = {
             'The project is in South Africa and is a solar panel system installed on the roof of a government building.',
         category: 'solar',
         raisedamount: 500000,
+        goal: 625000,
         currency: 'usd',
         progress: 0.8,
         endtime: '2018-11-19 00:00:00 +0700',
@@ -18,19 +19,17 @@ const details = {
         updates_number: 1,
         background: '/project/1/Bg-Image.png',
         media: [
-            '/project/1/1.png',
+            '/project/1/5.png',
             '/project/1/2.png',
             '/project/1/3.png',
             '/project/1/4.png',
-            '/project/1/5.png',
+            '/project/1/1.png',
         ],
-        developers: [
-            {
-                name: 'NESA INVESTMENT HOLDINGS',
-                avatar: '/projectowner/NESA_Logo.png',
-                location: 'South Africa',
-            },
-        ],
+        owner: {
+            name: 'NESA INVESTMENT HOLDINGS',
+            avatar_url: '/projectowner/NESA_Logo.png',
+            location: 'South Africa',
+        },
     },
 };
 

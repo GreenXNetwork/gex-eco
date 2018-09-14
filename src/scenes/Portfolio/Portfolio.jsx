@@ -4,8 +4,8 @@ import { Layout, Select, Card, Spin, Table, Menu, Row, Col } from 'antd';
 import { injectIntl, defineMessages } from 'react-intl';
 import { connect } from 'dva';
 import classNames from 'classnames';
+import SimplePie from '../../components/Charts/SimplePie';
 import { getMessage } from '../../common/definedmessages';
-import Pie from '../../components/Charts/Pie/index';
 import styles from './Portfolio.less';
 
 const { Option } = Select;
@@ -147,13 +147,12 @@ class Portfolio extends Component {
                 loading={isSummaryLoading}
                 className="main-title-text-color"
             >
-                <Pie
+                <SimplePie
                     hasLegend
-                    total={() => <span>1</span>}
                     data={pieDate}
-                    valueFormat={value => <span>{value}</span>}
                     height={248}
                     lineWidth={4}
+                    inner={0.4}
                 />
             </Card>
         );

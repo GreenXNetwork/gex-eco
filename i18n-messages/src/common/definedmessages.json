@@ -40,6 +40,14 @@
     "defaultMessage": "Wind"
   },
   {
+    "id": "model.project.headline.solar",
+    "defaultMessage": "SOLAR"
+  },
+  {
+    "id": "model.project.headline.wind",
+    "defaultMessage": "WIND"
+  },
+  {
     "id": "model.project.active",
     "defaultMessage": "Active"
   },
