@@ -86,12 +86,12 @@ class ProjectDetail extends Component {
                 <Row type="flex" gutter={24}>
                     <Col
                         className="gutter-row"
-                        xs={{ span: 24, order: 2 }}
-                        sm={{ span: 24, order: 2 }}
-                        md={{ span: 24, order: 2 }}
-                        lg={{ span: 24, order: 2 }}
-                        xl={{ span: 24, order: 2 }}
-                        xxl={{ span: 12, order: 1 }}
+                        xs={{ span: 24 }}
+                        sm={{ span: 24 }}
+                        md={{ span: 24 }}
+                        lg={{ span: 24 }}
+                        xl={{ span: 14 }}
+                        xxl={{ span: 12 }}
                     >
                         <div className={styles.imageSlideshow}>
                             <Carousel images={detail.media} thumb loop />
@@ -99,12 +99,12 @@ class ProjectDetail extends Component {
                     </Col>
                     <Col
                         className="gutter-row"
-                        xs={{ span: 24, order: 1 }}
-                        sm={{ span: 24, order: 1 }}
-                        md={{ span: 24, order: 1 }}
-                        lg={{ span: 24, order: 1 }}
-                        xl={{ span: 24, order: 1 }}
-                        xxl={{ span: 12, order: 2 }}
+                        xs={{ span: 24 }}
+                        sm={{ span: 24 }}
+                        md={{ span: 24 }}
+                        lg={{ span: 24 }}
+                        xl={{ span: 10 }}
+                        xxl={{ span: 12 }}
                     >
                         <DetailView detail={detail} onOwnerMore={this.showModal} />
                     </Col>
