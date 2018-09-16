@@ -36,6 +36,11 @@ const menuData = [
         icon: 'exchange',
         path: 'exchange',
     },
+    {
+        name: 'wallet',
+        icon: 'wallet',
+        path: 'wallet',
+    },
 ];
 
 function formatter(data, parentPath = '/', parentAuthority) {
