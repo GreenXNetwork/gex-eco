@@ -65,6 +65,7 @@ class Exchange extends Component {
     state = {
         balanceamount: 0,
         balancetoamount: 0,
+        balancetransferamount: 0,
         balancemax: 0,
         balancetomax: 0,
         balancetransfermax: 0,
@@ -336,7 +337,9 @@ class Exchange extends Component {
                                         {exchange.currencies.gex.symbol} |{' '}
                                         {exchange.currencies.gex.name}
                                         <br />
-                                        {exchange.balances.gex.amount}{' '}
+                                        {Intl.NumberFormat().format(
+                                            exchange.balances.gex.amount.toFixed(3)
+                                        )}{' '}
                                         <strong>{exchange.currencies.gex.symbol}</strong>
                                     </span>
                                 )}
@@ -351,7 +354,9 @@ class Exchange extends Component {
                                         {exchange.currencies.pr1.symbol} |{' '}
                                         {exchange.currencies.pr1.name}
                                         <br />
-                                        {exchange.balances.pr1.amount}{' '}
+                                        {Intl.NumberFormat().format(
+                                            exchange.balances.pr1.amount.toFixed(3)
+                                        )}{' '}
                                         <strong>{exchange.currencies.pr1.symbol}</strong>
                                     </span>
                                 )}
@@ -366,7 +371,9 @@ class Exchange extends Component {
                                         {exchange.currencies.pr2.symbol} |{' '}
                                         {exchange.currencies.pr2.name}
                                         <br />
-                                        {exchange.balances.pr2.amount}{' '}
+                                        {Intl.NumberFormat().format(
+                                            exchange.balances.pr2.amount.toFixed(3)
+                                        )}{' '}
                                         <strong>{exchange.currencies.pr2.symbol}</strong>
                                     </span>
                                 )}
@@ -381,7 +388,9 @@ class Exchange extends Component {
                                         {exchange.currencies.pr3.symbol} |{' '}
                                         {exchange.currencies.pr3.name}
                                         <br />
-                                        {exchange.balances.pr3.amount}{' '}
+                                        {Intl.NumberFormat().format(
+                                            exchange.balances.pr3.amount.toFixed(3)
+                                        )}{' '}
                                         <strong>{exchange.currencies.pr3.symbol}</strong>
                                     </span>
                                 )}
@@ -437,7 +446,7 @@ class Exchange extends Component {
                             className={styles.transferamount}
                             min={0}
                             max={999999999}
-                            value={balanceamount}
+                            value={balanceamount.toFixed(3)}
                             formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                             parser={value => value.replace(/\$\s?|(,*)/g, '')}
                             onChange={this.onAmountChange}
@@ -478,7 +487,7 @@ class Exchange extends Component {
                             className={styles.transferamount}
                             min={0}
                             max={999999999}
-                            value={balancetoamount}
+                            value={balancetoamount.toFixed(3)}
                             formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                             parser={value => value.replace(/\$\s?|(,*)/g, '')}
                             onChange={this.onAmountToChange}
@@ -537,7 +546,7 @@ class Exchange extends Component {
                                         className={styles.transferamount}
                                         min={0}
                                         max={999999999}
-                                        value={balancetransferamount}
+                                        value={balancetransferamount.toFixed(3)}
                                         formatter={value =>
                                             `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                                         }

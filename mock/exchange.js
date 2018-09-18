@@ -47,12 +47,12 @@ const currencies = {
 };
 const balances = {
     gex: {
-        amount: 1000000,
+        amount: 1000000.12356789,
         locked: 600000,
     },
     pr1: {
-        amount: 1000000,
-        locked: 500000,
+        amount: 33.3333,
+        locked: 10,
     },
     pr2: {
         amount: 2000000,
