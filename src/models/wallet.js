@@ -3,16 +3,24 @@ export default {
 
     state: {
         current: 0,
+        account: undefined,
     },
 
-    effects: {
-    },
+    effects: {},
 
     reducers: {
-        selectWallet(state, {current}){
+        selectWallet(state, { current }) {
             return {
-                ...state, current,
-            }
+                ...state,
+                current,
+            };
+        },
+
+        setAccount(state, { account }) {
+            return {
+                ...state,
+                account,
+            };
         },
     },
 };
