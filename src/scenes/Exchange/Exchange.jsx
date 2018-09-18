@@ -14,6 +14,7 @@ import {
     Tabs,
     Input,
     Spin,
+    Breadcrumb,
 } from 'antd';
 import { injectIntl } from 'react-intl';
 import { connect } from 'dva';
@@ -73,6 +74,7 @@ class Exchange extends Component {
         dropdownfromtext: 'Select From',
         dropdowntotext: 'Select To',
         dropdowntransfertext: 'Select To Transfer',
+        sidercollapsed: true,
     };
 
     componentDidMount() {
@@ -90,6 +92,11 @@ class Exchange extends Component {
             type: 'exchange/fetchBalances',
         });
     }
+
+    onCollapse = sidercollapsed => {
+        console.log(sidercollapsed);
+        this.setState({ sidercollapsed });
+    };
 
     onSliderChange = value => {
         // console.log('onAfterChange: ', value);
@@ -250,6 +257,7 @@ class Exchange extends Component {
             dropdowntransfertext,
             dropdowntotext,
             dropdownfromtext,
+            sidercollapsed,
         } = this.state;
 
         // Define dropdown values
@@ -565,10 +573,20 @@ class Exchange extends Component {
         return (
             <div>
                 <Layout>
-                    <Sider>This is Sider</Sider>
+                    <Sider collapsible collapsed={sidercollapsed} onCollapse={this.onCollapse}>
+                        This is Sider
+                    </Sider>
                     <Layout>
                         <Header className={styles.header}>
-                            <span>Exchange Header Content</span>
+                            <Breadcrumb style={{ marginTop: 20 }}>
+                                <Breadcrumb.Item href="">
+                                    <Icon type="home" />
+                                </Breadcrumb.Item>
+                                <Breadcrumb.Item href="">
+                                    <Icon type="swap" />
+                                    <span>Exchange</span>
+                                </Breadcrumb.Item>
+                            </Breadcrumb>
                         </Header>
                         <Content className={styles.container}>
                             <Row>{balance}</Row>
