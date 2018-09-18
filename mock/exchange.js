@@ -1,7 +1,17 @@
 const pairs = {
     'gex-pr1': {
         pair_id: 'gex-pr1',
-        pair_text: 'GEX / Project 01',
+        pair_text: 'GreenX / Project 01',
+        rate: 0.2,
+    },
+    'gex-pr2': {
+        pair_id: 'gex-pr1',
+        pair_text: 'GreenX / Project 01',
+        rate: 0.2,
+    },
+    'gex-pr3': {
+        pair_id: 'gex-pr1',
+        pair_text: 'GreenX / Project 01',
         rate: 0.2,
     },
 };
@@ -13,11 +23,44 @@ const currencies = {
         project_sector: 'Energy',
         market_cap: 70000000,
     },
+    pr1: {
+        symbol: 'PR1',
+        name: 'Green Project 1',
+        contract: '0xdac15794f0fadfdcf3a93aeaabdc7cac19066724',
+        project_sector: 'Energy',
+        market_cap: 70000000,
+    },
+    pr2: {
+        symbol: 'PR2',
+        name: 'Green Project 2',
+        contract: '0xdac15794f0fadfdcf3a93aeaabdc7cac19066724',
+        project_sector: 'Energy',
+        market_cap: 70000000,
+    },
+    pr3: {
+        symbol: 'PR3',
+        name: 'Green Project 3',
+        contract: '0xdac15794f0fadfdcf3a93aeaabdc7cac19066724',
+        project_sector: 'Energy',
+        market_cap: 70000000,
+    },
 };
 const balances = {
     gex: {
         amount: 1000000,
         locked: 600000,
+    },
+    pr1: {
+        amount: 1000000,
+        locked: 500000,
+    },
+    pr2: {
+        amount: 2000000,
+        locked: 600000,
+    },
+    pr3: {
+        amount: 3000000,
+        locked: 700000,
     },
 };
 const gasprice = {
