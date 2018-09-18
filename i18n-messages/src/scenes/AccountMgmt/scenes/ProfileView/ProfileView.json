@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ProfileView.tab.profile",
+    "defaultMessage": "Profile"
+  },
+  {
+    "id": "ProfileView.tab.campaigns",
+    "defaultMessage": "Campaigns"
+  },
+  {
+    "id": "ProfileView.tab.contributions",
+    "defaultMessage": "Contributions"
+  }
+]

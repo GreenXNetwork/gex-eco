@@ -22,6 +22,7 @@ import {
     portfoliosummary,
     portfoliodetails,
 } from './mock/portfolio';
+import { getFakeProfileTranslation } from './mock/profiletrans';
 
 // 是否禁用代理
 const noProxy = process.env.NO_PROXY === 'true';
@@ -42,7 +43,7 @@ const proxy = {
                 confirmation_code: null,
                 date_of_birth: null,
                 phone: null,
-                address: null,
+                address: 'Singapore',
                 city: null,
                 state: null,
                 zipcode: null,
@@ -61,6 +62,10 @@ const proxy = {
                 failed_login_count: 0,
                 last_failed_login_on: null,
                 notifyCount: 12,
+                campaigns_number: 0,
+                comments_number: 0,
+                contributions_number: 0,
+                avatar_url: '',
             });
             return;
         }
@@ -75,7 +80,7 @@ const proxy = {
                 confirmation_code: null,
                 date_of_birth: null,
                 phone: null,
-                address: null,
+                address: 'Singapore',
                 city: null,
                 state: null,
                 zipcode: null,
@@ -94,6 +99,10 @@ const proxy = {
                 failed_login_count: 0,
                 last_failed_login_on: null,
                 notifyCount: 12,
+                campaigns_number: 0,
+                comments_number: 0,
+                contributions_number: 0,
+                avatar_url: '',
             });
             return;
         }
@@ -105,27 +114,7 @@ const proxy = {
             path: '/base/category/list',
         });
     },
-    // GET POST 可省略
-    'GET /api/users': [
-        {
-            key: '1',
-            name: 'John Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-        },
-        {
-            key: '2',
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-        },
-        {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-        },
-    ],
+    'GET /api/users/*': getFakeProfileTranslation,
     'GET /api/project/notice': getNotice,
     'GET /api/activities': getActivities,
     'GET /api/rule': getRule,

@@ -14,7 +14,7 @@ import GlobalFooter from '../components/GlobalFooter';
 import NotFound from '../components/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
-import { getMenuData } from '../common/menu';
+import { getMenuData, getNavMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 import fulllogo from '../assets/fulllogo_big.png';
 import { injectIntl } from '../common/decorator';
@@ -252,7 +252,7 @@ export default class BasicLayout extends React.PureComponent {
                             notices={notices}
                             collapsed={collapsed}
                             isMobile={mb}
-                            menus={getMenuData()}
+                            menus={getNavMenuData()}
                             onNoticeClear={this.handleNoticeClear}
                             onCollapse={this.handleMenuCollapse}
                             onMenuClick={this.handleMenuClick}
