@@ -96,7 +96,7 @@ class GlobalHeader extends PureComponent {
 
         const menu = (
             <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-                <Menu.Item disabled>
+                <Menu.Item key="profile">
                     <Icon type="user" />
                     {intl.formatMessage(messages.profile_menuitem)}
                 </Menu.Item>

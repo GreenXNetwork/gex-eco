@@ -8,15 +8,15 @@ import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
+import { defineMessages, FormattedMessage } from 'react-intl';
 import GlobalHeader from '../components/GlobalHeader';
 import NotFound from '../components/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
-import { getMenuData } from '../common/menu';
+import { getMenuData, getNavMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 import fulllogo from '../assets/fulllogo_big.png';
 import { injectIntl } from '../common/decorator';
-import { defineMessages, FormattedMessage } from 'react-intl';
 
 const { Header } = Layout;
 const { AuthorizedRoute, check } = Authorized;
@@ -198,6 +198,10 @@ export default class ProjectsLayout extends React.PureComponent {
 
     handleMenuClick = ({ key }) => {
         const { dispatch } = this.props;
+        if (key === 'profile') {
+            dispatch(routerRedux.push('/account'));
+            return;
+        }
         if (key === 'triggerError') {
             dispatch(routerRedux.push('/exception/trigger'));
             return;
@@ -219,16 +223,7 @@ export default class ProjectsLayout extends React.PureComponent {
     };
 
     render() {
-        const {
-            currentUser,
-            collapsed,
-            fetchingNotices,
-            notices,
-            routerData,
-            match,
-            location,
-            intl,
-        } = this.props;
+        const { currentUser, collapsed, fetchingNotices, notices, routerData, match } = this.props;
         const { isMobile: mb } = this.state;
         const baseRedirect = this.getBaseRedirect();
 
@@ -243,7 +238,7 @@ export default class ProjectsLayout extends React.PureComponent {
                         notices={notices}
                         collapsed={collapsed}
                         isMobile={mb}
-                        menus={getMenuData()}
+                        menus={getNavMenuData()}
                         onNoticeClear={this.handleNoticeClear}
                         onCollapse={this.handleMenuCollapse}
                         onMenuClick={this.handleMenuClick}
