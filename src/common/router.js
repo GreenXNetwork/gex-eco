@@ -132,6 +132,9 @@ export const getRouterData = app => {
                 import('../scenes/Exchange/Exchange')
             ),
         },
+        '/txhistory': {
+            component: dynamicWrapper(app, [], () => import('../scenes/TxHistory/TxHistory')),
+        },
     };
     // Get name from ./menu.js or just set it in the router data.
     const menuData = getFlatMenuData(getMenuData());

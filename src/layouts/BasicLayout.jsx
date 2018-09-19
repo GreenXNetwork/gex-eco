@@ -203,6 +203,10 @@ export default class BasicLayout extends React.PureComponent {
             dispatch(routerRedux.push('/exception/trigger'));
             return;
         }
+        if (key === 'txhistory') {
+            dispatch(routerRedux.push('/txhistory'));
+            return;
+        }
         if (key === 'logout') {
             dispatch({
                 type: 'login/logout',
