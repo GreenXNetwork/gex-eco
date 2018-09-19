@@ -4,6 +4,7 @@ services:
   gex-node:
     image: node:carbon-alpine
     container_name: gex-node
+    restart: always
     working_dir: /usr/src/gex-mvp
     volumes:
       - ./:/usr/src/gex-mvp
@@ -13,9 +14,10 @@ services:
   gex-nginx:
     image: nginx:alpine
     container_name: gex-nginx
+    restart: always
     ports:
       - "8080:80"
-    working_dir: /var/www/html/
+    working_dir: /var/www/html/gex-eco-client
     volumes:
       - ./:/var/www/html/gex-eco-client
       - ./nginx/site.conf:/etc/nginx/conf.d/default.conf
