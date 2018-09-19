@@ -138,7 +138,7 @@ export const getRouterData = app => {
             ),
         },
         '/account/edit': {
-            component: dynamicWrapper(app, ['user'], () =>
+            component: dynamicWrapper(app, ['user', 'profiletrans', 'country'], () =>
                 import('../scenes/AccountMgmt/scenes/ProfileEdit/ProfileEdit')
             ),
         },
