@@ -3,17 +3,17 @@ version: '3.3'
 services:
   gex-node:
     image: node:carbon-alpine
-    container_name: gex-node
+    container_name: gex-node-dev
     restart: always
     working_dir: /usr/src/gex-mvp
     volumes:
       - ./:/usr/src/gex-mvp
-    command: ["npm","start"]
+    command: ash -c "cd /usr/src/gex-mvp/ && npm start"
     networks:
       - frontend
   gex-nginx:
     image: nginx:alpine
-    container_name: gex-nginx
+    container_name: gex-nginx-dev
     restart: always
     ports:
       - "8080:80"

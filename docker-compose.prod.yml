@@ -8,7 +8,7 @@ services:
     working_dir: /usr/src/gex-mvp
     volumes:
       - ./:/usr/src/gex-mvp
-    command: ["npm","start"]
+    command: ash -c "cd /usr/src/gex-mvp/ && npm start"
     networks:
       - frontend
   gex-nginx:
@@ -34,3 +34,7 @@ networks:
 # docker exec -it gex-node /bin/ash
 # apk add --no-cache bash
 # alpine use apk add to install app. debian use apt-get install...
+################################################################
+### to rebuild the project, flush cache please run #############
+################################################################
+# ash -c "cd /usr/src/gex-mvp/ && npm run build && npm start"
