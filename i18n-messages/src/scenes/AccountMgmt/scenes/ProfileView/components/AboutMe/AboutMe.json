@@ -1,0 +1,18 @@
+[
+  {
+    "id": "AboutMe.about_me",
+    "defaultMessage": "About Me"
+  },
+  {
+    "id": "AboutMe.campaigns",
+    "defaultMessage": "Campaigns"
+  },
+  {
+    "id": "AboutMe.comments",
+    "defaultMessage": "Comments"
+  },
+  {
+    "id": "AboutMe.contributions",
+    "defaultMessage": "Contributions"
+  }
+]

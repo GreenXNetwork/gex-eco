@@ -127,6 +127,26 @@ export const getRouterData = app => {
                 import('../scenes/RegisterResult/RegisterResult')
             ),
         },
+        '/account': {
+            component: dynamicWrapper(app, ['user'], () =>
+                import('../scenes/AccountMgmt/AccountMgmt')
+            ),
+        },
+        '/account/view': {
+            component: dynamicWrapper(app, ['user', 'profiletrans'], () =>
+                import('../scenes/AccountMgmt/scenes/ProfileView/ProfileView')
+            ),
+        },
+        '/account/edit': {
+            component: dynamicWrapper(app, ['user'], () =>
+                import('../scenes/AccountMgmt/scenes/ProfileEdit/ProfileEdit')
+            ),
+        },
+        // '/user/account/campaigns': {
+        //     component: dynamicWrapper(app, ['user'], () =>
+        //         import('../scenes/AccountMgmt/AccountMgmt')
+        //     ),
+        // },
         '/exchange': {
             component: dynamicWrapper(app, ['exchange'], () =>
                 import('../scenes/Exchange/Exchange')
