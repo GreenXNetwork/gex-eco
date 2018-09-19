@@ -13,6 +13,10 @@ const messages = defineMessages({
         id: 'GlobalHeader.account.profile_menuitem',
         defaultMessage: 'Profile',
     },
+    txhistory_menuitem: {
+        id: 'GlobalHeader.account.txhistory_menuitem',
+        defaultMessage: 'Transaction History',
+    },
     logout_menuitem: {
         id: 'GlobalHeader.account.logout_menuitem',
         defaultMessage: 'Logout',
@@ -99,6 +103,11 @@ class GlobalHeader extends PureComponent {
                 <Menu.Item key="profile">
                     <Icon type="user" />
                     {intl.formatMessage(messages.profile_menuitem)}
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="txhistory">
+                    <Icon type="ordered-list" />
+                    {intl.formatMessage(messages.txhistory_menuitem)}
                 </Menu.Item>
                 <Menu.Divider />
                 <Menu.Item key="logout">
