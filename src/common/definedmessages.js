@@ -94,6 +94,19 @@ const commonmessages = defineMessages({
         id: 'portfolio.best_project',
         defaultMessage: 'Best Project',
     },
+
+    navmenu_projects: {
+        id: 'navmenu.projects',
+        defaultMessage: 'Projects',
+    },
+    navmenu_portfolio: {
+        id: 'navmenu.portfolio',
+        defaultMessage: 'Portfolio',
+    },
+    navmenu_exchange: {
+        id: 'navmenu.exchange',
+        defaultMessage: 'Exchange',
+    },
 });
 
 export function getMessage(key) {
