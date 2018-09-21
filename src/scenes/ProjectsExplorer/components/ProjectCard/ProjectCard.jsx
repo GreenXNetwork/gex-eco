@@ -22,21 +22,19 @@ class ProjectCard extends PureComponent {
     render() {
         const { project, intl, onClick } = this.props;
 
-        const picture = require('../../../../assets/projectlist/item/' + project.image);
-
-        const headline = getMessage('headline_' + project.type);
+        const headline = getMessage(`headline_${project.type}`);
         const category = getMessage(project.category);
         const remainingDays = getRemainingDays(project.endtime);
         const timeLeft = intl.formatMessage(commonmessages.remaining_days, { days: remainingDays });
-        const money = '$' + project.raisedamount;
-        const percentage = (project.progress * 100).toFixed(2) + '%';
+        const money = `$${project.raisedamount}`;
+        const percentage = `${(project.progress * 100).toFixed(2)}%`;
 
         return (
             <Card
                 hoverable
                 style={{ width: 300, height: 360, display: 'inline-block' }}
                 bodyStyle={{ padding: 0 }}
-                cover={<img alt={project.name} src={picture} onClick={onClick} />}
+                cover={<img alt={project.name} src={project.thumbnail} onClick={onClick} />}
             >
                 <div className={styles.headline}>{intl.formatMessage(headline)}</div>
                 <div className={styles.name}>

@@ -15,7 +15,7 @@ const projects = {
             currency: 'usd',
             progress: 0.8,
             endtime: '2018-11-19 00:00:00 +0700',
-            image: 'img-1.png',
+            thumbnail: '/project/1/thumb_1.png',
         },
         {
             id: 2,
@@ -28,8 +28,8 @@ const projects = {
             goal: 1250000,
             currency: 'usd',
             progress: 0.4,
-            endtime: '2018-06-19 00:00:00 +0600',
-            image: 'img-2.png',
+            endtime: '2018-10-19 00:00:00 +0600',
+            thumbnail: '/project/2/thumb_1.png',
         },
         {
             id: 3,
@@ -43,7 +43,7 @@ const projects = {
             currency: 'usd',
             progress: 0.9,
             endtime: '2018-09-19 00:00:00 +0000',
-            image: 'img-3.png',
+            thumbnail: '/project/3/thumb_1.png',
         },
     ],
     'project-type=profit-sharing': [
@@ -57,8 +57,8 @@ const projects = {
             raisedamount: 500000,
             currency: 'usd',
             progress: 0.4,
-            endtime: '2018-06-19 00:00:00 +0600',
-            image: 'img-2.png',
+            endtime: '2018-12-19 00:00:00 +0600',
+            thumbnail: '/project/2/thumb_2.png',
         },
     ],
     'project-type=energy-buy-back': [
@@ -73,7 +73,7 @@ const projects = {
             currency: 'usd',
             progress: 0.8,
             endtime: '2018-11-19 00:00:00 +0700',
-            image: 'img-1.png',
+            thumbnail: '/project/1/thumb_1.png',
         },
         {
             id: 3,
@@ -86,7 +86,7 @@ const projects = {
             currency: 'usd',
             progress: 0.9,
             endtime: '2018-09-19 00:00:00 +0000',
-            image: 'img-3.png',
+            thumbnail: '/project/3/thumb_1.png',
         },
     ],
 };

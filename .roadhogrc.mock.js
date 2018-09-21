@@ -126,8 +126,8 @@ const proxy = {
         });
     },
     'GET /api/projects': getFakeProjects,
-    'GET /api/projects/detail/1': getFakeProjectDetail,
-    'GET /api/owners/1': getFakeOwner,
+    'GET /api/projects/detail/*': getFakeProjectDetail,
+    'GET /api/owners/*': getFakeOwner,
     'GET /api/portfolio': {
         ...portfolio,
     },
