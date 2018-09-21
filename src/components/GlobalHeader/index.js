@@ -6,6 +6,7 @@ import Debounce from 'lodash-decorators/debounce';
 import { Link } from 'dva/router';
 import { defineMessages, injectIntl } from 'react-intl';
 import HeaderSearch from '../HeaderSearch';
+import { getMessage } from '../../common/definedmessages';
 import styles from './index.less';
 
 const messages = defineMessages({
@@ -94,7 +95,7 @@ class GlobalHeader extends PureComponent {
 
         const topNav = menus.map(item => (
             <Link key={item.path} to={item.path}>
-                {item.name}
+                {intl.formatMessage(getMessage(`navmenu_${item.name}`))}
             </Link>
         ));
 
