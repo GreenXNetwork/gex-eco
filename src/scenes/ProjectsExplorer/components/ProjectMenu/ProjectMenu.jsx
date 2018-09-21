@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
+import PropTypes from 'prop-types';
 import pathToRegexp from 'path-to-regexp';
 import { Link } from 'dva/router';
-import styles from './ProjectMenu.less';
-import { urlToList } from '../../../../components/_utils/pathTools';
 import { defineMessages, injectIntl } from 'react-intl';
-import PropTypes from 'prop-types';
-import { getMessage } from './../../../../common/definedmessages';
+import classNames from 'classnames';
+import { urlToList } from '../../../../components/_utils/pathTools';
+import { getMessage } from '../../../../common/definedmessages';
+import styles from './ProjectMenu.less';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -116,13 +117,7 @@ class ProjectMenu extends PureComponent {
                 to={itemPath}
                 target={target}
                 replace={itemPath === location.pathname}
-                onClick={
-                    isMobile
-                        ? () => {
-                              onCollapse(true);
-                          }
-                        : undefined
-                }
+                onClick={isMobile ? () => onCollapse(true) : undefined}
             >
                 {icon}
                 <span>{itemName}</span>
@@ -219,11 +214,7 @@ class ProjectMenu extends PureComponent {
         const { intl, menuData, collapsed, onCollapse } = this.props;
         const { openKeys } = this.state;
         // Don't show popup menu when it is been collapsed
-        const menuProps = collapsed
-            ? {}
-            : {
-                  openKeys,
-              };
+        const menuProps = collapsed ? {} : { openKeys };
         // if pathname can't match, use the nearest parent's key
         let selectedKeys = this.getSelectedMenuKeys();
         if (!selectedKeys.length) {
@@ -238,7 +229,7 @@ class ProjectMenu extends PureComponent {
                 onCollapse={onCollapse}
                 width={220}
                 theme="light"
-                className={styles.sider}
+                className={classNames('project-side-menu', styles.sider)}
             >
                 <div className={styles.menu_title}>{intl.formatMessage(messages.menu_title)}</div>
                 <Menu

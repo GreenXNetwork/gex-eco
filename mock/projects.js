@@ -58,7 +58,7 @@ const projects = {
             currency: 'usd',
             progress: 0.4,
             endtime: '2018-12-19 00:00:00 +0600',
-            thumbnail: '/project/2/thumb_2.png',
+            thumbnail: '/project/2/thumb_1.png',
         },
     ],
     'project-type=energy-buy-back': [
