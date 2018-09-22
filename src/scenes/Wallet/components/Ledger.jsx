@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
-import { Button } from 'antd';
-
-// import Transport from "@ledgerhq/hw-transport-node-hid";
-// import Eth from "@ledgerhq/hw-app-eth";
+import { Button, message } from 'antd';
 
 class Ledger extends Component {
     state = {
         loading: false,
     };
 
-    /* getEthAddress = async () => {
-        const transport = await Transport.create();
-        const eth = new Eth(transport);
-        const result = await eth.getAddress("m/44'/60'/0'");
-        console.log('result', result);
-        return result.address;
-    }; */
+    componentDidMount = () => {
+        window.Ledger.init({
+            callback: event => {
+                if (!event) message.error('Chrome app not available.');
+                const { response } = event;
+                if (response && response.command === 'ping') {
+                    message.success('Chrome app is available.');
+                }
+                if (response && response.command === 'launch') {
+                    console.log('Chrome app has been launched.');
+                }
+            },
+        });
+
+        window.Ledger.isAppAvailable();
+    };
 
     connect = () => {
         const { wallet } = this.props; // wallet is a prop passed from Wallet.jsx
@@ -26,8 +32,8 @@ class Ledger extends Component {
                 loading: true,
             });
 
-            // https://github.com/LedgerHQ/ledgerjs
-            // this.getEthAddress().then(a => console.log(a));
+            // https://github.com/LedgerHQ/ledger-wallet-api
+            window.Ledger.launchApp();
         }
     };
 
