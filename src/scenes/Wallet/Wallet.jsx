@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { Button, Layout, Card, Col, Row, message } from 'antd';
+import { Layout, Card, Col, Row } from 'antd';
 // http://react-component.github.io/queue-anim/examples/enter-leave.html
 import QueueAnim from 'rc-queue-anim';
 import { injectIntl } from 'react-intl';
 import { connect } from 'dva';
-import Web3 from 'web3';
 import Metamask from './components/Metamask';
 import Trezor from './components/Trezor';
 import Ledger from './components/Ledger';
 import Keystore from './components/Keystore';
 import Privatekey from './components/Privatekey';
+import Transferable from './components/components/Transferable';
 import styles from './Wallet.less';
 
 const { Content } = Layout;
-const web3 = new Web3('wss://ropsten.infura.io/ws');
 
 /* const messages = defineMessages({
     metamask: {
@@ -96,33 +95,6 @@ class Wallet extends Component {
         });
     };
 
-    // these fields are shown when account info is in store
-    // used with Keystore & Privatekey method, where we get inputs from user and send transaction manually
-    TransferButton = () => {
-        return (
-            <Button type="danger" onClick={this.transfer}>
-                Test Transaction
-            </Button>
-        );
-    };
-
-    transfer = () => {
-        const { account } = this.props;
-        // test a transaction
-        account
-            .signTransaction({
-                to: '0xF0109fC8DF283027b6285cc889F5aA624EaC1F55',
-                value: '1000000000',
-                gas: 2000000,
-            })
-            .then(result => {
-                return web3.eth.sendSignedTransaction(result.rawTransaction);
-            })
-            .catch(error => {
-                message.error(error.toString());
-            });
-    };
-
     showWallet = (wallet, dispatch) => {
         switch (wallet) {
         case 0:
@@ -164,7 +136,7 @@ class Wallet extends Component {
                             >
                                 {this.showWallet(wallet, dispatch)}
                                 {account ? (
-                                    <this.TransferButton key="100" account={account} />
+                                    <Transferable key="100" account={account} />
                                 ) : null}
                             </QueueAnim>
                         </Col>

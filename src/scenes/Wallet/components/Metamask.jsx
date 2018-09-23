@@ -27,7 +27,7 @@ class Metamask extends Component {
                 // test transaction
                 web3.eth.sendTransaction(
                     {
-                        from: '0x68ab5366ae21400cdbad9c22def43c0df4114b71',
+                        from: '0x6De037bf6D5B933285711232330B933deafB16F5',
                         to: '0xc57f8628ad06663db85f534f23504a89530e4b16',
                         value: web3.toWei('0.11'),
                         gasPrice: web3.toWei('100', 'gwei'),

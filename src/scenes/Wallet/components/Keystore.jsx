@@ -92,6 +92,7 @@ class Keystore extends Component {
                     onChange={this.handleChange}
                     placeholder="Enter password"
                     onPressEnter={this.handleSubmit}
+                    type="password"
                 />
                 <Button type="primary" onClick={this.handleSubmit}>
                     Create Account
