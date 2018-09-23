@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
-import { Button, message } from 'antd';
+import { Button, Icon, message } from 'antd';
 
 class Ledger extends Component {
     state = {
@@ -39,17 +39,24 @@ class Ledger extends Component {
 
     render() {
         const { loading } = this.state;
-        const { wallet } = this.props; // wallet is a prop passed from Wallet.jsx
 
-        if (wallet === 2) {
-            // Ledger
-            return (
+        return (
+            <div>
+                <b>Ledger Hardware Wallet</b> <br />
+                <Icon type="check-circle" theme="twoTone" />
+                <i>This is a recommended way to access your wallet.</i>
+                <p />
+                <p>
+                    A hardware wallet is a small USB device that allows you to access your wallet
+                    quickly, safely & easily. It is more secure because your private key never
+                    leaves the hardware wallet. It protects you from phishing, malware, and more.
+                </p>
+                <br />
                 <Button type="primary" loading={loading} onClick={this.connect}>
                     Ledger
                 </Button>
-            );
-        }
-        return null;
+            </div>
+        );
     }
 }
 

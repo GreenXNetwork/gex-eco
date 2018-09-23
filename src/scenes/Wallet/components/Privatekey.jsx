@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
-import { Input, Button, message } from 'antd';
+import { Input, Button, Icon, message } from 'antd';
 
 import Web3 from 'web3';
 
@@ -38,26 +38,34 @@ class Privatekey extends Component {
     };
 
     render() {
-        const { wallet } = this.props; // wallet is a prop passed from Wallet.jsx
         const { value } = this.state; // private key
 
-        if (wallet === 4) {
-            // Keystore
-            return (
-                <div>
-                    <Input
-                        value={value}
-                        onChange={this.handleChange}
-                        placeholder="Enter private key"
-                        onPressEnter={this.handleSubmit}
-                    />
-                    <Button type="primary" onClick={this.handleSubmit}>
-                        Create Account
-                    </Button>
-                </div>
-            );
-        }
-        return null;
+        return (
+            <div>
+                <b>Paste your private key</b> <br />
+                <Icon type="warning" theme="twoTone" />
+                <i>
+                    This is <b style={{ color: '#cf1322' }}>not</b> a recommended way to access your
+                    wallet.
+                </i>
+                <p />
+                <p>
+                    Entering your private key on a website dangerous. If our website is compromised
+                    or you accidentally visit a different website, your funds will be stolen.
+                </p>
+                <br />
+                <Input
+                    value={value}
+                    onChange={this.handleChange}
+                    placeholder="Enter private key"
+                    onPressEnter={this.handleSubmit}
+                    type="password"
+                />
+                <Button type="primary" onClick={this.handleSubmit}>
+                    Create Account
+                </Button>
+            </div>
+        );
     }
 }
 

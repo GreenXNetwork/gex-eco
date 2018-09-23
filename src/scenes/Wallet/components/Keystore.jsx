@@ -65,32 +65,39 @@ class Keystore extends Component {
     };
 
     render() {
-        const { wallet } = this.props; // wallet is a prop passed from Wallet.jsx
         const { value } = this.state;
 
-        if (wallet === 3) {
-            // Keystore
-            return (
-                <div>
-                    <Dragger {...props}>
-                        <p className="ant-upload-drag-icon">
-                            <Icon type="inbox" />
-                        </p>
-                        <p className="ant-upload-text">Click or drag keystore file to this area</p>
-                    </Dragger>
-                    <Input
-                        value={value}
-                        onChange={this.handleChange}
-                        placeholder="Enter password"
-                        onPressEnter={this.handleSubmit}
-                    />
-                    <Button type="primary" onClick={this.handleSubmit}>
-                        Create Account
-                    </Button>
-                </div>
-            );
-        }
-        return null;
+        return (
+            <div>
+                <b>Select your Wallet file</b> <br />
+                <Icon type="warning" theme="twoTone" />
+                <i>
+                    This is <b style={{ color: '#cf1322' }}>not</b> a recommended way to access your
+                    wallet.
+                </i>
+                <p />
+                <p>
+                    Entering your private key on a website dangerous. If our website is compromised
+                    or you accidentally visit a different website, your funds will be stolen.
+                </p>
+                <br />
+                <Dragger {...props}>
+                    <p className="ant-upload-drag-icon">
+                        <Icon type="inbox" />
+                    </p>
+                    <p className="ant-upload-text">Click or drag keystore file to this area</p>
+                </Dragger>
+                <Input
+                    value={value}
+                    onChange={this.handleChange}
+                    placeholder="Enter password"
+                    onPressEnter={this.handleSubmit}
+                />
+                <Button type="primary" onClick={this.handleSubmit}>
+                    Create Account
+                </Button>
+            </div>
+        );
     }
 }
 

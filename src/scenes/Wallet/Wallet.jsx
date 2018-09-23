@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Layout, Card, Col, Row } from 'antd';
+import { Button, Layout, Card, Col, Row, message } from 'antd';
+// http://react-component.github.io/queue-anim/examples/enter-leave.html
+import QueueAnim from 'rc-queue-anim';
 import { injectIntl } from 'react-intl';
 import { connect } from 'dva';
 import Web3 from 'web3';
@@ -11,7 +13,7 @@ import Privatekey from './components/Privatekey';
 import styles from './Wallet.less';
 
 const { Content } = Layout;
-const web3 = new Web3(Web3.givenProvider || 'wss://ropsten.infura.io/ws');
+const web3 = new Web3('wss://ropsten.infura.io/ws');
 
 /* const messages = defineMessages({
     metamask: {
@@ -57,8 +59,10 @@ const wallets = [
 ];
 
 class Wallet extends Component {
-    addCards = () => {
+    setCards = () => {
         const cards = [];
+        const { wallet } = this.props;
+
         for (let i = 0; i < wallets.length; i += 1) {
             cards.push(
                 <Col span={4} key={wallets[i].key}>
@@ -67,7 +71,7 @@ class Wallet extends Component {
                         onClick={e => {
                             this.onClick(e, wallets[i]);
                         }}
-                        className={styles.card}
+                        className={wallets[i].key === wallet ? styles.cardSelected : styles.card}
                         cover={<img alt="example" src={wallets[i].image} />}
                     >
                         <Meta title={wallets[i].name} />
@@ -80,6 +84,7 @@ class Wallet extends Component {
 
     onClick = (e, wallet) => {
         const { dispatch } = this.props;
+
         dispatch({
             type: 'wallet/selectWallet',
             current: wallet.key,
@@ -91,17 +96,14 @@ class Wallet extends Component {
         });
     };
 
-    // transferButton is shown when account info is in store
-    TransferButton = props => {
-        // this account type is Web3 1.0, not the `account` from getAccount() of Metamask
-        if (props.account) {
-            return (
-                <Button type="danger" onClick={this.transfer}>
-                    Test Transaction
-                </Button>
-            );
-        }
-        return null;
+    // these fields are shown when account info is in store
+    // used with Keystore & Privatekey method, where we get inputs from user and send transaction manually
+    TransferButton = () => {
+        return (
+            <Button type="danger" onClick={this.transfer}>
+                Test Transaction
+            </Button>
+        );
     };
 
     transfer = () => {
@@ -116,31 +118,56 @@ class Wallet extends Component {
             .then(result => {
                 return web3.eth.sendSignedTransaction(result.rawTransaction);
             })
-            .then(result => {
-                console.log('__________________');
-                console.log(result);
+            .catch(error => {
+                message.error(error.toString());
             });
+    };
+
+    showWallet = (wallet, dispatch) => {
+        switch (wallet) {
+        case 0:
+            return <Metamask key="1" show wallet={wallet} />;
+        case 1:
+            return <Trezor key="2" show wallet={wallet} />;
+        case 2:
+            return <Ledger key="3" show wallet={wallet} />;
+        case 3:
+            return <Keystore key="4" show wallet={wallet} dispatch={dispatch} />;
+        case 4:
+            return <Privatekey key="5" show wallet={wallet} dispatch={dispatch} />;
+        default:
+            return <div key="6" />;
+        }
     };
 
     render() {
         const { wallet, account, dispatch } = this.props;
         return (
             <Layout>
-                <Row gutter={16}>
+                <Row>
                     <Content style={{ background: '#ECECEC', padding: '30px' }}>
                         <Row gutter={16} type="flex" justify="center">
-                            {this.addCards()}
+                            {this.setCards()}
                         </Row>
                     </Content>
                 </Row>
-                <Row gutter={16}>
-                    <Content>
-                        <Metamask wallet={wallet} />
-                        <Trezor wallet={wallet} />
-                        <Ledger wallet={wallet} />
-                        <Keystore wallet={wallet} dispatch={dispatch} />
-                        <Privatekey wallet={wallet} dispatch={dispatch} />
-                        <this.TransferButton account={account} />
+                <Row>
+                    <Content style={{ padding: '30px' }}>
+                        <Col span={8} offset={2}>
+                            <QueueAnim
+                                type={['right', 'left']}
+                                interval={[100, 0]}
+                                delay={[200, 0]}
+                                duration={[800, 200]}
+                                ease={['easeOutCubic', 'easeInBack']}
+                                leaveReverse
+                            >
+                                {this.showWallet(wallet, dispatch)}
+                                {account ? (
+                                    <this.TransferButton key="100" account={account} />
+                                ) : null}
+                            </QueueAnim>
+                        </Col>
                     </Content>
                 </Row>
             </Layout>
