@@ -128,7 +128,12 @@ export const getRouterData = app => {
             ),
         },
         '/exchange': {
-            component: dynamicWrapper(app, [], () => import('../scenes/Exchange/Exchange')),
+            component: dynamicWrapper(app, ['exchange'], () =>
+                import('../scenes/Exchange/Exchange')
+            ),
+        },
+        '/txhistory': {
+            component: dynamicWrapper(app, [], () => import('../scenes/TxHistory/TxHistory')),
         },
         '/wallet': {
             component: dynamicWrapper(app, ['wallet'], () => import('../scenes/Wallet/Wallet')),

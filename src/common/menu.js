@@ -37,6 +37,11 @@ const menuData = [
         path: 'exchange',
     },
     {
+        name: 'wallet',
+        icon: 'wallet',
+        path: 'wallet',
+    },
+    {
         name: 'account',
         icon: 'account',
         path: 'account',

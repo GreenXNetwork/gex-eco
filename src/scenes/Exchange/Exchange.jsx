@@ -100,10 +100,6 @@ class Exchange extends Component {
         this.scroll();
     }
 
-    componentDidUpdate() {
-        this.scroll();
-    }
-
     scroll = () => {
         const { location } = this.props;
         const { hash } = location;

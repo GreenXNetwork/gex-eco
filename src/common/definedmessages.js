@@ -107,12 +107,24 @@ const commonmessages = defineMessages({
         id: 'navmenu.exchange',
         defaultMessage: 'Exchange',
     },
+    navmenu_wallet: {
+        id: 'navmenu.wallet',
+        defaultMessage: 'Wallet',
+    },
 });
 
 export function getMessage(key) {
     if (typeof key === 'string') {
         const formattedKey = key.replace(/-/g, '_');
-        return commonmessages[formattedKey];
+        let msg = commonmessages[formattedKey];
+        if (!msg) {
+            console.warn(`Message with key ${formattedKey} not found!`);
+            msg = {
+                id: formattedKey,
+                defaultMessage: formattedKey,
+            };
+        }
+        return msg;
     }
     return key;
 }
