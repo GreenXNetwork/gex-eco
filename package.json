@@ -6,6 +6,7 @@
   "scripts": {
     "precommit": "npm run lint-staged",
     "start": "cross-env ESLINT=none roadhog dev",
+    "startHttps": "set HTTPS=true && cross-env ESLINT=none roadhog dev",
     "start:no-proxy": "cross-env NO_PROXY=true ESLINT=none roadhog dev",
     "build": "cross-env ESLINT=none roadhog build",
     "site": "roadhog-api-doc static && gh-pages -d dist",
@@ -34,6 +35,7 @@
     "dva": "^2.2.3",
     "dva-loading": "^2.0.3",
     "enquire-js": "^0.2.1",
+    "hw-app-nano": "^1.1.0",
     "lodash": "^4.17.10",
     "lodash-decorators": "^6.0.0",
     "moment": "^2.19.3",
@@ -42,7 +44,9 @@
     "path-to-regexp": "^2.1.0",
     "prop-types": "^15.5.10",
     "qs": "^6.5.0",
+    "rc-animate": "^2.5.3",
     "rc-drawer": "^1.2.0",
+    "rc-queue-anim": "^1.6.5",
     "react": "^16.4.1",
     "react-container-query": "^0.11.0",
     "react-document-title": "^2.0.3",
@@ -54,7 +58,9 @@
     "react-transition-group": "^2.4.0",
     "rollbar": "^2.3.4",
     "setprototypeof": "^1.1.0",
-    "url-polyfill": "^1.0.10"
+    "trezor-connect": "^5.0.31",
+    "url-polyfill": "^1.0.10",
+    "web3": "^1.0.0-beta.36"
   },
   "devDependencies": {
     "atool-l10n": "^0.3.1",
