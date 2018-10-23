@@ -47,6 +47,7 @@ const marks = {
 };
 const gexlogo = 'https://icobench.com/images/icos/icons/greenx.jpg';
 const { TabPane } = Tabs;
+const TABS_ROW_ID = 'ExchangeTransfer';
 
 function createDropdownList(currencies) {
     // console.log(JSON.stringify({currencies}));
@@ -61,6 +62,9 @@ function createDropdownList(currencies) {
     ));
     return renderedvalue;
 }
+
+const TABS = ['exchange', 'transfer'];
+const DEFAULT_ACTIVE_TAB = 'exchange';
 class Exchange extends Component {
     state = {
         balanceamount: 0,
@@ -92,7 +96,49 @@ class Exchange extends Component {
         dispatch({
             type: 'exchange/fetchBalances',
         });
+
+        this.scroll();
     }
+
+    componentDidUpdate() {
+        this.scroll();
+    }
+
+    scroll = () => {
+        const { location } = this.props;
+        const { hash } = location;
+
+        if (hash && hash.startsWith('#')) {
+            const id = hash.slice(1, hash.length);
+            const element = document.querySelector(id);
+            const alignToTop = true;
+            if (element && element.scrollIntoView) {
+                setTimeout(() => {
+                    element.scrollIntoView(alignToTop);
+                }, 0);
+            } else if (TABS.includes(id)) {
+                const tabElement = document.querySelector(`#${TABS_ROW_ID}`);
+                if (tabElement && tabElement.scrollIntoView) {
+                    setTimeout(() => {
+                        tabElement.scrollIntoView(alignToTop);
+                    }, 0);
+                }
+            }
+        }
+    };
+
+    getActiveTabFromUrl = () => {
+        const { location } = this.props;
+        const { hash } = location;
+
+        if (hash && hash.startsWith('#')) {
+            const id = hash.slice(1, hash.length);
+            if (TABS.includes(id)) {
+                return id;
+            }
+        }
+        return DEFAULT_ACTIVE_TAB;
+    };
 
     onCollapse = sidercollapsed => {
         console.log(sidercollapsed);
@@ -246,6 +292,11 @@ class Exchange extends Component {
         });
     };
 
+    onTabChange = activeKey => {
+        const { history } = this.props;
+        history.replace(`/exchange#${activeKey}`);
+    };
+
     render() {
         const { loading, exchange } = this.props;
         const {
@@ -260,6 +311,8 @@ class Exchange extends Component {
             dropdownfromtext,
             sidercollapsed,
         } = this.state;
+
+        const activeTab = this.getActiveTabFromUrl();
 
         // Define dropdown values
         const exchangedropdownto = (
@@ -599,10 +652,17 @@ class Exchange extends Component {
                         </Header>
                         <Content className={styles.container}>
                             <Row>{balance}</Row>
-                            <Row style={{ marginTop: 20 }} type="flex">
+                            <Row id={TABS_ROW_ID} style={{ marginTop: 20 }} type="flex">
                                 <Col md={24}>
-                                    <Tabs type="card" defaultActiveKey="1">
-                                        <TabPane tab={<span>{exchangeicon} Exchange</span>} key="1">
+                                    <Tabs
+                                        type="card"
+                                        activeKey={activeTab}
+                                        onChange={this.onTabChange}
+                                    >
+                                        <TabPane
+                                            tab={<span>{exchangeicon} Exchange</span>}
+                                            key="exchange"
+                                        >
                                             <Row type="flex" gutter={30}>
                                                 <Col
                                                     className={classNames(
@@ -637,7 +697,10 @@ class Exchange extends Component {
                                                 {isGasLoading ? <Spin size="large" /> : history}
                                             </Row>
                                         </TabPane>
-                                        <TabPane tab={<span>{transfericon} Transfer</span>} key="2">
+                                        <TabPane
+                                            tab={<span>{transfericon} Transfer</span>}
+                                            key="transfer"
+                                        >
                                             {transfercol}
                                         </TabPane>
                                     </Tabs>
