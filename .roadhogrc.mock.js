@@ -10,12 +10,21 @@ import { getFakeProjects } from './mock/projects';
 import { getFakeProjectDetail } from './mock/projectdetails';
 import { getFakeOwner } from './mock/owners';
 import {
+    getFakeExBalances,
+    getFakeExPairs,
+    getFakeExCurrencies,
+    getFakeExGas,
+} from './mock/exchange';
+import {
     portfolio,
     portfoliocurrency,
     portfoliosorts,
     portfoliosummary,
     portfoliodetails,
 } from './mock/portfolio';
+import { getFakeProfileTranslation } from './mock/profiletrans';
+import { getFakeUser, updateFakeUser } from './mock/users';
+import { getFakeCountryList } from './mock/countries';
 
 // 是否禁用代理
 const noProxy = process.env.NO_PROXY === 'true';
@@ -23,103 +32,12 @@ const noProxy = process.env.NO_PROXY === 'true';
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 const proxy = {
     // 支持值为 Object 和 Array
-    'GET /api/user': (req, res) => {
-        const { authorization } = req.headers;
-        if (authorization === 'Bearer admin_fake_token_string') {
-            res.send({
-                id: 1,
-                name: 'Administrator',
-                email: 'admin@greenx.network',
-                created_at: '2018-08-20 07:26:57',
-                updated_at: '2018-08-20 07:26:57',
-                confirmed: 0,
-                confirmation_code: null,
-                date_of_birth: null,
-                phone: null,
-                address: null,
-                city: null,
-                state: null,
-                zipcode: null,
-                country_id: null,
-                identity_type: null,
-                identity_number: null,
-                identity_image: null,
-                kyc_status: 1,
-                referred_by: null,
-                address_id: null,
-                status: 0,
-                last_login_on: null,
-                language: 'en',
-                first_login: 1,
-                force_password_change: 1,
-                failed_login_count: 0,
-                last_failed_login_on: null,
-                notifyCount: 12,
-            });
-            return;
-        }
-        if (authorization === 'Bearer investor1_fake_token_string') {
-            res.send({
-                id: 2,
-                name: 'Investor1',
-                email: 'investor1@greenx.network',
-                created_at: '2018-08-20 07:26:57',
-                updated_at: '2018-08-20 07:26:57',
-                confirmed: 0,
-                confirmation_code: null,
-                date_of_birth: null,
-                phone: null,
-                address: null,
-                city: null,
-                state: null,
-                zipcode: null,
-                country_id: null,
-                identity_type: null,
-                identity_number: null,
-                identity_image: null,
-                kyc_status: 1,
-                referred_by: null,
-                address_id: null,
-                status: 0,
-                last_login_on: null,
-                language: 'en',
-                first_login: 1,
-                force_password_change: 1,
-                failed_login_count: 0,
-                last_failed_login_on: null,
-                notifyCount: 12,
-            });
-            return;
-        }
-        res.status(403).send({
-            timestamp: 1513932555104,
-            status: 403,
-            error: 'Unauthorized',
-            message: 'Unauthorized',
-            path: '/base/category/list',
-        });
+    'GET /api/user': getFakeUser,
+    'GET /api/users/*': getFakeProfileTranslation,
+    'POST /api/user': updateFakeUser,
+    'POST /api/user/avatar': {
+        avatar_url: '/default-avatar.png',
     },
-    // GET POST 可省略
-    'GET /api/users': [
-        {
-            key: '1',
-            name: 'John Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-        },
-        {
-            key: '2',
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-        },
-        {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-        },
-    ],
     'GET /api/project/notice': getNotice,
     'GET /api/activities': getActivities,
     'GET /api/rule': getRule,
@@ -225,6 +143,11 @@ const proxy = {
     'GET /api/portfolio/details': {
         $body: portfoliodetails,
     },
+    'GET /api/exchange/balances': getFakeExBalances,
+    'GET /api/exchange/pairs': getFakeExPairs,
+    'GET /api/exchange/gas': getFakeExGas,
+    'GET /api/exchange/currencies': getFakeExCurrencies,
+    'GET /api/countries': getFakeCountryList,
 };
 
 export default (noProxy ? {} : delay(proxy, 1000));

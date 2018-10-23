@@ -4,6 +4,10 @@
     "defaultMessage": "Profile"
   },
   {
+    "id": "GlobalHeader.account.txhistory_menuitem",
+    "defaultMessage": "Transaction History"
+  },
+  {
     "id": "GlobalHeader.account.logout_menuitem",
     "defaultMessage": "Logout"
   },

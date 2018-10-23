@@ -1,0 +1,10 @@
+[
+  {
+    "id": "AccountMgmt.nav.view_profile",
+    "defaultMessage": "View Profile"
+  },
+  {
+    "id": "AccountMgmt.nav.edit_profile",
+    "defaultMessage": "Edit Profile"
+  }
+]

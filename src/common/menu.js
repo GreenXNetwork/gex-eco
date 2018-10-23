@@ -37,9 +37,22 @@ const menuData = [
         path: 'exchange',
     },
     {
-        name: 'wallet',
-        icon: 'wallet',
-        path: 'wallet',
+        name: 'account',
+        icon: 'account',
+        path: 'account',
+        hideInNav: true,
+        children: [
+            {
+                name: 'view',
+                path: 'view',
+                hideInMenu: true,
+            },
+            {
+                name: 'edit',
+                path: 'edit',
+                hideInMenu: true,
+            },
+        ],
     },
 ];
 
@@ -66,3 +79,5 @@ function formatter(data, parentPath = '/', parentAuthority) {
 }
 
 export const getMenuData = () => formatter(menuData);
+
+export const getNavMenuData = () => formatter(menuData.filter(item => !item.hideInNav));

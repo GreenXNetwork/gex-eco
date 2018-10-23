@@ -14,7 +14,7 @@ import GlobalFooter from '../components/GlobalFooter';
 import NotFound from '../components/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
-import { getMenuData } from '../common/menu';
+import { getMenuData, getNavMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 import fulllogo from '../assets/fulllogo_big.png';
 import { injectIntl } from '../common/decorator';
@@ -146,7 +146,7 @@ export default class BasicLayout extends React.PureComponent {
     getPageTitle() {
         const { routerData, location } = this.props;
         const { pathname } = location;
-        let title = 'Ant Design Pro';
+        let title = 'GreenX Network';
         let currRouterData = null;
         // match params path
         Object.keys(routerData).forEach(key => {
@@ -155,7 +155,7 @@ export default class BasicLayout extends React.PureComponent {
             }
         });
         if (currRouterData && currRouterData.name) {
-            title = `${currRouterData.name} - Ant Design Pro`;
+            title = `${currRouterData.name}`;
         }
         return title;
     }
@@ -201,6 +201,10 @@ export default class BasicLayout extends React.PureComponent {
         const { dispatch } = this.props;
         if (key === 'triggerError') {
             dispatch(routerRedux.push('/exception/trigger'));
+            return;
+        }
+        if (key === 'txhistory') {
+            dispatch(routerRedux.push('/txhistory'));
             return;
         }
         if (key === 'logout') {
@@ -252,7 +256,7 @@ export default class BasicLayout extends React.PureComponent {
                             notices={notices}
                             collapsed={collapsed}
                             isMobile={mb}
-                            menus={getMenuData()}
+                            menus={getNavMenuData()}
                             onNoticeClear={this.handleNoticeClear}
                             onCollapse={this.handleMenuCollapse}
                             onMenuClick={this.handleMenuClick}

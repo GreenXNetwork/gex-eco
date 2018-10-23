@@ -6,12 +6,17 @@ import Debounce from 'lodash-decorators/debounce';
 import { Link } from 'dva/router';
 import { defineMessages, injectIntl } from 'react-intl';
 import HeaderSearch from '../HeaderSearch';
+import { getMessage } from '../../common/definedmessages';
 import styles from './index.less';
 
 const messages = defineMessages({
     profile_menuitem: {
         id: 'GlobalHeader.account.profile_menuitem',
         defaultMessage: 'Profile',
+    },
+    txhistory_menuitem: {
+        id: 'GlobalHeader.account.txhistory_menuitem',
+        defaultMessage: 'Transaction History',
     },
     logout_menuitem: {
         id: 'GlobalHeader.account.logout_menuitem',
@@ -90,15 +95,20 @@ class GlobalHeader extends PureComponent {
 
         const topNav = menus.map(item => (
             <Link key={item.path} to={item.path}>
-                {item.name}
+                {intl.formatMessage(getMessage(`navmenu_${item.name}`))}
             </Link>
         ));
 
         const menu = (
             <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-                <Menu.Item disabled>
+                <Menu.Item key="profile">
                     <Icon type="user" />
                     {intl.formatMessage(messages.profile_menuitem)}
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="txhistory">
+                    <Icon type="ordered-list" />
+                    {intl.formatMessage(messages.txhistory_menuitem)}
                 </Menu.Item>
                 <Menu.Divider />
                 <Menu.Item key="logout">
