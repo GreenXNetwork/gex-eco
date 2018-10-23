@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'dva';
-import { defineMessages, injectIntl } from 'react-intl';
-import styles from './ProjectsExplorer.less';
+import { injectIntl } from 'react-intl';
+import { Layout, Alert } from 'antd';
 import ProjectSider from './components/ProjectSider/ProjectSider';
 import { getMenuData } from '../../common/projectmenu';
-import { Layout } from 'antd';
 import banner from '../../assets/projectlist/banner.png';
 import ProjectList from './components/ProjectList/ProjectList';
+import styles from './ProjectsExplorer.less';
 
-const { Content, Header, Footer } = Layout;
-
-const messages = defineMessages({
-    notification_empty: {
-        id: 'BasicLayout.notification.empty',
-        defaultMessage: `empty {type}`,
-    },
-});
+const { Content } = Layout;
 
 class ProjectsExplorer extends Component {
     handleMenuCollapse = collapsed => {
@@ -44,7 +36,7 @@ class ProjectsExplorer extends Component {
                 />
                 <Content>
                     <div>
-                        <img className={styles.banner} src={banner} />
+                        <img alt="" className={styles.banner} src={banner} />
                     </div>
                     <div className={styles.maincontent}>
                         <ProjectList location={location} match={match} />
@@ -54,11 +46,6 @@ class ProjectsExplorer extends Component {
         );
     }
 }
-
-const propTypes = {
-    intl: PropTypes.object.isRequired,
-};
-ProjectsExplorer.propTypes = propTypes;
 
 const mapStateToProps = ({ global = {} }) => ({
     collapsed: global.collapsed,
