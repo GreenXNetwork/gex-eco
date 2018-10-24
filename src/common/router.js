@@ -127,15 +127,38 @@ export const getRouterData = app => {
                 import('../scenes/RegisterResult/RegisterResult')
             ),
         },
-        '/exchange': {
-            component: dynamicWrapper(app, ['exchange'], () =>
-                import('../scenes/Exchange/Exchange')
+        '/account': {
+            component: dynamicWrapper(app, ['user'], () =>
+                import('../scenes/AccountMgmt/AccountMgmt')
             ),
         },
-        '/txhistory': {
+        '/account/view': {
+            component: dynamicWrapper(app, ['user', 'profiletrans'], () =>
+                import('../scenes/AccountMgmt/scenes/ProfileView/ProfileView')
+            ),
+        },
+        '/account/edit': {
+            component: dynamicWrapper(app, ['user', 'profiletrans', 'country'], () =>
+                import('../scenes/AccountMgmt/scenes/ProfileEdit/ProfileEdit')
+            ),
+        },
+        // '/user/account/campaigns': {
+        //     component: dynamicWrapper(app, ['user'], () =>
+        //         import('../scenes/AccountMgmt/AccountMgmt')
+        //     ),
+        // },
+        '/dex': {
+            component: dynamicWrapper(app, [], () => import('../scenes/Exchange/Exchange')),
+        },
+        '/dex/exchange': {
+            component: dynamicWrapper(app, ['exchange'], () =>
+                import('../scenes/Exchange/components/XchangeTransfer/XchangeTransfer')
+            ),
+        },
+        '/dex/txhistory': {
             component: dynamicWrapper(app, [], () => import('../scenes/TxHistory/TxHistory')),
         },
-        '/wallet': {
+        '/dex/wallet': {
             component: dynamicWrapper(app, ['wallet'], () => import('../scenes/Wallet/Wallet')),
         },
     };

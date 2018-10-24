@@ -199,12 +199,16 @@ export default class BasicLayout extends React.PureComponent {
 
     handleMenuClick = ({ key }) => {
         const { dispatch } = this.props;
+        if (key === 'profile') {
+            dispatch(routerRedux.push('/account'));
+            return;
+        }
         if (key === 'triggerError') {
             dispatch(routerRedux.push('/exception/trigger'));
             return;
         }
         if (key === 'txhistory') {
-            dispatch(routerRedux.push('/txhistory'));
+            dispatch(routerRedux.push('/dex/txhistory'));
             return;
         }
         if (key === 'logout') {

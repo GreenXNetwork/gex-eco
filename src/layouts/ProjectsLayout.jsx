@@ -207,7 +207,7 @@ export default class ProjectsLayout extends React.PureComponent {
             return;
         }
         if (key === 'txhistory') {
-            dispatch(routerRedux.push('/txhistory'));
+            dispatch(routerRedux.push('/dex/txhistory'));
             return;
         }
         if (key === 'logout') {

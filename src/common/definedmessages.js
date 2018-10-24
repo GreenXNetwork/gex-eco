@@ -95,6 +95,21 @@ const commonmessages = defineMessages({
         defaultMessage: 'Best Project',
     },
 
+    exchange: {
+        id: 'dex.exchange',
+        defaultMessage: 'Exchange/Transfer',
+    },
+
+    wallet: {
+        id: 'dex.wallet',
+        defaultMessage: 'Wallet',
+    },
+
+    history: {
+        id: 'dex.history',
+        defaultMessage: 'History',
+    },
+
     navmenu_projects: {
         id: 'navmenu.projects',
         defaultMessage: 'Projects',
@@ -103,8 +118,8 @@ const commonmessages = defineMessages({
         id: 'navmenu.portfolio',
         defaultMessage: 'Portfolio',
     },
-    navmenu_exchange: {
-        id: 'navmenu.exchange',
+    navmenu_dex: {
+        id: 'navmenu.dex',
         defaultMessage: 'Exchange',
     },
     navmenu_wallet: {
