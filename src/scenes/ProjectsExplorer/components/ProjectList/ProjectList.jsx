@@ -23,7 +23,7 @@ export default class ProjectList extends PureComponent {
     componentWillReceiveProps(nextProps) {
         const { match, dispatch } = this.props;
         if (match !== nextProps.match) {
-            const { nextMatch } = nextProps;
+            const nextMatch = nextProps.match;
             const params = {};
             params[nextMatch.params.filterkey] = nextMatch.params.filtervalue;
             dispatch({
