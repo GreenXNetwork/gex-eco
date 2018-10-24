@@ -59,7 +59,7 @@ class Exchange extends Component {
     };
 
     render() {
-        const { collapsed, location, routerData, match } = this.props;
+        const { collapsed, location, routerData, match, mobile } = this.props;
         const baseRedirect = this.getBaseRedirect();
 
         return (
@@ -68,7 +68,7 @@ class Exchange extends Component {
                     menuData={getMenuData()}
                     collapsed={collapsed}
                     location={location}
-                    isMobile={false}
+                    isMobile={mobile}
                     onCollapse={this.handleMenuCollapse}
                 />
                 <Switch>
@@ -95,6 +95,7 @@ class Exchange extends Component {
 
 const mapStateToProps = ({ global = {} }) => ({
     collapsed: global.collapsed,
+    mobile: global.mobile,
 });
 
 export default injectIntl(connect(mapStateToProps)(Exchange), { withRef: true });
