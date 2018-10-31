@@ -88,6 +88,18 @@
     "defaultMessage": "Best Project"
   },
   {
+    "id": "dex.exchange",
+    "defaultMessage": "Exchange/Transfer"
+  },
+  {
+    "id": "dex.wallet",
+    "defaultMessage": "Wallet"
+  },
+  {
+    "id": "dex.history",
+    "defaultMessage": "History"
+  },
+  {
     "id": "navmenu.projects",
     "defaultMessage": "Projects"
   },
@@ -96,7 +108,11 @@
     "defaultMessage": "Portfolio"
   },
   {
-    "id": "navmenu.exchange",
+    "id": "navmenu.dex",
     "defaultMessage": "Exchange"
+  },
+  {
+    "id": "navmenu.wallet",
+    "defaultMessage": "Wallet"
   }
 ]

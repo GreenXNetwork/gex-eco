@@ -95,6 +95,21 @@ const commonmessages = defineMessages({
         defaultMessage: 'Best Project',
     },
 
+    exchange: {
+        id: 'dex.exchange',
+        defaultMessage: 'Exchange/Transfer',
+    },
+
+    wallet: {
+        id: 'dex.wallet',
+        defaultMessage: 'Wallet',
+    },
+
+    history: {
+        id: 'dex.history',
+        defaultMessage: 'History',
+    },
+
     navmenu_projects: {
         id: 'navmenu.projects',
         defaultMessage: 'Projects',
@@ -103,16 +118,28 @@ const commonmessages = defineMessages({
         id: 'navmenu.portfolio',
         defaultMessage: 'Portfolio',
     },
-    navmenu_exchange: {
-        id: 'navmenu.exchange',
+    navmenu_dex: {
+        id: 'navmenu.dex',
         defaultMessage: 'Exchange',
+    },
+    navmenu_wallet: {
+        id: 'navmenu.wallet',
+        defaultMessage: 'Wallet',
     },
 });
 
 export function getMessage(key) {
     if (typeof key === 'string') {
         const formattedKey = key.replace(/-/g, '_');
-        return commonmessages[formattedKey];
+        let msg = commonmessages[formattedKey];
+        if (!msg) {
+            console.warn(`Message with key ${formattedKey} not found!`);
+            msg = {
+                id: formattedKey,
+                defaultMessage: formattedKey,
+            };
+        }
+        return msg;
     }
     return key;
 }

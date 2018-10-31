@@ -7,7 +7,6 @@ import { Route, Redirect, Switch, routerRedux } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
-import { enquireScreen, unenquireScreen } from 'enquire-js';
 import { defineMessages, FormattedMessage } from 'react-intl';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
@@ -97,26 +96,18 @@ const query = {
     },
 };
 
-let isMobile;
-enquireScreen(b => {
-    isMobile = b;
-});
-
 @injectIntl()
 @connect(({ user, global = {}, loading }) => ({
     currentUser: user.currentUser,
     collapsed: global.collapsed,
     fetchingNotices: loading.effects['global/fetchNotices'],
     notices: global.notices,
+    mobile: global.mobile,
 }))
 export default class BasicLayout extends React.PureComponent {
     static childContextTypes = {
         location: PropTypes.object,
         breadcrumbNameMap: PropTypes.object,
-    };
-
-    state = {
-        isMobile,
     };
 
     getChildContext() {
@@ -128,19 +119,10 @@ export default class BasicLayout extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.enquireHandler = enquireScreen(mobile => {
-            this.setState({
-                isMobile: mobile,
-            });
-        });
         const { dispatch } = this.props;
         dispatch({
             type: 'user/fetchCurrent',
         });
-    }
-
-    componentWillUnmount() {
-        unenquireScreen(this.enquireHandler);
     }
 
     getPageTitle() {
@@ -199,12 +181,16 @@ export default class BasicLayout extends React.PureComponent {
 
     handleMenuClick = ({ key }) => {
         const { dispatch } = this.props;
+        if (key === 'profile') {
+            dispatch(routerRedux.push('/account'));
+            return;
+        }
         if (key === 'triggerError') {
             dispatch(routerRedux.push('/exception/trigger'));
             return;
         }
         if (key === 'txhistory') {
-            dispatch(routerRedux.push('/txhistory'));
+            dispatch(routerRedux.push('/dex/txhistory'));
             return;
         }
         if (key === 'logout') {
@@ -232,8 +218,9 @@ export default class BasicLayout extends React.PureComponent {
             routerData,
             match,
             intl,
+            mobile,
         } = this.props;
-        const { isMobile: mb } = this.state;
+
         const baseRedirect = this.getBaseRedirect();
 
         const copyright = (
@@ -255,7 +242,7 @@ export default class BasicLayout extends React.PureComponent {
                             fetchingNotices={fetchingNotices}
                             notices={notices}
                             collapsed={collapsed}
-                            isMobile={mb}
+                            isMobile={mobile}
                             menus={getNavMenuData()}
                             onNoticeClear={this.handleNoticeClear}
                             onCollapse={this.handleMenuCollapse}

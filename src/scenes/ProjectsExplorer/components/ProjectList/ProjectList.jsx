@@ -1,15 +1,15 @@
-import React, { PureComponent, Component } from 'react';
+import React, { PureComponent } from 'react';
 import { List } from 'antd';
+import { connect } from 'dva';
 import { injectIntl } from '../../../../common/decorator';
 import ProjectCard from '../ProjectCard/ProjectCard';
-import { connect } from 'dva';
 
 @injectIntl()
 @connect(({ project, loading }) => ({
     project,
     loading,
 }))
-export default class ProjectList extends Component {
+export default class ProjectList extends PureComponent {
     componentDidMount() {
         const { dispatch, match } = this.props;
         const params = {};
@@ -21,16 +21,25 @@ export default class ProjectList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.match !== nextProps.match) {
-            const { dispatch, match } = nextProps;
+        const { match, dispatch } = this.props;
+        if (match !== nextProps.match) {
+            const nextMatch = nextProps.match;
             const params = {};
-            params[match.params.filterkey] = match.params.filtervalue;
+            params[nextMatch.params.filterkey] = nextMatch.params.filtervalue;
             dispatch({
                 type: 'project/fetchProjects',
                 params,
             });
         }
     }
+
+    goToProjectDetailPage = project => () => {
+        const { dispatch } = this.props;
+        dispatch({
+            type: 'project/showDetail',
+            id: project.id,
+        });
+    };
 
     render() {
         const { project, loading, dispatch } = this.props;
@@ -52,12 +61,4 @@ export default class ProjectList extends Component {
             />
         );
     }
-
-    goToProjectDetailPage = project => () => {
-        const { dispatch } = this.props;
-        dispatch({
-            type: 'project/showDetail',
-            id: project.id,
-        });
-    };
 }

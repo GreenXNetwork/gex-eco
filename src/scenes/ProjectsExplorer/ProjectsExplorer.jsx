@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { injectIntl } from 'react-intl';
 import { Layout, Alert } from 'antd';
@@ -10,7 +10,7 @@ import styles from './ProjectsExplorer.less';
 
 const { Content } = Layout;
 
-class ProjectsExplorer extends Component {
+class ProjectsExplorer extends PureComponent {
     handleMenuCollapse = collapsed => {
         const { dispatch } = this.props;
         dispatch({
@@ -24,14 +24,14 @@ class ProjectsExplorer extends Component {
     };
 
     render() {
-        const { collapsed, location, match } = this.props;
+        const { collapsed, location, match, mobile } = this.props;
         return (
             <Layout>
                 <ProjectSider
                     menuData={getMenuData()}
                     collapsed={collapsed}
                     location={location}
-                    isMobile={false}
+                    isMobile={mobile}
                     onCollapse={this.handleMenuCollapse}
                 />
                 <Content>
@@ -49,6 +49,7 @@ class ProjectsExplorer extends Component {
 
 const mapStateToProps = ({ global = {} }) => ({
     collapsed: global.collapsed,
+    mobile: global.mobile,
 });
 
 export default injectIntl(connect(mapStateToProps)(ProjectsExplorer), { withRef: true });

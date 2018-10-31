@@ -7,7 +7,6 @@ import { Route, Redirect, Switch, routerRedux } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
-import { enquireScreen, unenquireScreen } from 'enquire-js';
 import { defineMessages, FormattedMessage } from 'react-intl';
 import GlobalHeader from '../components/GlobalHeader';
 import NotFound from '../components/Exception/404';
@@ -96,26 +95,18 @@ const query = {
     },
 };
 
-let isMobile;
-enquireScreen(b => {
-    isMobile = b;
-});
-
 @injectIntl()
 @connect(({ user, global = {}, loading }) => ({
     currentUser: user.currentUser,
     collapsed: global.collapsed,
     fetchingNotices: loading.effects['global/fetchNotices'],
     notices: global.notices,
+    mobile: global.mobile,
 }))
 export default class ProjectsLayout extends React.PureComponent {
     static childContextTypes = {
         location: PropTypes.object,
         breadcrumbNameMap: PropTypes.object,
-    };
-
-    state = {
-        isMobile,
     };
 
     getChildContext() {
@@ -127,19 +118,10 @@ export default class ProjectsLayout extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.enquireHandler = enquireScreen(mobile => {
-            this.setState({
-                isMobile: mobile,
-            });
-        });
         const { dispatch } = this.props;
         dispatch({
             type: 'user/fetchCurrent',
         });
-    }
-
-    componentWillUnmount() {
-        unenquireScreen(this.enquireHandler);
     }
 
     getPageTitle() {
@@ -207,7 +189,7 @@ export default class ProjectsLayout extends React.PureComponent {
             return;
         }
         if (key === 'txhistory') {
-            dispatch(routerRedux.push('/txhistory'));
+            dispatch(routerRedux.push('/dex/txhistory'));
             return;
         }
         if (key === 'logout') {
@@ -227,8 +209,15 @@ export default class ProjectsLayout extends React.PureComponent {
     };
 
     render() {
-        const { currentUser, collapsed, fetchingNotices, notices, routerData, match } = this.props;
-        const { isMobile: mb } = this.state;
+        const {
+            currentUser,
+            collapsed,
+            fetchingNotices,
+            notices,
+            routerData,
+            match,
+            mobile,
+        } = this.props;
         const baseRedirect = this.getBaseRedirect();
 
         const layout = (
@@ -241,7 +230,7 @@ export default class ProjectsLayout extends React.PureComponent {
                         fetchingNotices={fetchingNotices}
                         notices={notices}
                         collapsed={collapsed}
-                        isMobile={mb}
+                        isMobile={mobile}
                         menus={getNavMenuData()}
                         onNoticeClear={this.handleNoticeClear}
                         onCollapse={this.handleMenuCollapse}

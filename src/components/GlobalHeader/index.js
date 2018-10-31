@@ -119,6 +119,7 @@ class GlobalHeader extends PureComponent {
         );
 
         let logoBox;
+        let collapseToggleNode = null;
         if (isMobile) {
             logoBox = [
                 <Link to="/" className={styles.logo} key="logo">
@@ -131,16 +132,19 @@ class GlobalHeader extends PureComponent {
                     <img src={fulllogo} alt="logo" width="170" />
                 </Link>,
             ];
-        }
-
-        return (
-            <div className={styles.header}>
-                {logoBox}
+            collapseToggleNode = (
                 <Icon
                     className={styles.trigger}
                     type={collapsed ? 'menu-unfold' : 'menu-fold'}
                     onClick={this.toggle}
                 />
+            );
+        }
+
+        return (
+            <div className={styles.header}>
+                {logoBox}
+                {collapseToggleNode}
                 <div className={styles.navbar}>{topNav}</div>
                 <div className={styles.right}>
                     <HeaderSearch
