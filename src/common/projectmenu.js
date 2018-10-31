@@ -1,9 +1,33 @@
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+    faTachometerAlt,
+    faChartBar,
+    faHandHoldingUsd,
+    faBolt,
+    faSolarPanel,
+    faBusinessTime,
+    faCheckCircle,
+    faEllipsisH,
+    faHourglassEnd,
+} from '@fortawesome/free-solid-svg-icons';
 import { formatter } from './menufuncs';
+
+library.add(
+    faTachometerAlt,
+    faChartBar,
+    faHandHoldingUsd,
+    faBolt,
+    faSolarPanel,
+    faBusinessTime,
+    faCheckCircle,
+    faEllipsisH,
+    faHourglassEnd
+);
 
 export const menuData = [
     {
         name: 'project-type',
-        icon: 'filter',
+        icon: 'fa-tachometer-alt',
         path: 'project-type',
         children: [
             {
@@ -13,19 +37,19 @@ export const menuData = [
             },
             {
                 name: 'profit-sharing',
-                icon: 'file',
+                icon: 'fa-chart-bar',
                 path: 'profit-sharing',
             },
             {
                 name: 'energy-buy-back',
-                icon: 'file',
+                icon: 'fa-hand-holding-usd',
                 path: 'energy-buy-back',
             },
         ],
     },
     {
         name: 'category',
-        icon: 'filter',
+        icon: 'fa-bolt',
         path: 'category',
         children: [
             {
@@ -35,19 +59,19 @@ export const menuData = [
             },
             {
                 name: 'solar',
-                icon: 'file',
+                icon: 'fa-solar-panel',
                 path: 'solar',
             },
             {
                 name: 'wind',
-                icon: 'file',
+                icon: 'my-wind-turbine',
                 path: 'wind',
             },
         ],
     },
     {
         name: 'project-timing',
-        icon: 'filter',
+        icon: 'fa-business-time',
         path: 'project-timing',
         children: [
             {
@@ -57,17 +81,17 @@ export const menuData = [
             },
             {
                 name: 'active',
-                icon: 'file',
+                icon: 'fa-check-circle',
                 path: 'active',
             },
             {
                 name: 'upcoming',
-                icon: 'file',
+                icon: 'fa-ellipsis-h',
                 path: 'upcoming',
             },
             {
                 name: 'ended',
-                icon: 'file',
+                icon: 'fa-hourglass-end',
                 path: 'ended',
             },
         ],

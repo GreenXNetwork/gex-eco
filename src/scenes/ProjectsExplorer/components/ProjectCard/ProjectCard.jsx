@@ -32,7 +32,12 @@ class ProjectCard extends PureComponent {
         return (
             <Card
                 hoverable
-                style={{ width: 300, height: 360, display: 'inline-block' }}
+                style={{
+                    width: 300,
+                    height: 360,
+                    display: 'inline-block',
+                    boxShadow: '20px 20px 41px -16px rgba(140,140,140,1)',
+                }}
                 bodyStyle={{ padding: 0 }}
                 cover={<img alt={project.name} src={project.thumbnail} onClick={onClick} />}
             >

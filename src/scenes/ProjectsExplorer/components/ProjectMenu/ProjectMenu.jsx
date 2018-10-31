@@ -5,6 +5,8 @@ import pathToRegexp from 'path-to-regexp';
 import { Link } from 'dva/router';
 import { defineMessages, injectIntl } from 'react-intl';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import xLogo from '../../../../assets/x-transparent.png';
 import { urlToList } from '../../../../components/_utils/pathTools';
 import { getMessage } from '../../../../common/definedmessages';
 import styles from './ProjectMenu.less';
@@ -27,6 +29,21 @@ const getIcon = icon => {
     if (typeof icon === 'string') {
         if (icon.indexOf('http') === 0) {
             return <img src={icon} alt="icon" className={`${styles.icon} sider-menu-item-img`} />;
+        }
+        if (icon.indexOf('fa-') === 0) {
+            const faName = icon.slice(3, icon.length);
+            return (
+                <i className="anticon">
+                    <FontAwesomeIcon icon={faName} />
+                </i>
+            );
+        }
+        if (icon.indexOf('my-') === 0) {
+            return (
+                <i className="anticon">
+                    <span className={`icon-${icon}`} />
+                </i>
+            );
         }
         return <Icon type={icon} />;
     }
@@ -244,6 +261,7 @@ class ProjectMenu extends PureComponent {
                 >
                     {this.getNavMenuItems(menuData)}
                 </Menu>
+                <img alt="logo" className={styles.menu_logo} src={xLogo} />
             </Sider>
         );
     }
