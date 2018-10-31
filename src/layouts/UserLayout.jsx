@@ -1,14 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link, Redirect, Switch, Route } from 'dva/router';
 import DocumentTitle from 'react-document-title';
-import { Icon } from 'antd';
-import GlobalFooter from '../components/GlobalFooter';
-import styles from './UserLayout.less';
-import logo from '../assets/x-transparent.png';
-import { getRoutes, getPageQuery, getQueryPath } from '../utils/utils';
 import { injectIntl, defineMessages } from 'react-intl';
 import PropTypes from 'prop-types';
 import LanguageSelection from 'components/LanguageSelection';
+import styles from './UserLayout.less';
+import fulllogo from '../assets/fulllogo_big.png';
+import { getRoutes, getPageQuery, getQueryPath } from '../utils/utils';
 
 const messages = defineMessages({
     pageTitle: {
@@ -61,34 +59,34 @@ class UserLayout extends React.PureComponent {
     }
 
     render() {
-        const { routerData, match, intl } = this.props;
-        const description = intl.formatMessage(messages.pageDescription);
+        const { routerData, match } = this.props;
+        // const description = intl.formatMessage(messages.pageDescription);
 
-        const copyright = (
-            <Fragment>
-                {`${intl.formatMessage(messages.copyright)} `}
-                <Icon type="copyright" />
-                {` ${intl.formatMessage(messages.copyrightMessage)}`}
-            </Fragment>
-        );
+        // const copyright = (
+        //     <Fragment>
+        //         {`${intl.formatMessage(messages.copyright)} `}
+        //         <Icon type="copyright" />
+        //         {` ${intl.formatMessage(messages.copyrightMessage)}`}
+        //     </Fragment>
+        // );
 
-        const links = [
-            {
-                key: 'help',
-                title: intl.formatMessage(messages.footerHelp),
-                href: '',
-            },
-            {
-                key: 'privacy',
-                title: intl.formatMessage(messages.footerPrivacy),
-                href: '',
-            },
-            {
-                key: 'terms',
-                title: intl.formatMessage(messages.footerTerms),
-                href: '',
-            },
-        ];
+        // const links = [
+        //     {
+        //         key: 'help',
+        //         title: intl.formatMessage(messages.footerHelp),
+        //         href: '',
+        //     },
+        //     {
+        //         key: 'privacy',
+        //         title: intl.formatMessage(messages.footerPrivacy),
+        //         href: '',
+        //     },
+        //     {
+        //         key: 'terms',
+        //         title: intl.formatMessage(messages.footerTerms),
+        //         href: '',
+        //     },
+        // ];
 
         return (
             <DocumentTitle title={this.getPageTitle()}>
@@ -97,13 +95,16 @@ class UserLayout extends React.PureComponent {
                         <div className={styles.top}>
                             <div className={styles.header}>
                                 <Link to="/">
-                                    <img alt="logo" className={styles.logo} src={logo} />
-                                    <span className={styles.title}>
-                                        {intl.formatMessage(messages.pageTitle)}
-                                    </span>
+                                    <img alt="logo" className={styles.logo} src={fulllogo} />
+                                    <span className={styles.title} />
                                 </Link>
                             </div>
-                            <div className={styles.desc}>{description}</div>
+                            <div className={styles.desc}>
+                                <h2>
+                                    The World&apos;s Most Sophisticated
+                                    <b>Green Energy Network</b>
+                                </h2>
+                            </div>
                             <div className={styles.langSel}>
                                 <LanguageSelection />
                             </div>
@@ -120,7 +121,7 @@ class UserLayout extends React.PureComponent {
                             <Redirect from="/user" to={getLoginPathWithRedirectPath()} />
                         </Switch>
                     </div>
-                    <GlobalFooter links={links} copyright={copyright} />
+                    {/* <GlobalFooter links={links} copyright={copyright} /> */}
                 </div>
             </DocumentTitle>
         );

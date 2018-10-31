@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Link } from 'dva/router';
 import { Checkbox, Alert } from 'antd';
 import Login from 'components/Login';
 import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
@@ -84,6 +83,8 @@ class LoginPage extends Component {
     render() {
         const { login, submitting, intl } = this.props;
         const { type, autoLogin } = this.state;
+        const tempUserPlaceholder = 'investor1@greenx.network';
+        const tempPasswPlaceholder = '123456';
 
         return (
             <div className={styles.main}>
@@ -92,8 +93,8 @@ class LoginPage extends Component {
                         login.type === 'account' &&
                         !submitting &&
                         this.renderMessage(intl.formatMessage(messages.incorrectUserPass))}
-                    <UserName name="username" placeholder="admin/user" />
-                    <Password name="password" placeholder="888888/123456" />
+                    <UserName name="username" placeholder={tempUserPlaceholder} />
+                    <Password name="password" placeholder={tempPasswPlaceholder} />
                     <div>
                         <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
                             <FormattedMessage {...messages.rememberMe} />
@@ -105,11 +106,11 @@ class LoginPage extends Component {
                     <Submit loading={submitting}>
                         <FormattedMessage {...messages.signInButton} />
                     </Submit>
-                    <div className={styles.other}>
+                    {/* <div className={styles.other}>
                         <Link className={styles.register} to="/user/register">
                             <FormattedMessage {...messages.singUpButton} />
                         </Link>
-                    </div>
+                    </div> */}
                 </Login>
             </div>
         );
