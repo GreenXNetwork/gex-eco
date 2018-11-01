@@ -20,10 +20,10 @@ const details = {
         background: '/project/1/Bg-Image.png',
         media: [
             '/project/1/5.png',
-            '/project/1/2.png',
-            '/project/1/3.png',
+            '/project/1/2.jpg',
+            '/project/1/3.jpg',
             '/project/1/4.png',
-            '/project/1/1.png',
+            '/project/1/1.jpg',
         ],
         owner: {
             name: 'NESA INVESTMENT HOLDINGS',
