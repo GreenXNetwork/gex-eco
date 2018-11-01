@@ -90,8 +90,8 @@ class ProjectDetail extends Component {
                         sm={{ span: 24 }}
                         md={{ span: 24 }}
                         lg={{ span: 24 }}
-                        xl={{ span: 14 }}
-                        xxl={{ span: 12 }}
+                        xl={{ span: 16 }}
+                        xxl={{ span: 14 }}
                     >
                         <div className={styles.imageSlideshow}>
                             <Carousel images={detail.media} thumb loop />
@@ -103,8 +103,8 @@ class ProjectDetail extends Component {
                         sm={{ span: 24 }}
                         md={{ span: 24 }}
                         lg={{ span: 24 }}
-                        xl={{ span: 10 }}
-                        xxl={{ span: 12 }}
+                        xl={{ span: 8 }}
+                        xxl={{ span: 10 }}
                     >
                         <DetailView detail={detail} onOwnerMore={this.showModal} />
                     </Col>
