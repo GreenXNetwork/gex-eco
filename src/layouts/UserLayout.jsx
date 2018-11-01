@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link, Redirect, Switch, Route } from 'dva/router';
 import DocumentTitle from 'react-document-title';
 import { injectIntl, defineMessages } from 'react-intl';
+import { Icon } from 'antd';
 import PropTypes from 'prop-types';
 import LanguageSelection from 'components/LanguageSelection';
 import styles from './UserLayout.less';
+import GlobalFooter from '../components/GlobalFooter';
 import fulllogo from '../assets/fulllogo_big.png';
 import { getRoutes, getPageQuery, getQueryPath } from '../utils/utils';
 
@@ -59,34 +61,31 @@ class UserLayout extends React.PureComponent {
     }
 
     render() {
-        const { routerData, match } = this.props;
+        const { routerData, match, intl } = this.props;
         // const description = intl.formatMessage(messages.pageDescription);
 
-        // const copyright = (
-        //     <Fragment>
-        //         {`${intl.formatMessage(messages.copyright)} `}
-        //         <Icon type="copyright" />
-        //         {` ${intl.formatMessage(messages.copyrightMessage)}`}
-        //     </Fragment>
-        // );
+        const copyright = (
+            <Fragment>
+                {`${intl.formatMessage(messages.copyright)} `}
+                <Icon type="copyright" />
+                {` ${intl.formatMessage(messages.copyrightMessage)}`}
+            </Fragment>
+        );
 
-        // const links = [
-        //     {
-        //         key: 'help',
-        //         title: intl.formatMessage(messages.footerHelp),
-        //         href: '',
-        //     },
-        //     {
-        //         key: 'privacy',
-        //         title: intl.formatMessage(messages.footerPrivacy),
-        //         href: '',
-        //     },
-        //     {
-        //         key: 'terms',
-        //         title: intl.formatMessage(messages.footerTerms),
-        //         href: '',
-        //     },
-        // ];
+        const links = [
+            {
+                key: 'privacy',
+                title: intl.formatMessage(messages.footerPrivacy),
+                href: 'https://drive.google.com/file/d/1Cb3Q9dLACsLeIJeAEnOOo6saepEC--TF/view',
+                blankTarget: true,
+            },
+            {
+                key: 'terms',
+                title: intl.formatMessage(messages.footerTerms),
+                href: 'https://drive.google.com/file/d/1MS8GpCBz0LyFkOEMNWghuvZ_bkM6WdYv/view',
+                blankTarget: true,
+            },
+        ];
 
         return (
             <DocumentTitle title={this.getPageTitle()}>
@@ -121,7 +120,7 @@ class UserLayout extends React.PureComponent {
                             <Redirect from="/user" to={getLoginPathWithRedirectPath()} />
                         </Switch>
                     </div>
-                    {/* <GlobalFooter links={links} copyright={copyright} /> */}
+                    <GlobalFooter links={links} copyright={copyright} />
                 </div>
             </DocumentTitle>
         );
