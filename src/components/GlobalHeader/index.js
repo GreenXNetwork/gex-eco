@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Menu, Icon, Spin, Tag, Dropdown, Avatar, Tooltip } from 'antd';
+import { Menu, Icon, Spin, Tag, Dropdown, Avatar } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import Debounce from 'lodash-decorators/debounce';
@@ -8,6 +8,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import HeaderSearch from '../HeaderSearch';
 import { getMessage } from '../../common/definedmessages';
 import styles from './index.less';
+import LanguageSelection from '../LanguageSelection/index';
 
 const messages = defineMessages({
     profile_menuitem: {
@@ -158,7 +159,7 @@ class GlobalHeader extends PureComponent {
                             console.log('enter', value); // eslint-disable-line
                         }}
                     />
-                    <Tooltip title={intl.formatMessage(messages.support)}>
+                    {/* <Tooltip title={intl.formatMessage(messages.support)}>
                         <a
                             target="_blank"
                             href="https://www.google.com"
@@ -167,7 +168,13 @@ class GlobalHeader extends PureComponent {
                         >
                             <Icon type="question-circle-o" />
                         </a>
-                    </Tooltip>
+                    </Tooltip> */}
+                    <LanguageSelection
+                        className={styles.action}
+                        hover
+                        mode="text"
+                        mobile={isMobile}
+                    />
                     {currentUser.name ? (
                         <Dropdown overlay={menu}>
                             <span className={`${styles.action} ${styles.account}`}>
