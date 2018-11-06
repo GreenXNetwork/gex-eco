@@ -13,6 +13,6 @@
   },
   {
     "id": "ProjectDetail.tab.investors",
-    "defaultMessage": "INVESTORS"
+    "defaultMessage": "INVESTORS {value}"
   }
 ]

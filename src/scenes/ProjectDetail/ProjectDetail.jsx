@@ -8,6 +8,7 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import Developer from '../Developer/Developer';
 import styles from './ProjectDetail.less';
 import DetailView from './components/DetailView/DetailView';
+import ProjectInvestorList from './components/ProjectInvestorList/ProjectInvestorList';
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
@@ -27,7 +28,7 @@ const messages = defineMessages({
     },
     tab_investors: {
         id: 'ProjectDetail.tab.investors',
-        defaultMessage: 'INVESTORS',
+        defaultMessage: 'INVESTORS {value}',
     },
 });
 
@@ -58,7 +59,7 @@ class ProjectDetail extends Component {
     callback = () => {};
 
     render() {
-        const { intl, projectdetail, loading } = this.props;
+        const { intl, projectdetail, loading, match, investorNumber } = this.props;
         let isLoading = loading.effects['projectdetail/fetchProjectDetail'];
         isLoading = isLoading === undefined ? true : isLoading;
 
@@ -130,7 +131,17 @@ class ProjectDetail extends Component {
                         <TabPane tab={intl.formatMessage(messages.tab_story)} key="story" />
                         <TabPane tab={intl.formatMessage(messages.tab_updates)} key="updates" />
                         <TabPane tab={intl.formatMessage(messages.tab_comments)} key="comments" />
-                        <TabPane tab={intl.formatMessage(messages.tab_investors)} key="investors" />
+                        <TabPane
+                            tab={intl.formatMessage(messages.tab_investors, {
+                                value: `(${investorNumber})`,
+                            })}
+                            key="investors"
+                        >
+                            <ProjectInvestorList
+                                className={styles.investors}
+                                projectId={parseInt(match.params.id, 10)}
+                            />
+                        </TabPane>
                     </Tabs>
                 </StickyContainer>
             </Content>
@@ -152,9 +163,10 @@ const defaultProps = {
 };
 ProjectDetail.defaultProps = defaultProps;
 
-const mapStateToProps = ({ loading, projectdetail }) => ({
+const mapStateToProps = ({ loading, projectdetail, investor }) => ({
     loading,
     projectdetail,
+    investorNumber: investor.total,
 });
 
 export default injectIntl(connect(mapStateToProps)(ProjectDetail), { withRef: true });
