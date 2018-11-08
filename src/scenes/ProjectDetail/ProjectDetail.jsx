@@ -9,6 +9,8 @@ import Developer from '../Developer/Developer';
 import styles from './ProjectDetail.less';
 import DetailView from './components/DetailView/DetailView';
 import ProjectInvestorList from './components/ProjectInvestorList/ProjectInvestorList';
+import CommentFlowList from './components/CommentFlowList/CommentFlowList';
+import CommentBox from './components/CommentBox/CommentBox';
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
@@ -24,7 +26,7 @@ const messages = defineMessages({
     },
     tab_comments: {
         id: 'ProjectDetail.tab.comments',
-        defaultMessage: 'COMMENTS',
+        defaultMessage: 'COMMENTS {value}',
     },
     tab_investors: {
         id: 'ProjectDetail.tab.investors',
@@ -40,7 +42,7 @@ class ProjectDetail extends Component {
         // See models/projectdetail.js for more effects and actions.
         dispatch({
             type: 'projectdetail/fetchProjectDetail',
-            projectId: match.params.id,
+            payload: { projectId: match.params.id },
         });
     }
 
@@ -59,9 +61,10 @@ class ProjectDetail extends Component {
     callback = () => {};
 
     render() {
-        const { intl, projectdetail, loading, match, investorNumber } = this.props;
+        const { intl, projectdetail, loading, match, investorNumber, commentNumber } = this.props;
         let isLoading = loading.effects['projectdetail/fetchProjectDetail'];
         isLoading = isLoading === undefined ? true : isLoading;
+        const projectId = parseInt(match.params.id, 10);
 
         if (isLoading) {
             return <Spin size="large" />;
@@ -130,7 +133,15 @@ class ProjectDetail extends Component {
                     >
                         <TabPane tab={intl.formatMessage(messages.tab_story)} key="story" />
                         <TabPane tab={intl.formatMessage(messages.tab_updates)} key="updates" />
-                        <TabPane tab={intl.formatMessage(messages.tab_comments)} key="comments" />
+                        <TabPane
+                            tab={intl.formatMessage(messages.tab_comments, {
+                                value: `(${commentNumber})`,
+                            })}
+                            key="comments"
+                        >
+                            <CommentFlowList className={styles.comments} projectId={projectId} />
+                            <CommentBox />
+                        </TabPane>
                         <TabPane
                             tab={intl.formatMessage(messages.tab_investors, {
                                 value: `(${investorNumber})`,
@@ -139,7 +150,7 @@ class ProjectDetail extends Component {
                         >
                             <ProjectInvestorList
                                 className={styles.investors}
-                                projectId={parseInt(match.params.id, 10)}
+                                projectId={projectId}
                             />
                         </TabPane>
                     </Tabs>
@@ -163,10 +174,11 @@ const defaultProps = {
 };
 ProjectDetail.defaultProps = defaultProps;
 
-const mapStateToProps = ({ loading, projectdetail, investor }) => ({
+const mapStateToProps = ({ loading, projectdetail, investor, comment }) => ({
     loading,
     projectdetail,
     investorNumber: investor.total,
+    commentNumber: comment.total,
 });
 
 export default injectIntl(connect(mapStateToProps)(ProjectDetail), { withRef: true });

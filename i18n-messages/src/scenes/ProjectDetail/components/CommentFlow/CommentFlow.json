@@ -1,0 +1,14 @@
+[
+  {
+    "id": "CommentFlow.button.reply",
+    "defaultMessage": "Reply"
+  },
+  {
+    "id": "CommentFlow.button.show",
+    "defaultMessage": "Show Replies"
+  },
+  {
+    "id": "CommentFlow.button.collapse",
+    "defaultMessage": "Hide Replies"
+  }
+]

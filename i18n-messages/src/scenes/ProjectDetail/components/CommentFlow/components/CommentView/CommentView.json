@@ -1,0 +1,14 @@
+[
+  {
+    "id": "CommentView.button.reply",
+    "defaultMessage": "Reply"
+  },
+  {
+    "id": "CommentView.button.show",
+    "defaultMessage": "Show Replies"
+  },
+  {
+    "id": "CommentView.button.collapse",
+    "defaultMessage": "Hide Replies"
+  }
+]

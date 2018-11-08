@@ -25,7 +25,7 @@ import {
 import { getFakeProfileTranslation } from './mock/profiletrans';
 import { getFakeUser, updateFakeUser } from './mock/users';
 import { getFakeCountryList } from './mock/countries';
-import { getFakeComments } from './mock/comments';
+import { getFakeComments, getFakeCommentReplies } from './mock/comments';
 import { getFakeProjectInvestors } from './mock/investors';
 
 const noProxy = process.env.NO_PROXY === 'true';
@@ -127,6 +127,7 @@ const proxy = {
     'GET /api/projects': getFakeProjects,
     'GET /api/projects/*/comments': getFakeComments,
     'GET /api/projects/*/investors': getFakeProjectInvestors,
+    'GET /api/projects/*/comments/*/replies': getFakeCommentReplies,
     'GET /api/projects/detail/*': getFakeProjectDetail,
     'GET /api/owners/*': getFakeOwner,
     'GET /api/portfolio': {

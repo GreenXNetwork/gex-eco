@@ -46,7 +46,7 @@ export function getFakeProjectInvestors(req, res, u) {
     const projectId = re[1];
     const queryParams = parse(re[2], { ignoreQueryPrefix: true });
 
-    const investors = PROJECT_INVESTORS[projectId];
+    const investors = PROJECT_INVESTORS[projectId] || [];
 
     const result = {
         total: investors.length,

@@ -1,0 +1,21 @@
+.container {
+    .content {
+        padding: 0.5em 0;
+    }
+
+    .footer {
+        span {
+            margin-right: 0.5em;
+            a {
+                text-decoration: none;
+            }
+        }
+        span:not(:first-child) {
+            &::before {
+                content: '•';
+                color: #999;
+                margin-right: 0.5em;
+            }
+        }
+    }
+}

@@ -64,6 +64,22 @@
     "defaultMessage": "{days} days left"
   },
   {
+    "id": "time.minutes.ago",
+    "defaultMessage": "{minutes} minutes ago"
+  },
+  {
+    "id": "time.hours.ago",
+    "defaultMessage": "{hours} hours ago"
+  },
+  {
+    "id": "time.days.ago",
+    "defaultMessage": "{days} days ago"
+  },
+  {
+    "id": "time.years.ago",
+    "defaultMessage": "{years} years ago"
+  },
+  {
     "id": "portfolio.min",
     "defaultMessage": "Portfolio MIN"
   },

@@ -1,5 +1,4 @@
 import { queryProjectDetail } from '../services/project';
-import { queryInvestorsByProject } from '../services/investor';
 
 export default {
     namespace: 'projectdetail',
@@ -7,18 +6,22 @@ export default {
     state: {},
 
     effects: {
-        *fetchProjectDetail({ projectId }, { call, put }) {
+        *fetchProjectDetail({ payload }, { call, put }) {
+            const { projectId } = payload;
             const reponse = yield call(queryProjectDetail, projectId);
             yield put({
                 type: 'showProjectDetail',
                 payload: reponse,
             });
-        },
-        *fetchProjectInvestors({ projectId }, { call, put }) {
-            const response = yield call(queryInvestorsByProject, projectId);
+
             yield put({
-                type: 'showInvestors',
-                payload: response,
+                type: 'comment/fetchComments',
+                payload: { projectId },
+            });
+
+            yield put({
+                type: 'investor/fetchInvestors',
+                payload: { projectId },
             });
         },
     },
@@ -28,12 +31,6 @@ export default {
             return {
                 ...state,
                 detail: payload,
-            };
-        },
-        showInvestors(state, { payload }) {
-            return {
-                ...state,
-                investors: payload,
             };
         },
     },

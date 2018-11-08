@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
-import { Button, List } from 'antd';
-import PropTypes from 'prop-types';
 import { connect } from 'dva';
-import ProjectInvestor from '../ProjectInvestor/ProjectInvestor';
+import PropTypes from 'prop-types';
+import { Button, List } from 'antd';
+import CommentFlow from '../CommentFlow/CommentFlow';
 
-class ProjectInvestorList extends PureComponent {
+class CommentFlowList extends PureComponent {
     getData = () => {
         const { dispatch, projectId } = this.props;
         dispatch({
-            type: 'investor/fetchMoreInvestors',
+            type: 'comment/fetchMoreComments',
             payload: {
                 projectId,
             },
@@ -20,7 +20,8 @@ class ProjectInvestorList extends PureComponent {
     };
 
     render() {
-        const { initLoading, loading, list, className } = this.props;
+        const { className, initLoading, loading, comments, projectId } = this.props;
+
         const loadMore = (
             <div style={{ textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px' }}>
                 <Button disabled={initLoading || loading} onClick={this.onLoadMore}>
@@ -28,22 +29,16 @@ class ProjectInvestorList extends PureComponent {
                 </Button>
             </div>
         );
-
         return (
             <List
                 className={className}
                 loading={initLoading}
                 itemLayout="horizontal"
                 loadMore={loadMore}
-                dataSource={list}
+                dataSource={comments}
                 renderItem={item => (
                     <List.Item>
-                        <ProjectInvestor
-                            avatarUrl={item.investor_image_url || '/default-avatar.png'}
-                            investorName={item.investor_name}
-                            investTime={item.time_ago}
-                            investAmount={`${item.display_amount} ${item.display_amount_currency}`}
-                        />
+                        <CommentFlow projectId={projectId} comment={item} />
                     </List.Item>
                 )}
             />
@@ -54,12 +49,12 @@ class ProjectInvestorList extends PureComponent {
 const propTypes = {
     projectId: PropTypes.number.isRequired,
 };
-ProjectInvestorList.propTypes = propTypes;
+CommentFlowList.propTypes = propTypes;
 
-const mapStateToProps = ({ loading, investor }) => ({
-    initLoading: loading.effects['investor/fetchInvestors'],
-    loading: loading.effects['investor/fetchMoreInvestors'],
-    list: investor.list,
+const mapStateToProps = ({ loading, comment }) => ({
+    initLoading: loading.effects['comment/fetchComments'],
+    loading: loading.effects['comment/fetchMoreComments'],
+    comments: comment.data.values(),
 });
 
-export default connect(mapStateToProps)(ProjectInvestorList);
+export default connect(mapStateToProps)(CommentFlowList);

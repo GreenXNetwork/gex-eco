@@ -9,7 +9,7 @@
   },
   {
     "id": "ProjectDetail.tab.comments",
-    "defaultMessage": "COMMENTS"
+    "defaultMessage": "COMMENTS {value}"
   },
   {
     "id": "ProjectDetail.tab.investors",

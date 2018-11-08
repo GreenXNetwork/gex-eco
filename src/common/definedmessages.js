@@ -70,6 +70,23 @@ const commonmessages = defineMessages({
         defaultMessage: '{days} days left',
     },
 
+    minutes_ago: {
+        id: 'time.minutes.ago',
+        defaultMessage: '{minutes} minutes ago',
+    },
+    hours_ago: {
+        id: 'time.hours.ago',
+        defaultMessage: '{hours} hours ago',
+    },
+    days_ago: {
+        id: 'time.days.ago',
+        defaultMessage: '{days} days ago',
+    },
+    years_ago: {
+        id: 'time.years.ago',
+        defaultMessage: '{years} years ago',
+    },
+
     portfolio_min: {
         id: 'portfolio.min',
         defaultMessage: 'Portfolio MIN',
