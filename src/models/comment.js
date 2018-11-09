@@ -1,7 +1,8 @@
-import { queryMoreComments, queryMoreReplies } from '../services/comment';
+import { queryMoreComments, queryMoreReplies, createComment } from '../services/comment';
+import { STATUS } from '../common/constants';
 
 function mapReducer(map, elem) {
-    const replyData = { ...elem, loading: false };
+    const replyData = { ...elem, loading: false, editorStatus: STATUS.ready };
     map.set(elem.id, replyData);
     return map;
 }
@@ -15,6 +16,7 @@ export default {
         data: new Map(),
         total: 0,
         loadSize: 10,
+        editorStatus: STATUS.ready,
     },
 
     effects: {
@@ -84,6 +86,52 @@ export default {
                 },
             });
         },
+
+        *postComment({ payload }, { call, put, select }) {
+            const { projectId, commentId, comment } = payload;
+            const { comment: commentState, user: userState } = yield select(state => ({
+                comment: state.comment,
+                user: state.user,
+            }));
+
+            yield put({
+                type: 'changeEditorState',
+                payload: { commentId, status: STATUS.sending },
+            });
+
+            const ok = yield call(
+                createComment,
+                projectId,
+                commentId,
+                userState.currentUser.id,
+                comment
+            );
+
+            if (ok) {
+                if (commentId) {
+                    const response = yield call(
+                        queryMoreReplies,
+                        projectId,
+                        commentId,
+                        0,
+                        commentState.loadSize
+                    );
+
+                    yield put({
+                        type: 'saveCommentReplies',
+                        payload: {
+                            commentId,
+                            totalReplies: response.total,
+                            replies: response.records,
+                        },
+                    });
+                }
+                yield put({
+                    type: 'changeEditorState',
+                    payload: { commentId, status: STATUS.completed },
+                });
+            }
+        },
     },
 
     reducers: {
@@ -93,6 +141,22 @@ export default {
                 loading: false,
                 total: payload.total,
                 data: payload.data,
+            };
+        },
+
+        changeEditorState(state, { payload }) {
+            const { commentId, status } = payload;
+            if (commentId) {
+                const comment = state.data.get(commentId);
+                comment.editorStatus = status;
+                return {
+                    ...state,
+                };
+            }
+
+            return {
+                ...state,
+                editorStatus: status,
             };
         },
 

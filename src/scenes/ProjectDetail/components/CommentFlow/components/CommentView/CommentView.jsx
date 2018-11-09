@@ -22,7 +22,13 @@ const messages = defineMessages({
 });
 
 class CommentView extends PureComponent {
+    static defaultProps = {
+        parentId: null,
+    };
+
     static propTypes = {
+        parentId: PropTypes.number,
+        userId: PropTypes.number.isRequired,
         avatarUrl: PropTypes.string.isRequired,
         userName: PropTypes.string.isRequired,
         content: PropTypes.string.isRequired,
@@ -40,6 +46,11 @@ class CommentView extends PureComponent {
         onReply: () => {},
     };
 
+    onClickReply = () => {
+        const { userId, userName, onReply, parentId } = this.props;
+        onReply({ userId, userName, commentId: parentId });
+    };
+
     render() {
         const {
             intl,
@@ -51,7 +62,6 @@ class CommentView extends PureComponent {
             collapsed,
             allowRepliesShown,
             onExpandCollapse,
-            onReply,
         } = this.props;
 
         const showText = intl.formatMessage(messages.showButton);
@@ -78,6 +88,8 @@ class CommentView extends PureComponent {
             timeAgoText = intl.formatMessage(commonmessages.minutes_ago, {
                 minutes: Math.abs(remainingTime.minutes),
             });
+        } else {
+            timeAgoText = intl.formatMessage(commonmessages.few_seconds_ago);
         }
 
         return (
@@ -90,7 +102,7 @@ class CommentView extends PureComponent {
                 <div className={styles.content}>{content}</div>
                 <div className={styles.footer}>
                     <span>
-                        <a tabIndex="0" role="button" onClick={onReply}>
+                        <a tabIndex="0" role="button" onClick={this.onClickReply}>
                             {intl.formatMessage(messages.replyButton)}
                         </a>
                     </span>

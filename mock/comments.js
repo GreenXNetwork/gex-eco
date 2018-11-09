@@ -1,13 +1,17 @@
 import pathToRegexp from 'path-to-regexp';
 import { parse } from 'qs';
+import { users } from './users';
+
+let TOTAL = 5;
 
 const PROJECT_COMMENTS = {
     1: [
         {
             id: 1,
+            parent_id: null,
             comment: 'I have some questions.',
-            investor_id: 1,
-            investor_name: 'Rehkj',
+            investor_id: 2,
+            investor_name: 'Investor1',
             avatar_url: '/default-avatar.png',
             created_time: 1540452292702,
             is_campaigner: false,
@@ -17,8 +21,8 @@ const PROJECT_COMMENTS = {
         {
             id: 2,
             comment: 'Great work!',
-            investor_id: 2,
-            investor_name: 'Banda',
+            investor_id: 3,
+            investor_name: 'Pandar',
             avatar_url: 'default-avatar.png',
             created_time: 1540452322702,
             is_campaigner: false,
@@ -31,9 +35,10 @@ const PROJECT_COMMENTS = {
 const REPLIES = {
     1: [
         {
-            comment_id: 2,
-            investor_id: 3,
-            investor_name: 'IAmOwner',
+            id: 3,
+            parent_id: 1,
+            investor_id: 1,
+            investor_name: 'Administrator',
             avatar_url: 'default-avatar.png',
             comment: 'Please do',
             created_time: 1540452298702,
@@ -42,9 +47,10 @@ const REPLIES = {
             replies: [],
         },
         {
-            comment_id: 4,
-            investor_id: 1,
-            investor_name: 'Rehkj',
+            id: 4,
+            parent_id: 1,
+            investor_id: 3,
+            investor_name: 'Investor1',
             avatar_url: 'default-avatar.png',
             comment: 'When do this project start ?',
             created_time: 1540452498702,
@@ -55,9 +61,10 @@ const REPLIES = {
     ],
     2: [
         {
-            comment_id: 2,
-            investor_id: 3,
-            investor_name: 'IAmOwner',
+            id: 5,
+            parent_id: 2,
+            investor_id: 1,
+            investor_name: 'Administrator',
             avatar_url: 'default-avatar.png',
             comment: 'Thank you',
             created_time: 1540452398702,
@@ -133,7 +140,59 @@ export function getFakeCommentReplies(req, res, u) {
     }
 }
 
+export function postFakeComment(req, res, u) {
+    let url = u;
+    if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+        url = req.url; // eslint-disable-line
+    }
+
+    const re = pathToRegexp('/api/projects/:project_id/comments').exec(url);
+
+    const projectId = re[1];
+
+    const { body: data } = req;
+
+    // console.log(JSON.stringify(data));
+
+    const user = users[data.user_id];
+    if (data.parent_id) {
+        REPLIES[data.parent_id].push({
+            id: TOTAL,
+            parent_id: data.parent_id,
+            investor_id: data.user_id,
+            investor_name: user.name,
+            avatar_url: user.avatar_url,
+            comment: data.comment,
+            created_time: Date.now(),
+            is_campaigner: user.name === 'Administrator',
+            reply_number: 0,
+            replies: [],
+        });
+        TOTAL += 1;
+    } else {
+        PROJECT_COMMENTS[projectId].push({
+            id: TOTAL,
+            parent_id: data.parent_id,
+            investor_id: data.user_id,
+            investor_name: user.name,
+            avatar_url: user.avatar_url,
+            comment: data.comment,
+            created_time: Date.now(),
+            is_campaigner: user.name === 'Administrator',
+            reply_number: 0,
+            replies: [],
+        });
+    }
+
+    if (res && res.json) {
+        res.json(true);
+    } else {
+        return true;
+    }
+}
+
 export default {
     getFakeComments,
     getFakeCommentReplies,
+    postFakeComment,
 };

@@ -64,6 +64,10 @@
     "defaultMessage": "{days} days left"
   },
   {
+    "id": "time.fewseconds.ago",
+    "defaultMessage": "Few seconds ago"
+  },
+  {
     "id": "time.minutes.ago",
     "defaultMessage": "{minutes} minutes ago"
   },

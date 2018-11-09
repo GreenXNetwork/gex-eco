@@ -139,8 +139,15 @@ class ProjectDetail extends Component {
                             })}
                             key="comments"
                         >
-                            <CommentFlowList className={styles.comments} projectId={projectId} />
-                            <CommentBox />
+                            <div className={styles.comments}>
+                                <CommentFlowList projectId={projectId} />
+                                <CommentBox
+                                    className={styles.editor}
+                                    projectId={projectId}
+                                    commentId={null}
+                                    replyTo={null}
+                                />
+                            </div>
                         </TabPane>
                         <TabPane
                             tab={intl.formatMessage(messages.tab_investors, {

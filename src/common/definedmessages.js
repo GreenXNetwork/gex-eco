@@ -70,6 +70,10 @@ const commonmessages = defineMessages({
         defaultMessage: '{days} days left',
     },
 
+    few_seconds_ago: {
+        id: 'time.fewseconds.ago',
+        defaultMessage: 'Few seconds ago',
+    },
     minutes_ago: {
         id: 'time.minutes.ago',
         defaultMessage: '{minutes} minutes ago',

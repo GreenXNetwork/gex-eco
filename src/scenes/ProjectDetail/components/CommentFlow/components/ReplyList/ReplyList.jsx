@@ -8,7 +8,7 @@ import CommentView from '../CommentView/CommentView';
 const messages = defineMessages({
     showMoreButton: {
         id: 'ReplyList.button.showmore',
-        defaultMessage: 'Show More',
+        defaultMessage: 'more replies',
     },
 });
 
@@ -40,7 +40,7 @@ class ReplyList extends PureComponent {
     };
 
     render() {
-        const { intl, loading, replies, className, hide, onReply } = this.props;
+        const { intl, loading, replies, className, hide, onReply, parentId } = this.props;
 
         if (hide) {
             return null;
@@ -63,6 +63,8 @@ class ReplyList extends PureComponent {
                 renderItem={item => (
                     <List.Item>
                         <CommentView
+                            parentId={parentId}
+                            userId={item.investor_id}
                             avatarUrl={item.investor_image_url || '/default-avatar.png'}
                             userName={item.investor_name}
                             createdTime={item.created_time}
