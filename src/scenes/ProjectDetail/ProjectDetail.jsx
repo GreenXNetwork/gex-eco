@@ -4,13 +4,14 @@ import { connect } from 'dva';
 import PropTypes from 'prop-types';
 import { Modal, Spin, Tabs, Row, Col, Layout } from 'antd';
 import Carousel from 'react-image-carousel';
-import { StickyContainer, Sticky } from 'react-sticky';
+import { StickyContainer } from 'react-sticky';
 import Developer from '../Developer/Developer';
 import styles from './ProjectDetail.less';
 import DetailView from './components/DetailView/DetailView';
 import ProjectInvestorList from './components/ProjectInvestorList/ProjectInvestorList';
 import CommentFlowList from './components/CommentFlowList/CommentFlowList';
 import CommentBox from './components/CommentBox/CommentBox';
+import StoryPane from './components/StoryPane/StoryPane';
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
@@ -72,17 +73,6 @@ class ProjectDetail extends Component {
 
         const { detail } = projectdetail;
 
-        const renderTabBar = (props, DefaultTabBar) => (
-            <Sticky bottomOffset={80}>
-                {({ style }) => (
-                    <DefaultTabBar
-                        {...props}
-                        style={{ ...style, zIndex: 1, background: 'transparent' }}
-                    />
-                )}
-            </Sticky>
-        );
-
         const { visible } = this.state;
 
         return (
@@ -126,12 +116,10 @@ class ProjectDetail extends Component {
                     <Developer ownerId="1" />
                 </Modal>
                 <StickyContainer className="extraDetailContainer">
-                    <Tabs
-                        defaultActiveKey="story"
-                        onChange={this.callback}
-                        renderTabBar={renderTabBar}
-                    >
-                        <TabPane tab={intl.formatMessage(messages.tab_story)} key="story" />
+                    <Tabs defaultActiveKey="story" onChange={this.callback} tabPosition="top">
+                        <TabPane tab={intl.formatMessage(messages.tab_story)} key="story">
+                            <StoryPane projectId={projectId} />
+                        </TabPane>
                         <TabPane tab={intl.formatMessage(messages.tab_updates)} key="updates" />
                         <TabPane
                             tab={intl.formatMessage(messages.tab_comments, {
