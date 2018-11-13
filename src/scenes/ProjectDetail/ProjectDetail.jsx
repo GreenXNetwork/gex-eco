@@ -12,6 +12,7 @@ import ProjectInvestorList from './components/ProjectInvestorList/ProjectInvesto
 import CommentFlowList from './components/CommentFlowList/CommentFlowList';
 import CommentBox from './components/CommentBox/CommentBox';
 import StoryPane from './components/StoryPane/StoryPane';
+import UpdateList from './components/UpdateList/UpdateList';
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
@@ -120,7 +121,9 @@ class ProjectDetail extends Component {
                         <TabPane tab={intl.formatMessage(messages.tab_story)} key="story">
                             <StoryPane projectId={projectId} />
                         </TabPane>
-                        <TabPane tab={intl.formatMessage(messages.tab_updates)} key="updates" />
+                        <TabPane tab={intl.formatMessage(messages.tab_updates)} key="updates">
+                            <UpdateList projectId={projectId} />
+                        </TabPane>
                         <TabPane
                             tab={intl.formatMessage(messages.tab_comments, {
                                 value: `(${commentNumber})`,

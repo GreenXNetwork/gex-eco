@@ -23,6 +23,11 @@ export default {
                 type: 'investor/fetchInvestors',
                 payload: { projectId },
             });
+
+            yield put({
+                type: 'update/fetchUpdates',
+                payload: { projectId },
+            });
         },
     },
 
